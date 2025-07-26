@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>L'IA sous tous les angles</h1>
+<p>
+  Bienvenue sur <strong>Prizm AI</strong>, votre source d'analyses pointues et de guides pratiques 
+  pour comprendre et appliquer l'intelligence artificielle dans votre contexte professionnel.
+</p>
+<p>
+  Nous décryptons les dernières avancées, comparons les solutions, et partageons 
+  des retours d'expérience concrets pour vous aider à prendre les bonnes décisions.
+</p>
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
