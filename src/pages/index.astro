@@ -1,28 +1,305 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.article-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+			}
+			.feature-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+			}
+			.start-here-link:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+				background: #667eea;
+				color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>L'IA sous tous les angles</h1>
-<p>
-  Bienvenue sur <strong>Prizm AI</strong>, votre source d'analyses pointues et de guides pratiques 
-  pour comprendre et appliquer l'intelligence artificielle dans votre contexte professionnel.
-</p>
-<p>
-  Nous décryptons les dernières avancées, comparons les solutions, et partageons 
-  des retours d'expérience concrets pour vous aider à prendre les bonnes décisions.
-</p>
-			</p>
+			<!-- Hero Section -->
+			<section style="background: linear-gradient(to bottom right, rgba(102,126,234,0.05), rgba(240,147,251,0.05)); padding: 6rem 0; text-align: center; position: relative; overflow: hidden;">
+				<div style="position: absolute; top: -50%; right: -25%; width: 800px; height: 800px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border-radius: 50%; filter: blur(100px);"></div>
+				<div style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1;">
+					<h1 style="font-size: 3.5rem; font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+						L'IA sous tous les angles
+					</h1>
+					<p style="font-size: 1.375rem; color: #4a5568; margin-bottom: 2.5rem;">
+						Analyses pointues et guides pratiques pour les professionnels qui veulent comprendre et appliquer l'IA dans leur contexte
+					</p>
+					<a href="#start-here" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem 2rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; font-size: 1.125rem; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s;">
+						Commencer ici
+						<span>→</span>
+					</a>
+				</div>
+			</section>
+
+			<!-- Trust Section -->
+			<section style="background: #f8f9fa; padding: 3.75rem 0; text-align: center;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 2px;">Ils nous font confiance</p>
+					<div style="display: flex; justify-content: center; align-items: center; gap: 3.75rem; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%);">
+						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
+						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
+						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
+						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
+						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Cette semaine -->
+			<section style="padding: 5rem 0;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+						<div style="display: flex; align-items: center; gap: 1rem;">
+							<span style="font-size: 2rem;">📅</span>
+							<h2 style="font-size: 2rem; font-weight: 600;">Cette semaine</h2>
+						</div>
+						<a href="/cette-semaine" style="color: #667eea; text-decoration: none; font-weight: 500;">Voir tout →</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
+						<!-- Article 1 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								🔬
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">EXPLORATION</span>
+									<span style="color: #6b7280;">⏱ 15 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									RAG vs Fine-tuning : Le match définitif pour vos use cases
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									Analyse comparative avec benchmarks réels sur 5 cas d'usage entreprise. Découvrez quelle approche maximise votre ROI.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Sarah Chen</span>
+									<span>Publié lundi</span>
+								</div>
+							</div>
+						</article>
+
+						<!-- Article 2 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								⚡
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">RESSOURCE</span>
+									<span style="color: #6b7280;">⏱ 5 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									Template : Grille d'évaluation LLM pour votre entreprise
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									Notre framework testé pour comparer objectivement GPT-4, Claude, et Mistral selon vos besoins spécifiques.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Marc Dubois</span>
+									<span>Publié mardi</span>
+								</div>
+							</div>
+						</article>
+
+						<!-- Article 3 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e5e7eb; transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								📊
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">ANGLE DE LA SEMAINE</span>
+									<span style="color: #6b7280;">⏱ 8 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									Pourquoi 80% des POC IA échouent (et comment éviter ce piège)
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									Les 5 patterns d'échec identifiés sur 100+ projets et notre méthode pour garantir le passage en production.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Équipe Prism</span>
+									<span>Publié mercredi</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- Les Essentiels -->
+			<section style="background: #f8f9fa; padding: 5rem 0;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+						<div style="display: flex; align-items: center; gap: 1rem;">
+							<span style="font-size: 2rem;">📚</span>
+							<h2 style="font-size: 2rem; font-weight: 600;">Les essentiels</h2>
+						</div>
+						<a href="/essentiels" style="color: #667eea; text-decoration: none; font-weight: 500;">Tous les essentiels →</a>
+					</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
+						<!-- Essentiel 1 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								🎯
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">GUIDE FONDAMENTAL</span>
+									<span style="color: #6b7280;">⏱ 25 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									Le guide complet du RAG en production
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									De la théorie à l'implémentation : chunking optimal, stratégies d'embeddings, et patterns d'architecture éprouvés.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Guide référence</span>
+									<span>Evergreen</span>
+								</div>
+							</div>
+						</article>
+
+						<!-- Essentiel 2 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								🛠️
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">FRAMEWORK</span>
+									<span style="color: #6b7280;">⏱ 12 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									La matrice Build vs Buy pour l'IA
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									Critères objectifs et arbre de décision pour choisir entre développement interne et solutions tierces.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Guide référence</span>
+									<span>Evergreen</span>
+								</div>
+							</div>
+						</article>
+
+						<!-- Essentiel 3 -->
+						<article class="article-card" style="background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: all 0.3s; cursor: pointer;">
+							<div style="height: 200px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1)); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+								🚀
+							</div>
+							<div style="padding: 1.75rem;">
+								<div style="display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.875rem;">
+									<span style="color: #667eea; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">BEST PRACTICES</span>
+									<span style="color: #6b7280;">⏱ 18 min</span>
+								</div>
+								<h3 style="font-size: 1.375rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4;">
+									Prompt Engineering : Au-delà des bases
+								</h3>
+								<p style="color: #4a5568; line-height: 1.6; margin-bottom: 1.25rem;">
+									Techniques avancées : few-shot, chain-of-thought, et patterns spécifiques par modèle pour maximiser la performance.
+								</p>
+								<div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #6b7280; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
+									<span>Guide référence</span>
+									<span>Evergreen</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- Start Here Section -->
+			<section id="start-here" style="padding: 5rem 0;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<div style="background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border-radius: 1.5rem; padding: 3.75rem; text-align: center;">
+						<h2 style="font-size: 2rem; margin-bottom: 1.25rem;">🎯 Nouveau sur Prism ?</h2>
+						<p style="font-size: 1.25rem; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; color: #4a5568;">
+							Commencez par ces ressources essentielles pour maîtriser rapidement les fondamentaux de l'IA appliquée
+						</p>
+						<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto;">
+							<a href="#" class="start-here-link" style="background: white; padding: 1.5rem; border-radius: 0.75rem; text-decoration: none; color: #1a1a1a; font-weight: 600; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+								1. Comprendre les LLMs
+							</a>
+							<a href="#" class="start-here-link" style="background: white; padding: 1.5rem; border-radius: 0.75rem; text-decoration: none; color: #1a1a1a; font-weight: 600; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+								2. Votre premier RAG
+							</a>
+							<a href="#" class="start-here-link" style="background: white; padding: 1.5rem; border-radius: 0.75rem; text-decoration: none; color: #1a1a1a; font-weight: 600; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+								3. Mesurer le ROI
+							</a>
+							<a href="#" class="start-here-link" style="background: white; padding: 1.5rem; border-radius: 0.75rem; text-decoration: none; color: #1a1a1a; font-weight: 600; transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+								4. Éviter les pièges
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Pourquoi Prism AI -->
+			<section style="padding: 5rem 0;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<h2 style="text-align: center; margin-bottom: 3.75rem; font-size: 2rem;">Pourquoi Prism AI ?</h2>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: 1rem; transition: all 0.3s;">
+							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
+								🔍
+							</div>
+							<h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem;">Analyse en profondeur</h3>
+							<p style="font-size: 1rem; color: #4a5568;">Pas de bullshit marketing. Des analyses techniques basées sur des tests réels et des retours terrain.</p>
+						</div>
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: 1rem; transition: all 0.3s;">
+							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
+								⚡
+							</div>
+							<h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem;">100% actionnable</h3>
+							<p style="font-size: 1rem; color: #4a5568;">Chaque article contient des templates, checklists ou code prêts à l'emploi dans votre contexte.</p>
+						</div>
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: 1rem; transition: all 0.3s;">
+							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
+								🎯
+							</div>
+							<h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem;">ROI-focused</h3>
+							<p style="font-size: 1rem; color: #4a5568;">On ne parle que de ce qui génère un impact business mesurable. Pas de hype, que du concret.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Newsletter Section -->
+			<section id="newsletter" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 5rem 0; margin-top: 5rem;">
+				<div style="max-width: 600px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+					<h2 style="color: white; margin-bottom: 1.25rem; font-size: 2rem;">Les 3 angles de la semaine</h2>
+					<p style="color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2.5rem;">
+						Chaque vendredi, recevez notre sélection d'insights IA directement applicables à votre métier
+					</p>
+					<form style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto;">
+						<input type="email" placeholder="votre@email.com" required style="flex: 1; padding: 1rem 1.5rem; border: none; border-radius: 0.75rem; font-size: 1rem; background: rgba(255,255,255,0.2); color: white; backdrop-filter: blur(10px);">
+						<button type="submit" style="background: white; color: #667eea; padding: 1rem 2rem; border: none; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; white-space: nowrap; transition: all 0.3s;">
+							S'inscrire
+						</button>
+					</form>
+					<p style="font-size: 0.875rem; margin-top: 1.25rem; opacity: 0.9;">
+						Pas de spam. Désabonnement en 1 clic. 2,847 professionnels déjà inscrits.
+					</p>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
