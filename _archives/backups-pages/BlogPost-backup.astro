@@ -1,0 +1,417 @@
+---
+// src/layouts/BlogPost.astro - Version améliorée
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// Ajouter des valeurs par défaut pour les nouvelles propriétés
+const emoji = Astro.props.emoji || '📄';
+const category = Astro.props.category || 'article';
+const readingTime = Astro.props.readingTime || '5 min';
+
+// Style par catégorie
+const getCategoryStyle = (cat: string) => {
+  const styles = {
+    'lessentiel': { color: 'var(--color-primary)', label: 'ACTUALITÉ' },
+    'guides': { color: 'var(--color-guides)', label: 'GUIDE' },
+    'analyses': { color: 'var(--color-analyses)', label: 'ANALYSE' },
+    'article': { color: '#6b7280', label: 'ARTICLE' }
+  };
+  return styles[cat] || styles.article;
+};
+
+const categoryStyle = getCategoryStyle(category);
+---
+
+<html lang="fr">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			/* Container principal */
+			main {
+				min-height: 100vh;
+			}
+			
+			/* Hero Section améliorée */
+			.hero-section {
+				background: linear-gradient(135deg, rgba(102,126,234,0.05), rgba(240,147,251,0.05));
+				padding: 4rem 0 3rem;
+				margin-bottom: 3rem;
+				text-align: center;
+			}
+			
+			.hero-content {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 0 2rem;
+			}
+			
+			/* Badge de catégorie */
+			.category-badge {
+				display: inline-block;
+				padding: 0.4rem 1.2rem;
+				border-radius: 2rem;
+				font-size: var(--text-xs);
+				font-weight: var(--font-bold);
+				letter-spacing: 1px;
+				text-transform: uppercase;
+				color: white;
+				margin-bottom: 1.5rem;
+				box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+			}
+			
+			/* Titre amélioré */
+			.article-title {
+				font-size: clamp(2rem, 5vw, 3.5rem);
+				font-weight: var(--font-extrabold);
+				line-height: 1.2;
+				margin-bottom: 1.5rem;
+				color: #1a202c;
+			}
+			
+			/* Métadonnées */
+			.article-meta {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1.5rem;
+				flex-wrap: wrap;
+				color: #64748b;
+				font-size: 0.95rem;
+			}
+			
+			.meta-item {
+				display: flex;
+				align-items: center;
+				gap: 0.4rem;
+			}
+			
+			/* Image ou placeholder */
+			.hero-image-wrapper {
+				max-width: 900px;
+				margin: -2rem auto 3rem;
+				padding: 0 2rem;
+			}
+			
+			.hero-placeholder {
+				height: 400px;
+				background: linear-gradient(135deg, #60a5fa, #9333ea);
+				border-radius: var(--radius-3xl);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: var(--shadow-xl);
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hero-placeholder::after {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background: rgba(255,255,255,0.1);
+				backdrop-filter: blur(10px);
+			}
+
+			.hero-placeholder .emoji {
+				font-size: 10rem;
+				filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+				position: relative;
+				z-index: 1;
+				animation: float 3s ease-in-out infinite;
+			}
+
+			@keyframes float {
+				0%, 100% { transform: translateY(0); }
+				50% { transform: translateY(-10px); }
+			}
+								
+			.hero-image {
+				width: 100%;
+				height: auto;
+				border-radius: var(--radius-3xl);
+				box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+			}
+			
+			/* Contenu de l'article */
+			article {
+				max-width: 750px;
+				margin: 0 auto;
+				padding: 0 2rem 4rem;
+			}
+			
+			.prose {
+				font-family: Georgia, 'Times New Roman', serif;
+				font-size: 1.15rem;
+				line-height: 1.8;
+				color: #374151;
+			}
+			
+			.prose p {
+				margin-bottom: 1.5rem;
+			}
+			
+			/* Premier paragraphe */
+			.prose > p:first-child {
+				font-size: 1.3rem;
+				line-height: 1.6;
+				color: #4b5563;
+				font-weight: var(--font-normal);
+				margin-bottom: 2rem;
+			}
+			
+			/* Première lettre */
+			.prose > p:first-child::first-letter {
+				float: left;
+				font-size: 4rem;
+				line-height: 3.5rem;
+				padding-right: 0.5rem;
+				margin-top: 0.2rem;
+				font-weight: var(--font-extrabold);
+				color: var(--color-primary);
+			}
+			
+			/* Titres */
+			.prose h2 {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+				font-size: var(--text-3xl);
+				font-weight: var(--font-bold);
+				color: #1a202c;
+				margin-top: 3rem;
+				margin-bottom: 1.25rem;
+				padding-left: 1rem;
+				border-left: 4px solid var(--color-primary);
+			}
+			
+			.prose h3 {
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+				font-size: var(--text-2xl);
+				font-weight: var(--font-semibold);
+				color: #2d3748;
+				margin-top: 2rem;
+				margin-bottom: 1rem;
+			}
+			
+			/* Listes */
+			.prose ul,
+			.prose ol {
+				margin: var(--space-6) 0;
+				padding-left: 2rem;
+			}
+			
+			.prose li {
+				margin-bottom: 0.5rem;
+			}
+			
+			/* Citations */
+			.prose blockquote {
+				margin: var(--space-8) 0;
+				padding: var(--space-6);
+				background: #f8f9fa;
+				border-left: 4px solid var(--color-primary);
+				border-radius: var(--radius-lg);
+				font-style: italic;
+				color: #4b5563;
+			}
+			
+			/* Liens */
+			.prose a {
+				color: var(--color-primary);
+				text-decoration: underline;
+				text-underline-offset: 2px;
+				transition: color 0.2s;
+			}
+			
+			.prose a:hover {
+				color: #5a67d8;
+			}
+			
+			/* Section de partage */
+			.share-section {
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 2px solid #e5e7eb;
+				text-align: center;
+			}
+			
+			.share-buttons {
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+			
+			.share-button {
+				padding: 0.75rem 1.5rem;
+				border-radius: var(--radius-lg);
+				font-weight: var(--font-semibold);
+				text-decoration: none;
+				color: white;
+				transition: all 0.3s;
+			}
+			
+			.share-linkedin {
+				background: #0077b5;
+			}
+			
+			.share-linkedin:hover {
+				background: #005885;
+				transform: translateY(-2px);
+			}
+			
+			.share-twitter {
+				background: #1da1f2;
+			}
+			
+			.share-twitter:hover {
+				background: #1a8cd8;
+				transform: translateY(-2px);
+			}
+			
+			/* Navigation bas de page */
+			.article-nav {
+				max-width: 900px;
+				margin: 3rem auto 0;
+				padding: var(--space-8);
+				display: flex;
+				justify-content: space-between;
+				gap: 2rem;
+			}
+			
+			.nav-link {
+				padding: var(--space-4);
+				background: #f8f9fa;
+				border-radius: var(--radius-xl);
+				text-decoration: none;
+				color: #4b5563;
+				transition: all 0.3s;
+			}
+			
+			.nav-link:hover {
+				background: #e5e7eb;
+				transform: translateY(-2px);
+			}
+			
+			/* Responsive */
+			@media (max-width: 768px) {
+				.article-meta {
+					gap: 1rem;
+					font-size: var(--text-sm);
+				}
+				
+				.prose {
+					font-size: 1.05rem;
+				}
+				
+				.share-buttons {
+					flex-direction: column;
+				}
+				
+				.article-nav {
+					flex-direction: column;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<!-- Hero Section -->
+			<div class="hero-section">
+				<div class="hero-content">
+					<span class="category-badge" style={`background: ${categoryStyle.color};`}>
+						{categoryStyle.label}
+					</span>
+					<h1 class="article-title">{title}</h1>
+					<div class="article-meta">
+						<div class="meta-item">
+							<span>✍️</span>
+							<span>Prizm AI</span>
+						</div>
+						<div class="meta-item">
+							<span>📅</span>
+							{pubDate && (
+								<FormattedDate date={pubDate} />
+							)}
+						</div>
+						<div class="meta-item">
+							<span>⏱</span>
+							<span>{readingTime} de lecture</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Hero Image ou Placeholder -->
+			<div class="hero-image-wrapper">
+			{heroImage ? (
+				<div 
+				style={`
+					background-image: url('${heroImage}');
+					height: 400px;
+					background-size: cover;
+					background-position: center;
+					border-radius: 1.5rem;
+					box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+				`}
+				></div>
+			) : (
+				<div class="hero-placeholder">
+				<span class="emoji">{emoji}</span>
+				</div>
+			)}
+			</div>
+			
+			<!-- Contenu de l'article -->
+			<article>
+				<div class="prose">
+					<slot />
+				</div>
+				
+				<!-- Section partage -->
+				<div class="share-section">
+					<h3 style="font-size: var(--text-xl); margin-bottom: 1rem; color: #4b5563;">
+						Partagez cet article
+					</h3>
+					<div class="share-buttons">
+						<a 
+							href={`https://www.linkedin.com/sharing/share-offsite/?url=${Astro.url}`}
+							class="share-button share-linkedin"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							💼 LinkedIn
+						</a>
+						<a 
+							href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${Astro.url}`}
+							class="share-button share-twitter"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							🐦 Twitter
+						</a>
+					</div>
+				</div>
+			</article>
+			
+			<!-- Navigation -->
+			<nav class="article-nav">
+				<a href="/blog" class="nav-link">
+					← Retour aux articles
+				</a>
+				<a href="/#newsletter" class="nav-link">
+					Newsletter →
+				</a>
+			</nav>
+		</main>
+		<Footer />
+	</body>
+</html>

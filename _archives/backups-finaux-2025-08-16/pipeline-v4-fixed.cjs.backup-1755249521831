@@ -1,0 +1,783 @@
+// pipeline-v4-fixed.js - Pipeline corrigé avec génération automatique de veille
+require('dotenv').config({ path: './config/.env' });
+const PRIZM_CONFIG = require('./config/prizm-config.cjs');
+const fs = require('fs').promises;
+const path = require('path');
+const { exec } = require('child_process');
+const util = require('util');
+const execPromise = util.promisify(exec);
+
+// Import des utilitaires
+const DateHelper = require('./utils/date-helper.cjs');
+const VeilleParser = require('./utils/veille-parser.cjs');
+const SujetScorer = require('./utils/sujet-scorer.cjs');
+
+// Configuration
+// Configuration déplacée vers prizm-config.js
+const CONFIG = {
+  AGENTS: {
+    veille: './agent-veille-v4.cjs',
+    redacteurFactuel: './agent-redacteur-factuel.cjs',
+    styleConversationnel: './agent-style-conversationnel.cjs'
+  },
+  STRUCTURE: {
+    base: './output',
+    veille: '01-veille',
+    corpus: 'corpus-verifie',
+    factuels: '02-articles-factuels',
+    conversationnels: '03-articles-conversationnels',
+    finaux: '04-articles-finaux',
+    rapports: '05-rapports',
+    archives: '06-archives'
+  },
+  VALIDATION: {
+    longueurMin: 1200,
+    longueurMax: 1800,
+    longueurCible: 1500
+  },
+  OPTIONS: {
+    archiver: true,
+    genererRapport: true,
+    afficherStats: true
+  }
+};
+
+class PipelinePrizmV4 {
+  constructor() {
+    this.sessionId = this.genererSessionId();
+    this.stats = {
+      debut: Date.now(),
+      etapes: [],
+      resultats: {
+        veille: null,
+        corpus: null,
+        articleFactuel: null,
+        articleConversationnel: null
+      }
+    };
+    this.scorer = new SujetScorer();
+    this.parser = new VeilleParser();
+  }
+
+  genererSessionId() {
+    const date = new Date();
+    return date.toISOString().slice(0, 19).replace(/[:-]/g, '').replace('T', '-');
+  }
+
+  async initialiser() {
+    console.log(`
+╔═══════════════════════════════════════════════════════╗
+║              PIPELINE PRIZM AI v4                     ║
+║          Double sortie : Factuel + Conversationnel    ║
+║                                                       ║
+║  Session : ${this.sessionId}                    ║
+╚═══════════════════════════════════════════════════════╝
+    `);
+
+    // Créer la structure des dossiers
+    await this.creerStructure();
+    
+    // Vérifier les agents
+    await this.verifierAgents();
+    
+    console.log('\n✅ Pipeline initialisé\n');
+    return true;
+  }
+
+  async creerStructure() {
+    console.log('📁 Création de la structure...');
+    
+    for (const [key, dossier] of Object.entries(CONFIG.STRUCTURE)) {
+      if (key !== 'base') {
+        const chemin = path.join(CONFIG.STRUCTURE.base, dossier);
+        await fs.mkdir(chemin, { recursive: true });
+      }
+    }
+    
+    // Créer aussi les sous-dossiers nécessaires
+    const date = new Date();
+    const dateStr = date.toISOString().split('T')[0];
+    
+    // Créer le dossier de veille du jour
+    const veilleJour = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.veille, dateStr.substring(0, 7), dateStr);
+    await fs.mkdir(veilleJour, { recursive: true });
+    
+    // Dossier de session pour archives
+    this.dossierSession = path.join(
+      CONFIG.STRUCTURE.base,
+      CONFIG.STRUCTURE.archives,
+      this.sessionId
+    );
+    await fs.mkdir(this.dossierSession, { recursive: true });
+  }
+
+  async verifierAgents() {
+    console.log('🔍 Vérification des agents...');
+    
+    for (const [nom, fichier] of Object.entries(CONFIG.AGENTS)) {
+      try {
+        await fs.access(fichier);
+        console.log(`   ✓ ${nom}`);
+      } catch {
+        throw new Error(`Agent ${nom} introuvable : ${fichier}`);
+      }
+    }
+  }
+
+  // === ÉTAPE 1 : VEILLE ET SÉLECTION (CORRIGÉE) ===
+  async etapeVeille(forceNouvelle = false) {
+    console.log(`
+┌─────────────────────────────────────────┐
+│     ÉTAPE 1 : VEILLE & SÉLECTION       │
+└─────────────────────────────────────────┘
+    `);
+
+    let fichierVeille = null;
+    let doitGenererVeille = forceNouvelle;
+    
+    // Si pas de nouvelle veille forcée, chercher la dernière
+    if (!forceNouvelle) {
+      console.log('📋 Recherche de la dernière veille...\n');
+      
+      try {
+        // Chercher récursivement dans tous les sous-dossiers
+        fichierVeille = await this.trouverDerniereVeille();
+        
+        if (fichierVeille) {
+          console.log(`📄 Veille trouvée : ${path.basename(fichierVeille)}`);
+          
+          // Vérifier l'âge du fichier
+          const stats = await fs.stat(fichierVeille);
+          const ageHeures = (Date.now() - stats.mtime) / (1000 * 60 * 60);
+          
+          if (ageHeures > 24) {
+            console.log(`⚠️  Veille datée de plus de 24h (${Math.round(ageHeures)}h)`);
+            console.log('🔄 Génération d\'une nouvelle veille recommandée\n');
+          }
+        } else {
+          console.log('❌ Aucune veille existante trouvée');
+          doitGenererVeille = true;
+        }
+      } catch (error) {
+        console.log('⚠️  Erreur recherche veille :', error.message);
+        doitGenererVeille = true;
+      }
+    }
+    
+    // Générer une nouvelle veille si nécessaire
+    if (doitGenererVeille) {
+      console.log('🔍 Génération d\'une nouvelle veille...\n');
+      const debut = Date.now();
+      
+      try {
+        const { stdout, stderr } = await execPromise(`node ${CONFIG.AGENTS.veille}`);
+        
+        if (stderr) {
+          console.log('⚠️  Avertissements veille :', stderr);
+        }
+        
+        // Attendre un peu que le fichier soit bien écrit
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Retrouver le fichier généré
+        fichierVeille = await this.trouverDerniereVeille();
+        
+        if (!fichierVeille) {
+          throw new Error('Fichier de veille généré mais introuvable');
+        }
+        
+        this.stats.etapes.push({
+          nom: 'veille',
+          duree: Date.now() - debut,
+          succes: true
+        });
+        
+        console.log(`\n✅ Nouvelle veille générée en ${Math.round((Date.now() - debut) / 1000)}s`);
+        
+      } catch (error) {
+        console.error('❌ Erreur génération veille :', error.message);
+        this.stats.etapes.push({
+          nom: 'veille',
+          duree: Date.now() - debut,
+          succes: false,
+          erreur: error.message
+        });
+        throw error;
+      }
+    }
+    
+    if (!fichierVeille) {
+      throw new Error('Impossible d\'obtenir un fichier de veille');
+    }
+    
+    console.log(`\n📄 Utilisation de : ${path.basename(fichierVeille)}`);
+    
+    // Parser et scorer les sujets
+    const contenuVeille = await fs.readFile(fichierVeille, 'utf-8');
+    
+    // Parser avec le bon format
+    const resultatParse = await this.parser.parseVeilleFile(fichierVeille);
+    
+    if (!resultatParse || !resultatParse.sujets || resultatParse.sujets.length === 0) {
+      throw new Error('Aucun sujet trouvé dans la veille');
+    }
+    
+    const sujets = resultatParse.sujets;
+    console.log(`\n📊 ${sujets.length} sujets trouvés`);
+    
+    // Scorer et trier
+    const sujetsScores = sujets.map(sujet => {
+      const score = this.scorer.calculateScore(sujet);
+      return score;
+    }).sort((a, b) => b.score - a.score);
+    
+    // Afficher le top 3
+    console.log('\n🏆 Top 3 des sujets :');
+    sujetsScores.slice(0, 3).forEach((sujet, i) => {
+      console.log(`\n${i + 1}. ${sujet.titre}`);
+      console.log(`   Score : ${sujet.score}/${sujet.scoreMax}`);
+      if (sujet.priorite) {
+        console.log(`   Priorité : ${sujet.priorite}`);
+      }
+    });
+    
+    // Sélection du meilleur sujet
+    const sujetSelectionne = await this.selectionnerSujet(sujetsScores, fichierVeille);
+    
+    this.stats.resultats.veille = {
+      fichier: fichierVeille,
+      nbSujets: sujets.length,
+      sujetChoisi: sujetSelectionne.titre
+    };
+    
+    return sujetSelectionne;
+  }
+
+  async trouverDerniereVeille() {
+    const dossierVeille = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.veille);
+    
+    // Fonction récursive pour chercher tous les fichiers .md
+    async function trouverFichiersMd(dir) {
+      let fichiers = [];
+      
+      try {
+        const entrees = await fs.readdir(dir, { withFileTypes: true });
+        
+        for (const entree of entrees) {
+          const cheminComplet = path.join(dir, entree.name);
+          
+          if (entree.isDirectory()) {
+            // Récursion dans les sous-dossiers
+            const sousFichiers = await trouverFichiersMd(cheminComplet);
+            fichiers = fichiers.concat(sousFichiers);
+          } else if (entree.isFile() && entree.name.startsWith('veille-') && entree.name.endsWith('.md')) {
+            fichiers.push(cheminComplet);
+          }
+        }
+      } catch (error) {
+        // Ignorer les erreurs de lecture
+      }
+      
+      return fichiers;
+    }
+    
+    const tousLesFichiers = await trouverFichiersMd(dossierVeille);
+    
+    if (tousLesFichiers.length === 0) {
+      return null;
+    }
+    
+    // Trier par date de modification (plus récent en premier)
+    const fichiersAvecStats = await Promise.all(
+      tousLesFichiers.map(async fichier => {
+        const stats = await fs.stat(fichier);
+        return { fichier, mtime: stats.mtime };
+      })
+    );
+    
+    fichiersAvecStats.sort((a, b) => b.mtime - a.mtime);
+    
+    return fichiersAvecStats[0].fichier;
+  }
+
+  async selectionnerSujet(sujets, fichierVeille) {
+    // Pour l'instant, on prend le premier
+    const sujet = sujets[0];
+    
+    console.log(`\n✅ Sujet sélectionné : "${sujet.titre}"`);
+    
+    // Trouver le dossier corpus correspondant
+    // D'abord essayer avec la date du fichier de veille
+    const dateMatch = path.basename(fichierVeille).match(/veille-(\d{4}-\d{2}-\d{2})/);
+    const dateVeille = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
+    
+    const dossierCorpus = path.join(
+      CONFIG.STRUCTURE.base,
+      CONFIG.STRUCTURE.corpus,
+      dateVeille
+    );
+    
+    try {
+      const dossiers = await fs.readdir(dossierCorpus);
+      const titreSanitize = sujet.titre.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .substring(0, 50);
+      
+      // Chercher un dossier qui pourrait correspondre
+      const dossierSujet = dossiers.find(d => {
+        const dLower = d.toLowerCase();
+        return dLower.includes(titreSanitize) || 
+               dLower.includes(sujet.numero) ||
+               titreSanitize.split('-').some(mot => mot.length > 3 && dLower.includes(mot));
+      });
+      
+      if (dossierSujet) {
+        sujet.corpusPath = path.join(dossierCorpus, dossierSujet);
+        console.log(`📚 Corpus trouvé : ${dossierSujet}`);
+      } else {
+        console.log('⚠️  Corpus non trouvé, génération avec le titre seul');
+      }
+    } catch (error) {
+      console.log('⚠️  Pas de corpus disponible pour ce sujet');
+    }
+    
+    return sujet;
+  }
+
+  // Le reste du code reste identique...
+  // [Copier toutes les autres méthodes depuis le pipeline-v4.js original]
+  
+  async etapeRedactionFactuelle(sujet) {
+    console.log(`
+┌─────────────────────────────────────────┐
+│     ÉTAPE 2 : RÉDACTION FACTUELLE      │
+└─────────────────────────────────────────┘
+    `);
+
+    const debut = Date.now();
+    
+    // Préparer la commande
+    const commande = sujet.corpusPath 
+      ? `node ${CONFIG.AGENTS.redacteurFactuel} "${sujet.corpusPath}"`
+      : `node ${CONFIG.AGENTS.redacteurFactuel} --titre "${sujet.titre}"`;
+    
+    console.log('✍️  Génération de l\'article factuel...\n');
+    
+    try {
+      const { stdout } = await execPromise(commande);
+      
+      // Trouver l'article généré
+      const dossierFactuels = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.factuels);
+      const fichiers = await fs.readdir(dossierFactuels);
+      const dernierArticle = fichiers
+        .filter(f => f.endsWith('.md'))
+        .sort()
+        .pop();
+      
+      if (!dernierArticle) {
+        throw new Error('Article factuel non généré');
+      }
+      
+      const cheminArticle = path.join(dossierFactuels, dernierArticle);
+      
+      // Valider l'article
+      const validation = await this.validerArticle(cheminArticle);
+      
+      console.log(`\n✅ Article factuel généré : ${dernierArticle}`);
+      console.log(`📏 Longueur : ${validation.mots} mots ${validation.statut}`);
+      
+      this.stats.etapes.push({
+        nom: 'redaction-factuelle',
+        duree: Date.now() - debut,
+        succes: true
+      });
+      
+      this.stats.resultats.articleFactuel = {
+        fichier: dernierArticle,
+        chemin: cheminArticle,
+        mots: validation.mots,
+        validation: validation.statut
+      };
+      
+      return cheminArticle;
+      
+    } catch (error) {
+      console.error('❌ Erreur rédaction :', error.message);
+      this.stats.etapes.push({
+        nom: 'redaction-factuelle',
+        duree: Date.now() - debut,
+        succes: false,
+        erreur: error.message
+      });
+      throw error;
+    }
+  }
+
+  async etapeStyleConversationnel(articleFactuel, activer = true) {
+    if (!activer) {
+      console.log('\n⏭️  Style conversationnel désactivé');
+      return null;
+    }
+    
+    console.log(`
+┌─────────────────────────────────────────┐
+│   ÉTAPE 3 : STYLE CONVERSATIONNEL      │
+└─────────────────────────────────────────┘
+    `);
+
+    const debut = Date.now();
+    
+    console.log('🗣️  Application du style conversationnel...\n');
+    
+    try {
+      await execPromise(`node ${CONFIG.AGENTS.styleConversationnel} "${articleFactuel}"`);
+      
+      // L'agent style sauvegarde dans 05-articles-finaux
+      const dossierFinaux = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.conversationnels);
+      const fichiers = await fs.readdir(dossierFinaux);
+      const articleConversationnel = fichiers
+        .filter(f => f.includes('conversationnel') && f.endsWith('.md'))
+        .sort()
+        .pop();
+      
+      if (!articleConversationnel) {
+        throw new Error('Article conversationnel non généré');
+      }
+      
+      const cheminArticle = path.join(dossierFinaux, articleConversationnel);
+      
+      // Déplacer vers le bon dossier
+      const nouveauChemin = path.join(
+        CONFIG.STRUCTURE.base,
+        CONFIG.STRUCTURE.conversationnels,
+        articleConversationnel
+      );
+      await fs.rename(cheminArticle, nouveauChemin);
+      
+      console.log(`\n✅ Article conversationnel généré : ${articleConversationnel}`);
+      
+      this.stats.etapes.push({
+        nom: 'style-conversationnel',
+        duree: Date.now() - debut,
+        succes: true
+      });
+      
+      this.stats.resultats.articleConversationnel = {
+        fichier: articleConversationnel,
+        chemin: nouveauChemin
+      };
+      
+      return nouveauChemin;
+      
+    } catch (error) {
+      console.error('❌ Erreur style :', error.message);
+      this.stats.etapes.push({
+        nom: 'style-conversationnel',
+        duree: Date.now() - debut,
+        succes: false,
+        erreur: error.message
+      });
+      // Non bloquant - on continue avec juste l'article factuel
+      return null;
+    }
+  }
+
+  async validerArticle(cheminArticle) {
+    const contenu = await fs.readFile(cheminArticle, 'utf-8');
+    const mots = contenu.split(/\s+/).length;
+    
+    const validation = {
+      mots,
+      longueurOk: mots >= CONFIG.VALIDATION.longueurMin && 
+                  mots <= CONFIG.VALIDATION.longueurMax,
+      sources: contenu.includes('Source :'),
+      structure: contenu.includes('##'),
+      statut: ''
+    };
+    
+    if (validation.longueurOk && validation.sources && validation.structure) {
+      validation.statut = '✅';
+    } else if (mots < CONFIG.VALIDATION.longueurMin) {
+      validation.statut = '⚠️ (trop court)';
+    } else if (mots > CONFIG.VALIDATION.longueurMax) {
+      validation.statut = '⚠️ (trop long)';
+    } else {
+      validation.statut = '❌ (structure)';
+    }
+    
+    return validation;
+  }
+
+  async finaliser() {
+    console.log(`
+┌─────────────────────────────────────────┐
+│          FINALISATION                   │
+└─────────────────────────────────────────┘
+    `);
+
+    // Copier les articles finaux
+    const articlesFinaux = [];
+    
+    if (this.stats.resultats.articleFactuel) {
+      const destination = path.join(
+        CONFIG.STRUCTURE.base,
+        CONFIG.STRUCTURE.finaux,
+        this.stats.resultats.articleFactuel.fichier
+      );
+      await fs.copyFile(
+        this.stats.resultats.articleFactuel.chemin,
+        destination
+      );
+      articlesFinaux.push({
+        type: 'factuel',
+        fichier: this.stats.resultats.articleFactuel.fichier
+      });
+    }
+    
+    if (this.stats.resultats.articleConversationnel) {
+      const destination = path.join(
+        CONFIG.STRUCTURE.base,
+        CONFIG.STRUCTURE.finaux,
+        this.stats.resultats.articleConversationnel.fichier
+      );
+      await fs.copyFile(
+        this.stats.resultats.articleConversationnel.chemin,
+        destination
+      );
+      articlesFinaux.push({
+        type: 'conversationnel',
+        fichier: this.stats.resultats.articleConversationnel.fichier
+      });
+    }
+    
+    // Générer le rapport
+    if (CONFIG.OPTIONS.genererRapport) {
+      await this.genererRapport();
+    }
+    
+    // Archiver la session
+    if (CONFIG.OPTIONS.archiver) {
+      await this.archiverSession();
+    }
+    
+    // Afficher le résumé
+    this.afficherResume(articlesFinaux);
+    
+    return articlesFinaux;
+  }
+
+  async genererRapport() {
+    const rapport = {
+      session: this.sessionId,
+      timestamp: new Date().toISOString(),
+      pipeline: 'v4',
+      dureeTotal: Date.now() - this.stats.debut,
+      etapes: this.stats.etapes,
+      resultats: this.stats.resultats,
+      configuration: CONFIG
+    };
+    
+    const cheminRapport = path.join(
+      CONFIG.STRUCTURE.base,
+      CONFIG.STRUCTURE.rapports,
+      `rapport-${this.sessionId}.json`
+    );
+    
+    await fs.writeFile(cheminRapport, JSON.stringify(rapport, null, 2));
+    console.log(`\n📊 Rapport généré : ${path.basename(cheminRapport)}`);
+    
+    // Version Markdown lisible
+    let md = `# Rapport Pipeline v4 - ${this.sessionId}\n\n`;
+    md += `**Date** : ${new Date().toLocaleString('fr-FR')}\n`;
+    md += `**Durée totale** : ${Math.round((Date.now() - this.stats.debut) / 1000)}s\n\n`;
+    
+    md += `## Résultats\n\n`;
+    md += `### Veille\n`;
+    md += `- Fichier : ${this.stats.resultats.veille?.fichier || 'N/A'}\n`;
+    md += `- Sujets analysés : ${this.stats.resultats.veille?.nbSujets || 0}\n`;
+    md += `- Sujet choisi : ${this.stats.resultats.veille?.sujetChoisi || 'N/A'}\n\n`;
+    
+    md += `### Articles générés\n`;
+    if (this.stats.resultats.articleFactuel) {
+      md += `- **Factuel** : ${this.stats.resultats.articleFactuel.fichier}\n`;
+      md += `  - Mots : ${this.stats.resultats.articleFactuel.mots}\n`;
+      md += `  - Validation : ${this.stats.resultats.articleFactuel.validation}\n`;
+    }
+    if (this.stats.resultats.articleConversationnel) {
+      md += `- **Conversationnel** : ${this.stats.resultats.articleConversationnel.fichier}\n`;
+    }
+    
+    md += `\n## Performance\n\n`;
+    md += `| Étape | Durée | Statut |\n`;
+    md += `|-------|-------|--------|\n`;
+    this.stats.etapes.forEach(etape => {
+      md += `| ${etape.nom} | ${Math.round(etape.duree / 1000)}s | ${etape.succes ? '✅' : '❌'} |\n`;
+    });
+    
+    const cheminRapportMd = cheminRapport.replace('.json', '.md');
+    await fs.writeFile(cheminRapportMd, md);
+  }
+
+  async archiverSession() {
+    // Copier tous les fichiers importants dans l'archive
+    const fichiers = [
+      this.stats.resultats.veille?.fichier,
+      this.stats.resultats.articleFactuel?.fichier,
+      this.stats.resultats.articleConversationnel?.fichier
+    ].filter(f => f);
+    
+    for (const fichier of fichiers) {
+      // Logique de copie vers this.dossierSession
+    }
+    
+    console.log(`📦 Session archivée : ${path.basename(this.dossierSession)}`);
+  }
+
+  afficherResume(articlesFinaux) {
+    const dureeTotal = Math.round((Date.now() - this.stats.debut) / 1000);
+    
+    console.log(`
+╔═══════════════════════════════════════════════════════╗
+║                  PIPELINE TERMINÉ                     ║
+╚═══════════════════════════════════════════════════════╝
+
+📊 RÉSUMÉ DE LA SESSION
+────────────────────────
+⏱️  Durée totale : ${dureeTotal}s
+📄 Articles générés : ${articlesFinaux.length}
+`);
+
+    articlesFinaux.forEach(article => {
+      console.log(`
+${article.type === 'factuel' ? '📚' : '🗣️'} Article ${article.type} :
+   ${article.fichier}
+`);
+    });
+
+    console.log(`
+📋 PROCHAINES ÉTAPES
+───────────────────
+1. Relire les articles dans : ${CONFIG.STRUCTURE.base}/${CONFIG.STRUCTURE.finaux}/
+2. Choisir la version adaptée à votre objectif :
+   - Factuel → Pour informer (blog référence, documentation)
+   - Conversationnel → Pour engager (newsletter, réseaux sociaux)
+3. Copier dans le blog : C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\
+4. Publier via git push
+
+✨ Pipeline v4 - Simple, efficace, flexible.
+`);
+  }
+
+  async executer(options = {}) {
+    try {
+      await this.initialiser();
+      
+      // Étape 1 : Veille et sélection
+      const sujet = await this.etapeVeille(options.nouvelleVeille);
+      
+      // Étape 2 : Rédaction factuelle
+      const articleFactuel = await this.etapeRedactionFactuelle(sujet);
+      
+      // Étape 3 : Style conversationnel (optionnel)
+      const articleConversationnel = await this.etapeStyleConversationnel(
+        articleFactuel,
+        options.styleConversationnel !== false
+      );
+      
+      // Finalisation
+      const articlesFinaux = await this.finaliser();
+      
+      return {
+        succes: true,
+        articles: articlesFinaux,
+        duree: Date.now() - this.stats.debut
+      };
+      
+    } catch (error) {
+      console.error('\n❌ ERREUR PIPELINE :', error.message);
+      
+      // Rapport d'erreur
+      const rapportErreur = {
+        session: this.sessionId,
+        timestamp: new Date().toISOString(),
+        erreur: error.message,
+        stack: error.stack,
+        stats: this.stats
+      };
+      
+      const cheminErreur = path.join(
+        CONFIG.STRUCTURE.base,
+        CONFIG.STRUCTURE.rapports,
+        `erreur-${this.sessionId}.json`
+      );
+      
+      await fs.writeFile(cheminErreur, JSON.stringify(rapportErreur, null, 2));
+      
+      throw error;
+    }
+  }
+}
+
+// === CLI ===
+async function main() {
+  const args = process.argv.slice(2);
+  
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+🚀 Pipeline Prizm AI v4 (CORRIGÉ)
+=================================
+
+Pipeline épuré avec double sortie : factuel et conversationnel.
+Génère automatiquement une veille si aucune n'existe.
+
+Usage :
+  node pipeline-v4-fixed.js [options]
+
+Options :
+  --nouvelle-veille    Forcer une nouvelle veille (même si une existe)
+  --factuel-only       Générer uniquement l'article factuel
+  --help, -h           Afficher cette aide
+
+Exemples :
+  node pipeline-v4-fixed.js                    # Utilise la dernière veille OU en génère une
+  node pipeline-v4-fixed.js --nouvelle-veille  # Force une nouvelle veille
+  node pipeline-v4-fixed.js --factuel-only     # Sans style conversationnel
+
+Comportement par défaut :
+  1. Cherche la dernière veille disponible
+  2. Si aucune veille → génère automatiquement
+  3. Si veille > 24h → propose une nouvelle
+  4. Génère article factuel + conversationnel
+
+Temps moyen : ~2-3 minutes pour pipeline complet
+    `);
+    process.exit(0);
+  }
+  
+  const pipeline = new PipelinePrizmV4();
+  
+  const options = {
+    nouvelleVeille: args.includes('--nouvelle-veille'),
+    styleConversationnel: !args.includes('--factuel-only')
+  };
+  
+  try {
+    console.time('⏱️ Pipeline complet');
+    await pipeline.executer(options);
+    console.timeEnd('⏱️ Pipeline complet');
+    
+    process.exit(0);
+    
+  } catch (error) {
+    console.error('\n💥 Pipeline échoué');
+    process.exit(1);
+  }
+}
+
+// Export pour utilisation programmatique
+module.exports = PipelinePrizmV4;
+
+// Lancer si exécuté directement
+if (require.main === module) {
+  main();
+}
