@@ -1,86 +1,338 @@
----import '../styles/global.css';
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
+---
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+export interface Props {
+  content: {
+    title: string;
+    description: string;
+    pubDate?: string;
+    updatedDate?: string;
+    heroImage?: string;
+    imageUrl?: string;  // Nouvelle prop pour URL d'image directe
+    emoji?: string;
+  };
+}
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+  content: { title, description, pubDate, updatedDate, heroImage, imageUrl, emoji = "📰" },
+} = Astro.props;
+
+// Fonction pour déterminer l'image à afficher
+function getImagePath(title, imageUrl) {
+  // Si une imageUrl est fournie, l'utiliser
+  if (imageUrl) return imageUrl;
+  
+  // Mapping des titres vers les images
+  const imageMap = {
+    'manifeste': '/images/blog/manifeste-prizm-ai.jpg',
+    'spectateurs': '/images/blog/manifeste-prizm-ai.jpg',
+    // Ajoutez ici les futurs articles avec images
+  };
+  
+  // Chercher si le titre contient un mot-clé
+  const titleLower = title ? title.toLowerCase() : '';
+  for (const [keyword, imagePath] of Object.entries(imageMap)) {
+    if (titleLower.includes(keyword)) {
+      return imagePath;
+    }
+  }
+  
+  return null;
+}
+
+const imagePath = getImagePath(title, imageUrl);
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<html lang="fr">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      :root {
+        --accent: #667eea;
+        --accent-dark: #764ba2;
+        --gray: #6c757d;
+        --gray-dark: #212529;
+      }
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3em 1em;
+      }
+
+      .hero-image-wrapper {
+        width: 100%;
+        margin: 2rem 0;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        min-height: 400px;
+        position: relative;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .hero-placeholder {
+        width: 100%;
+        height: 400px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .emoji {
+        font-size: 5rem;
+        animation: float 3s ease-in-out infinite;
+        color: white;
+        text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+
+      .prose {
+        width: 100%;
+        max-width: 900px;
+        margin: auto;
+        padding: 1em;
+        line-height: 1.8;
+      }
+
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1.3;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .date {
+        text-align: center;
+        color: var(--gray);
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+      }
+
+      .last-updated-on {
+        font-style: italic;
+      }
+
+      /* Styles pour le contenu */
+      .prose h2 {
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2d3748;
+        position: relative;
+        padding-left: 1rem;
+      }
+
+      .prose h2:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2px;
+      }
+
+      .prose h3 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #4a5568;
+      }
+
+      .prose p {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        color: #4a5568;
+      }
+
+      .prose ul, .prose ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+      }
+
+      .prose li {
+        margin-bottom: 0.5rem;
+        font-size: 1.05rem;
+        color: #4a5568;
+      }
+
+      .prose ul {
+        list-style-type: none;
+      }
+
+      .prose ul li:before {
+        content: "▸";
+        color: #667eea;
+        font-weight: bold;
+        display: inline-block;
+        width: 1.5rem;
+        margin-left: -1.5rem;
+      }
+
+      .prose ol {
+        counter-reset: list-counter;
+        list-style-type: none;
+      }
+
+      .prose ol li {
+        counter-increment: list-counter;
+        position: relative;
+      }
+
+      .prose ol li:before {
+        content: counter(list-counter) ".";
+        color: #667eea;
+        font-weight: bold;
+        position: absolute;
+        left: -1.5rem;
+      }
+
+      .prose blockquote {
+        border-left: 4px solid #667eea;
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: #718096;
+        background: linear-gradient(to right, rgba(102, 126, 234, 0.05), transparent);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+      }
+
+      .prose a {
+        color: #667eea;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+
+      .prose a:hover {
+        border-bottom-color: #667eea;
+      }
+
+      .prose strong {
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      .prose code {
+        background: #f7fafc;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-family: 'Monaco', 'Courier New', monospace;
+        font-size: 0.9em;
+        color: #764ba2;
+      }
+
+      .prose pre {
+        background: #f7fafc;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 2rem 0;
+        border: 1px solid #e2e8f0;
+      }
+
+      .prose pre code {
+        background: transparent;
+        padding: 0;
+        color: #2d3748;
+      }
+
+      /* Responsive */
+      @media (max-width: 720px) {
+        .title { font-size: 2rem; }
+        .prose h2 { font-size: 1.5rem; }
+        .prose h3 { font-size: 1.2rem; }
+        .prose p, .prose li { font-size: 1rem; }
+      }
+
+      /* Animation d'entrée */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .prose > * {
+        animation: fadeIn 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .prose > *:nth-child(1) { animation-delay: 0.1s; }
+      .prose > *:nth-child(2) { animation-delay: 0.2s; }
+      .prose > *:nth-child(3) { animation-delay: 0.3s; }
+      .prose > *:nth-child(4) { animation-delay: 0.4s; }
+      .prose > *:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="prose">
+          <h1 class="title">{title}</h1>
+          <div class="date">
+            {pubDate && <FormattedDate date={pubDate} />}
+            {
+              updatedDate && (
+                <div class="last-updated-on">
+                  Mis à jour le <FormattedDate date={updatedDate} />
+                </div>
+              )
+            }
+          </div>
+
+          <!-- Hero Section avec gestion propre des images -->
+          <div class="hero-image-wrapper">
+            {imagePath ? (
+              <img 
+                src={imagePath}
+                alt={title}
+                class="hero-image"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="hero-placeholder">
+                <span class="emoji">{emoji}</span>
+              </div>
+            )}
+          </div>
+
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
 </html>

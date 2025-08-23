@@ -7,8 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "content:generate": "cd pipelines/content-generation && node pipeline-v4-fixed.js",
-    "content:veille": "cd pipelines/content-generation && node agent-veille-v4.js"
+    "content:generate": "cd pipelines/content-generation/agents && node pipeline-v5-batch.cjs",
+    "content:veille": "cd pipelines/content-generation && node agent-veille-v4.js",
+    "content:test": "cd pipelines/content-generation/agents && node pipeline-v5-batch.cjs --test",
+    "content:single": "cd pipelines/content-generation/agents && node pipeline-v5-batch.cjs --single"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.20.0",

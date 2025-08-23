@@ -4,18 +4,113 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/* ========================================
+   SYSTÈME DE DESIGN UNIFIÉ - PRIZM AI
+   ======================================== */
+
 :root {
+  /* ========================================
+     COULEURS EXISTANTES (on les garde)
+     ======================================== */
   --accent: #667eea;
   --accent-dark: #764ba2;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
+  --black: 15, 18, 25;
+  --gray: 96, 115, 159;
+  --gray-light: 229, 233, 240;
+  --gray-dark: 34, 41, 57;
+  --gray-gradient: rgba(var(--gray-light), 50%), #fff;
+  --box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+  
+  /* ========================================
+     NOUVELLES COULEURS PRIZM AI
+     ======================================== */
+  
+  /* Alias pour cohérence */
+  --color-primary: var(--accent);
+  --color-primary-dark: var(--accent-dark);
+  --color-primary-light: #818cf8;
+  
+  /* Couleurs par catégorie d'articles */
+  --color-lessentiel: #3b82f6;
+  --color-guides: #10b981;
+  --color-analyses: #8b5cf6;
+  --color-outils: #f59e0b;
+  
+  /* Dégradés Prizm */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(240,147,251,0.05) 100%);
+  --gradient-card: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(240,147,251,0.1) 100%);
+  
+  /* ========================================
+     TYPOGRAPHIE UNIFIÉE
+     ======================================== */
+  
+  /* Tailles cohérentes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Poids */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  
+  /* ========================================
+     ESPACEMENTS COHÉRENTS
+     ======================================== */
+  
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  
+  /* ========================================
+     BORDURES & OMBRES
+     ======================================== */
+  
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  /* Ombres améliorées */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-card-hover: 0 20px 40px rgba(102, 126, 234, 0.15);
+  
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  
+  --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-colors: color, background-color, border-color 0.3s ease;
+  --transition-transform: transform 0.3s ease;
 }
+
+/* ========================================
+   POLICES (on garde Atkinson)
+   ======================================== */
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -23,6 +118,7 @@
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
 	font-family: "Atkinson";
 	src: url("/fonts/atkinson-bold.woff") format("woff");
@@ -30,8 +126,13 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+/* ========================================
+   STYLES DE BASE (améliorés)
+   ======================================== */
+
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: "Atkinson", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -40,101 +141,280 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
+	font-size: 18px; /* On garde une taille lisible */
 	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
+
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+/* ========================================
+   TYPOGRAPHIE (tailles cohérentes)
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
+	font-weight: var(--font-bold);
 }
+
 h1 {
-	font-size: 3.052em;
+	font-size: var(--text-4xl);
+	font-weight: var(--font-extrabold);
+	letter-spacing: -0.025em;
 }
+
 h2 {
-	font-size: 2.441em;
+	font-size: var(--text-3xl);
+	font-weight: var(--font-bold);
 }
+
 h3 {
-	font-size: 1.953em;
+	font-size: var(--text-2xl);
+	font-weight: var(--font-semibold);
 }
+
 h4 {
-	font-size: 1.563em;
+	font-size: var(--text-xl);
+	font-weight: var(--font-semibold);
 }
+
 h5 {
-	font-size: 1.25em;
+	font-size: var(--text-lg);
+	font-weight: var(--font-medium);
 }
-strong,
-b {
-	font-weight: 700;
+
+h6 {
+	font-size: var(--text-base);
+	font-weight: var(--font-medium);
 }
+
+/* ========================================
+   ÉLÉMENTS DE BASE
+   ======================================== */
+
+strong, b {
+	font-weight: var(--font-bold);
+}
+
 a {
-	color: var(--accent);
+	color: var(--color-primary);
+	text-decoration: none;
+	transition: var(--transition-colors);
 }
+
 a:hover {
-	color: var(--accent);
+	color: var(--color-primary-dark);
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }
+
 p {
 	margin-bottom: 1em;
 }
+
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 1.5em;
+	line-height: 1.8;
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
+	font-family: inherit;
+	border-radius: var(--radius-lg);
+	border: 2px solid rgb(var(--gray-light));
+	padding: var(--space-3);
+	transition: var(--transition-colors);
 }
+
+textarea:focus {
+	outline: none;
+	border-color: var(--color-primary);
+}
+
 input {
 	font-size: 16px;
+	font-family: inherit;
+	border-radius: var(--radius-lg);
+	border: 2px solid rgb(var(--gray-light));
+	padding: var(--space-2) var(--space-3);
+	transition: var(--transition-colors);
 }
+
+input:focus {
+	outline: none;
+	border-color: var(--color-primary);
+}
+
 table {
 	width: 100%;
+	border-collapse: collapse;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: var(--radius-lg);
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	border-radius: var(--radius-sm);
+	font-size: 0.9em;
+	font-family: "Fira Code", "Courier New", monospace;
 }
+
 pre {
 	padding: 1.5em;
-	border-radius: 8px;
+	border-radius: var(--radius-lg);
+	background-color: rgb(var(--black));
+	color: rgb(var(--gray-light));
+	overflow-x: auto;
 }
+
 pre > code {
 	all: unset;
+	color: inherit;
+	font-size: 0.875rem;
 }
+
 blockquote {
-	border-left: 4px solid var(--accent);
+	border-left: 4px solid var(--color-primary);
 	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
+	margin: var(--space-4) 0;
+	font-size: 1.1em;
+	font-style: italic;
+	background: linear-gradient(90deg, rgba(102,126,234,0.05) 0%, transparent 100%);
+	border-radius: var(--radius-md);
+	padding: var(--space-4);
 }
+
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 2px solid rgb(var(--gray-light));
+	margin: var(--space-8) 0;
 }
+
+/* ========================================
+   COMPOSANTS RÉUTILISABLES
+   ======================================== */
+
+/* Boutons */
+button, .btn {
+	font-family: inherit;
+	font-weight: var(--font-semibold);
+	border-radius: var(--radius-lg);
+	padding: var(--space-3) var(--space-6);
+	transition: var(--transition-all);
+	cursor: pointer;
+	border: none;
+	font-size: var(--text-base);
+}
+
+.btn-primary {
+	background: var(--gradient-primary);
+	color: white;
+}
+
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Cards */
+.card {
+	background: white;
+	border-radius: var(--radius-xl);
+	padding: var(--space-6);
+	box-shadow: var(--shadow-md);
+	transition: var(--transition-all);
+}
+
+.card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-xl);
+}
+
+/* Container */
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 var(--space-4);
+}
+
+/* ========================================
+   CLASSES UTILITAIRES
+   ======================================== */
+
+.text-primary { color: var(--color-primary); }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-bold { font-weight: var(--font-bold); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-medium { font-weight: var(--font-medium); }
+
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-4 { padding: var(--space-4); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
 @media (max-width: 720px) {
 	body {
-		font-size: 18px;
+		font-size: 16px;
 	}
+	
 	main {
 		padding: 1em;
 	}
+	
+	h1 {
+		font-size: var(--text-3xl);
+	}
+	
+	h2 {
+		font-size: var(--text-2xl);
+	}
+	
+	h3 {
+		font-size: var(--text-xl);
+	}
+	
+	blockquote {
+		padding: var(--space-3);
+	}
 }
+
+/* ========================================
+   CLASSES SPÉCIFIQUES (existantes)
+   ======================================== */
 
 .sr-only {
 	border: 0;
@@ -144,12 +424,36 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+}
+
+/* ========================================
+   ANIMATIONS GLOBALES
+   ======================================== */
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.5s ease-out;
 }

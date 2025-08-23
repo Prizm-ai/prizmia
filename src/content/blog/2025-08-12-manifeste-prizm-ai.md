@@ -1,11 +1,10 @@
----
+﻿---
 title: "De spectateurs à acteurs en 6 mois : notre révélation IA"
 description: "Comment deux professionnels non-tech ont comblé leur retard en IA et lancent aujourd'hui Prizm AI pour accompagner ceux qui veulent faire de même."
 pubDate: 2025-08-12
 author: "L'équipe Prizm AI"
-categories: ["Édito", "Vision"]
-tags: ["Manifeste", "IA", "Transformation", "PME", "France"]
-image: "/images/blog/manifeste-prizm-ai.jpg"
+emoji: "📰"
+category: "analyses"
 featured: true
 readingTime: "4 min"
 ---

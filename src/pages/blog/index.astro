@@ -1,113 +1,304 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
+// src/pages/blog/index.astro
 import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+// Pour le futur : pagination (10 articles par page)
+const POSTS_PER_PAGE = 10;
+const currentPage = 1;
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+const paginatedPosts = posts.slice(0, POSTS_PER_PAGE);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Tous les articles - ${SITE_TITLE}`} description="Archive complète des articles Prizm AI sur l'IA pour les PME et ETI" />
 		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
+			.blog-header {
 				text-align: center;
+				padding: 3rem 0;
+				margin-bottom: 3rem;
+				background: linear-gradient(135deg, rgba(102,126,234,0.05), rgba(240,147,251,0.05));
 			}
-			ul li:first-child img {
-				width: 100%;
+			
+			.blog-title {
+				font-size: 2.5rem;
+				margin-bottom: 1rem;
+				background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
+			
+			.blog-description {
+				font-size: var(--text-xl);
+				color: #6b7280;
+				max-width: 600px;
+				margin: 0 auto 2rem;
 			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
+			
+			.blog-stats {
+				display: flex;
+				justify-content: center;
+				gap: 3rem;
+				font-size: 0.95rem;
+				color: #6b7280;
 			}
-			ul li a {
+			
+			.stat-item {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			
+			.articles-list {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 0 1.5rem;
+			}
+			
+			.article-item {
 				display: block;
+				padding: var(--space-8);
+				margin-bottom: 1.5rem;
+				background: white;
+				border: 1px solid #e5e7eb;
+				border-radius: 12px;
+				text-decoration: none;
+				color: inherit;
+				transition: all 0.3s ease;
 			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
+			
+			.article-item:hover {
+				transform: translateX(4px);
+				box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+				border-color: var(--color-primary);
 			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
+			
+			.article-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				margin-bottom: 1rem;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			
+			.article-meta {
+				display: flex;
+				gap: 1rem;
+				align-items: center;
+				font-size: var(--text-sm);
+				color: #6b7280;
 			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
+			
+			.article-category {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.25rem;
+				padding: 0.25rem 0.75rem;
+				background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(240,147,251,0.1));
+				border-radius: 9999px;
+				color: var(--color-primary);
+				font-weight: var(--font-semibold);
+				font-size: var(--text-xs);
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
 			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+			
+			.article-date {
+				color: #9ca3af;
+			}
+			
+			.article-title {
+				font-size: var(--text-2xl);
+				font-weight: var(--font-semibold);
+				margin-bottom: 0.75rem;
+				line-height: 1.3;
+			}
+			
+			.article-description {
+				color: #4a5568;
+				line-height: 1.6;
+				margin-bottom: 1rem;
+			}
+			
+			.article-footer {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: var(--text-sm);
+				color: #6b7280;
+			}
+			
+			.article-author {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			
+			.read-more {
+				color: var(--color-primary);
+				font-weight: var(--font-medium);
+				display: inline-flex;
+				align-items: center;
+				gap: 0.25rem;
+			}
+			
+			.empty-state {
+				text-align: center;
+				padding: 5rem 2rem;
+				color: #6b7280;
+			}
+			
+			.empty-icon {
+				font-size: 4rem;
+				margin-bottom: 1rem;
+			}
+			
+			.pagination {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+				margin-top: 4rem;
+				padding-top: 2rem;
+				border-top: 1px solid #e5e7eb;
+			}
+			
+			.pagination-button {
+				padding: var(--space-2) 1rem;
+				background: white;
+				border: 1px solid #e5e7eb;
+				border-radius: 8px;
+				color: #4a5568;
+				text-decoration: none;
+				transition: all 0.3s;
+			}
+			
+			.pagination-button:hover:not(.disabled) {
+				border-color: var(--color-primary);
+				color: var(--color-primary);
+			}
+			
+			.pagination-button.disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+			
+			.pagination-info {
+				color: #6b7280;
+				font-size: var(--text-sm);
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+			<!-- En-tête du blog -->
+			<div class="blog-header">
+				<h1 class="blog-title">Tous les articles</h1>
+				<p class="blog-description">
+					Archive complète de nos analyses, guides et actualités sur l'IA pour les PME/ETI
+				</p>
+				<div class="blog-stats">
+					<div class="stat-item">
+						📚 <span>{posts.length} article{posts.length > 1 ? 's' : ''}</span>
+					</div>
+					<div class="stat-item">
+						📅 <span>Mis à jour chaque semaine</span>
+					</div>
+					<div class="stat-item">
+						⏱ <span>5-15 min de lecture</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Liste des articles -->
+			<div class="articles-list">
+				{posts.length > 0 ? (
+					posts.map((post) => {
+						// Déterminer la catégorie et l'emoji
+						const category = post.data.category || 'lessentiel';
+						const categoryNames = {
+							lessentiel: "L'Essentiel IA",
+							guides: "Guides Pratiques",
+							analyses: "Analyses & Décryptages",
+							outils: "Boîte à Outils"
+						};
+						const categoryEmojis = {
+							lessentiel: '📰',
+							guides: '🎯',
+							analyses: '🔍',
+							outils: '🛠️'
+						};
+						
+						return (
+							<a href={`/blog/${post.id.replace('.md', '')}/`} class="article-item">
+								<div class="article-header">
+									<div class="article-meta">
+										<span class="article-category">
+											{categoryEmojis[category]} {categoryNames[category]}
+										</span>
+										<span class="article-date">
+											<FormattedDate date={post.data.pubDate} />
+										</span>
+									</div>
+								</div>
+								
+								<h2 class="article-title">{post.data.title}</h2>
+								
+								<p class="article-description">
+									{post.data.description || 'Découvrez cet article sur l\'IA générative et son application en entreprise.'}
+								</p>
+								
+								<div class="article-footer">
+									<div class="article-author">
+										<span>✍️ {post.data.author || 'Prizm AI'}</span>
+										<span>•</span>
+										<span>⏱ {post.data.readingTime || '5 min'}</span>
+									</div>
+									<span class="read-more">
+										Lire l'article →
+									</span>
+								</div>
+							</a>
+						);
+					})
+				) : (
+					<div class="empty-state">
+						<div class="empty-icon">🚀</div>
+						<h2>Les articles arrivent bientôt !</h2>
+						<p>Notre système IA prépare du contenu de qualité pour vous.</p>
+						<p style="margin-top: 2rem;">
+							<a href="/" style="color: var(--color-primary); text-decoration: none; font-weight: var(--font-medium);">
+								← Retour à l'accueil
+							</a>
+						</p>
+					</div>
+				)}
+			</div>
+
+			<!-- Pagination (pour le futur) -->
+			{totalPages > 1 && (
+				<div class="pagination">
+					<a href="#" class="pagination-button disabled">
+						← Précédent
+					</a>
+					<span class="pagination-info">
+						Page {currentPage} sur {totalPages}
+					</span>
+					<a href="#" class="pagination-button">
+						Suivant →
+					</a>
+				</div>
+			)}
 		</main>
 		<Footer />
 	</body>

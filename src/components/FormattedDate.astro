@@ -1,17 +1,24 @@
 ---
 interface Props {
-	date: Date;
+  date: Date | string | undefined;
 }
 
 const { date } = Astro.props;
+// S'assurer que la date est valide
+let dateToFormat: Date;
+if (date) {
+  dateToFormat = date instanceof Date ? date : new Date(date);
+} else {
+  dateToFormat = new Date();
+}
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+<time datetime={dateToFormat.toISOString()}>
+  {
+    dateToFormat.toLocaleDateString('fr-FR', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  }
 </time>

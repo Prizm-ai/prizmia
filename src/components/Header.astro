@@ -4,15 +4,15 @@ import HeaderLink from './HeaderLink.astro';
 
 <header style="background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100;">
 	<nav style="max-width: 1200px; margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-		<a href="/" style="text-decoration: none; font-size: 1.625rem; font-weight: 300; letter-spacing: 6px; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+		<a href="/" style="text-decoration: none; font-size: 1.625rem; font-weight: 300; letter-spacing: 6px; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
 			PRIZM AI
 		</a>
 		<div style="display: flex; gap: 2.5rem; align-items: center;">
-			<HeaderLink href="/cette-semaine">Cette semaine</HeaderLink>
-			<HeaderLink href="/essentiels">Essentiels</HeaderLink>
-			<HeaderLink href="/explorations">Explorations</HeaderLink>
-			<HeaderLink href="/ressources">Ressources</HeaderLink>
-			<a href="#newsletter" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 0.625rem 1.5rem; border-radius: 0.5rem; text-decoration: none; font-weight: 500;">
+			<HeaderLink href="/#lessentiel">L'Essentiel IA</HeaderLink>
+			<HeaderLink href="/#guides">Guides Pratiques</HeaderLink>
+			<HeaderLink href="/#analyses">Analyses & Décryptages</HeaderLink>
+			<HeaderLink href="/#outils">Boîte à Outils</HeaderLink>
+			<a href="#newsletter" style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: white; padding: 0.625rem 1.5rem; border-radius: var(--radius-lg); text-decoration: none; font-weight: var(--font-medium);">
 				Newsletter →
 			</a>
 		</div>
