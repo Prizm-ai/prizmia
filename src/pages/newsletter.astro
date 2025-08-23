@@ -1,0 +1,412 @@
+---
+// src/pages/newsletter.astro
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <BaseHead title="Newsletter - Prizm AI" description="Inscrivez-vous à notre newsletter IA hebdomadaire" />
+</head>
+<body>
+  <Header />
+  
+  <main class="newsletter-page">
+    <div class="container">
+      <div class="newsletter-header">
+        <h1>📬 Newsletter Prizm AI</h1>
+        <p class="subtitle">
+          Recevez chaque mardi notre sélection d'actualités IA vérifiées 
+          et nos analyses exclusives
+        </p>
+        
+        <div class="features">
+          <div class="feature">
+            <span class="icon">✅</span>
+            <span>Sources vérifiées</span>
+          </div>
+          <div class="feature">
+            <span class="icon">📊</span>
+            <span>70% actualités + 30% analyses</span>
+          </div>
+          <div class="feature">
+            <span class="icon">🎯</span>
+            <span>Contenu adapté à votre entreprise</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire Mailchimp Embedded -->
+      <div id="mc_embed_shell">
+        <div id="mc_embed_signup">
+          <form 
+            action="https://netlify.us15.list-manage.com/subscribe/post?u=aeb1040d58d11953182994775&amp;id=bb46c06589" 
+            method="post" 
+            id="mc-embedded-subscribe-form" 
+            name="mc-embedded-subscribe-form" 
+            class="validate" 
+            target="_self"
+          >
+            <div id="mc_embed_signup_scroll">
+              <div class="mc-field-group">
+                <label for="mce-EMAIL">Email <span class="asterisk">*</span></label>
+                <input 
+                  type="email" 
+                  name="EMAIL" 
+                  class="required email" 
+                  id="mce-EMAIL" 
+                  required
+                  placeholder="votre@email.com"
+                />
+              </div>
+              
+              <div class="mc-field-group">
+                <label for="mce-FNAME">Prénom</label>
+                <input 
+                  type="text" 
+                  name="FNAME" 
+                  class="text" 
+                  id="mce-FNAME"
+                  placeholder="Votre prénom"
+                />
+              </div>
+              
+              <div class="mc-field-group">
+                <label for="mce-COMPANY">Entreprise</label>
+                <input 
+                  type="text" 
+                  name="COMPANY" 
+                  class="text" 
+                  id="mce-COMPANY"
+                  placeholder="Nom de votre entreprise"
+                />
+              </div>
+              
+              <div class="mc-field-group">
+                <label for="mce-MMERGE3">Type d'entreprise</label>
+                <select name="MMERGE3" class="select" id="mce-MMERGE3">
+                  <option value="">-- Sélectionnez --</option>
+                  <option value="TPE">TPE (moins de 10 salariés)</option>
+                  <option value="PME">PME (10-250 salariés)</option>
+                  <option value="ETI">ETI (plus de 250 salariés)</option>
+                  <option value="Indépendant">Indépendant / Freelance</option>
+                </select>
+              </div>
+              
+              <!-- RGPD Consent -->
+              <div class="mc-field-group input-group">
+                <strong>Consentement RGPD <span class="asterisk">*</span></strong>
+                <ul>
+                  <li>
+                    <label class="checkbox-label">
+                      <input 
+                        type="checkbox" 
+                        id="gdpr_consent" 
+                        name="gdpr[12345]" 
+                        value="Y" 
+                        class="av-checkbox gdpr"
+                        required
+                      />
+                      <span>
+                        J'accepte de recevoir la newsletter hebdomadaire de Prizm AI 
+                        et comprends que je peux me désinscrire à tout moment.
+                      </span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+              
+              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="aeb1040d58d11953182994775_bb46c06589" tabindex="-1" value="">
+              </div>
+              
+              <div class="clear">
+                <input 
+                  type="submit" 
+                  name="subscribe" 
+                  id="mc-embedded-subscribe" 
+                  class="button" 
+                  value="S'abonner à la newsletter"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Message de confirmation -->
+      <div id="success-message" class="success-message" style="display: none;">
+        <h3>🎉 Inscription réussie !</h3>
+        <p>Vérifiez votre boîte mail pour confirmer votre inscription.</p>
+        <p class="small">Vous recevrez ensuite notre newsletter tous les mardis matin.</p>
+      </div>
+
+      <!-- Avantages -->
+      <div class="benefits">
+        <h3>Ce que vous recevrez chaque semaine :</h3>
+        <ul>
+          <li>🔬 Les dernières actualités IA triées et vérifiées</li>
+          <li>📚 Nos analyses approfondies du blog Prizm AI</li>
+          <li>💡 Des cas d'usage concrets pour votre entreprise</li>
+          <li>🛠️ Des outils et ressources pratiques</li>
+          <li>📊 Les tendances du marché de l'IA</li>
+        </ul>
+      </div>
+
+      <!-- Footer Newsletter -->
+      <div class="newsletter-footer">
+        <p class="privacy">
+          🔒 Vos données sont sécurisées et ne seront jamais partagées.<br>
+          Conformément au RGPD, vous pouvez vous désinscrire à tout moment.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .newsletter-page {
+      min-height: 100vh;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .newsletter-header h1 {
+      font-size: 48px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #546e7a;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #546e7a;
+    }
+
+    .feature .icon {
+      font-size: 18px;
+    }
+
+    /* Styles Mailchimp personnalisés */
+    #mc_embed_signup {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    #mc_embed_signup .mc-field-group {
+      margin-bottom: 25px;
+    }
+
+    #mc_embed_signup label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    #mc_embed_signup input[type="email"],
+    #mc_embed_signup input[type="text"],
+    #mc_embed_signup select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    #mc_embed_signup input:focus,
+    #mc_embed_signup select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    #mc_embed_signup .asterisk {
+      color: #e74c3c;
+    }
+
+    #mc_embed_signup .button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #mc_embed_signup .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .input-group ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-top: 5px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-label span {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #546e7a;
+    }
+
+    .success-message {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .success-message h3 {
+      color: #155724;
+      margin-bottom: 10px;
+    }
+
+    .success-message p {
+      color: #155724;
+      margin-bottom: 5px;
+    }
+
+    .success-message .small {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .benefits {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+
+    .benefits h3 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .benefits ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .benefits li {
+      padding: 10px 0;
+      color: #546e7a;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .benefits li:last-child {
+      border-bottom: none;
+    }
+
+    .newsletter-footer {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .privacy {
+      font-size: 13px;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .newsletter-header h1 {
+        font-size: 36px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      #mc_embed_signup {
+        padding: 25px;
+      }
+
+      .features {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+
+  <script>
+    // Gestion du formulaire
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('mc-embedded-subscribe-form');
+      const successMessage = document.getElementById('success-message');
+      
+      // Vous pouvez ajouter des validations supplémentaires ici
+      form.addEventListener('submit', function(e) {
+        // Validation GDPR
+        const gdprCheckbox = document.getElementById('gdpr_consent');
+        if (!gdprCheckbox.checked) {
+          e.preventDefault();
+          alert('Veuillez accepter les conditions RGPD pour continuer.');
+          return false;
+        }
+        
+        // Le formulaire sera soumis normalement à Mailchimp
+        // Mailchimp gère la validation et l'envoi de l'email de confirmation
+      });
+    });
+  </script>
+
+  <Footer />
+</body>
+</html>
