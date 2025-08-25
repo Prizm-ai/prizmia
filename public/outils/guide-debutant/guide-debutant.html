@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide du Débutant IA - Prizm AI</title>
+    <link rel="stylesheet" href="guide-debutant.css">
+</head>
+<body>
+    <div class="guide-container">
+        <!-- Header -->
+        <header class="guide-header">
+            <div class="header-content">
+                <a href="/" class="back-link">← Retour à la boîte à outils</a>
+                <h1>🎯 Guide du Débutant</h1>
+                <p class="subtitle">L'Intelligence Artificielle expliquée simplement en 5 minutes</p>
+                <div class="reading-time">⏱️ Temps de lecture : 5 min</div>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="section-nav">
+            <button class="nav-tab active" data-section="intro">Introduction</button>
+            <button class="nav-tab" data-section="comprendre">Comprendre l'IA</button>
+            <button class="nav-tab" data-section="applications">Applications</button>
+            <button class="nav-tab" data-section="commencer">Commencer</button>
+            <button class="nav-tab" data-section="futur">Le Futur</button>
+        </nav>
+
+        <!-- Content Sections -->
+        <main class="guide-content">
+            <!-- Section 1: Introduction -->
+            <section id="intro" class="content-section active">
+                <div class="section-icon">👋</div>
+                <h2>Bienvenue dans le monde de l'IA</h2>
+                
+                <div class="key-point">
+                    <strong>L'IA est partout autour de nous</strong> - de votre smartphone à Netflix, en passant par votre GPS. 
+                    Mais qu'est-ce que c'est vraiment ?
+                </div>
+
+                <p>
+                    Si vous lisez ce guide, c'est que vous avez déjà franchi le pas le plus important : 
+                    vous voulez comprendre l'Intelligence Artificielle. Bonne nouvelle : c'est bien plus 
+                    simple que ce qu'on imagine !
+                </p>
+
+                <div class="info-card">
+                    <h3>💡 Ce que vous allez découvrir</h3>
+                    <ul>
+                        <li>Ce qu'est vraiment l'IA (sans jargon technique)</li>
+                        <li>Comment elle fonctionne concrètement</li>
+                        <li>Ce qu'elle peut faire pour vous aujourd'hui</li>
+                        <li>Comment commencer à l'utiliser dès maintenant</li>
+                    </ul>
+                </div>
+
+                <div class="myth-reality">
+                    <div class="myth">
+                        <span class="label">❌ Mythe</span>
+                        <p>L'IA va remplacer tous les emplois et dominer le monde</p>
+                    </div>
+                    <div class="reality">
+                        <span class="label">✅ Réalité</span>
+                        <p>L'IA est un outil qui augmente nos capacités et nous aide à être plus efficaces</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Comprendre l'IA -->
+            <section id="comprendre" class="content-section">
+                <div class="section-icon">🧠</div>
+                <h2>Qu'est-ce que l'Intelligence Artificielle ?</h2>
+
+                <div class="key-point">
+                    <strong>Définition simple :</strong> L'IA est un ensemble de technologies qui permettent 
+                    aux machines d'accomplir des tâches qui nécessitent normalement l'intelligence humaine.
+                </div>
+
+                <div class="concept-cards">
+                    <div class="concept-card">
+                        <div class="card-icon">👀</div>
+                        <h3>Reconnaître</h3>
+                        <p>Identifier des images, comprendre la parole, lire du texte</p>
+                        <div class="example">Ex: Face ID de votre téléphone</div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="card-icon">🎯</div>
+                        <h3>Prédire</h3>
+                        <p>Anticiper des tendances, prévoir des comportements</p>
+                        <div class="example">Ex: Suggestions Netflix</div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="card-icon">💬</div>
+                        <h3>Générer</h3>
+                        <p>Créer du contenu, répondre à des questions</p>
+                        <div class="example">Ex: ChatGPT, Claude</div>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="card-icon">🤖</div>
+                        <h3>Automatiser</h3>
+                        <p>Exécuter des tâches répétitives sans intervention</p>
+                        <div class="example">Ex: Filtres anti-spam</div>
+                    </div>
+                </div>
+
+                <div class="analogy-box">
+                    <h3>🎭 Analogie simple</h3>
+                    <p>
+                        Imaginez l'IA comme un <strong>assistant très doué</strong> qui a lu des millions de livres, 
+                        vu des millions d'images, et peut utiliser ces connaissances pour vous aider. 
+                        Il ne "pense" pas vraiment, mais il reconnaît des patterns et fait des associations 
+                        très sophistiquées.
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <h3>📅 L'IA en quelques dates</h3>
+                    <div class="timeline-item">
+                        <span class="year">1950</span>
+                        <span class="event">Alan Turing imagine le test de Turing</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">1997</span>
+                        <span class="event">Deep Blue bat Kasparov aux échecs</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">2011</span>
+                        <span class="event">Siri arrive sur iPhone</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="year">2022</span>
+                        <span class="event">ChatGPT démocratise l'IA générative</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Applications -->
+            <section id="applications" class="content-section">
+                <div class="section-icon">🚀</div>
+                <h2>L'IA dans votre quotidien</h2>
+
+                <div class="key-point">
+                    Vous utilisez probablement déjà l'IA <strong>plusieurs fois par jour</strong> sans le savoir !
+                </div>
+
+                <div class="use-cases">
+                    <div class="use-case">
+                        <div class="use-case-header">
+                            <span class="icon">📱</span>
+                            <h3>Dans votre smartphone</h3>
+                        </div>
+                        <ul>
+                            <li>Reconnaissance faciale pour déverrouiller</li>
+                            <li>Suggestions de mots quand vous tapez</li>
+                            <li>Assistant vocal (Siri, Google Assistant)</li>
+                            <li>Photos organisées automatiquement</li>
+                        </ul>
+                    </div>
+
+                    <div class="use-case">
+                        <div class="use-case-header">
+                            <span class="icon">💼</span>
+                            <h3>Au travail</h3>
+                        </div>
+                        <ul>
+                            <li>Rédaction d'emails et de documents</li>
+                            <li>Traduction instantanée</li>
+                            <li>Analyse de données</li>
+                            <li>Automatisation de tâches répétitives</li>
+                        </ul>
+                    </div>
+
+                    <div class="use-case">
+                        <div class="use-case-header">
+                            <span class="icon">🏠</span>
+                            <h3>À la maison</h3>
+                        </div>
+                        <ul>
+                            <li>Recommandations Netflix/Spotify</li>
+                            <li>Assistants vocaux (Alexa, Google Home)</li>
+                            <li>Aspirateurs robots</li>
+                            <li>Thermostats intelligents</li>
+                        </ul>
+                    </div>
+
+                    <div class="use-case">
+                        <div class="use-case-header">
+                            <span class="icon">🌐</span>
+                            <h3>Sur Internet</h3>
+                        </div>
+                        <ul>
+                            <li>Moteurs de recherche</li>
+                            <li>Filtres anti-spam</li>
+                            <li>Publicités ciblées</li>
+                            <li>Chatbots de support client</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sector-impact">
+                    <h3>🏭 Impact par secteur</h3>
+                    <div class="sector-grid">
+                        <div class="sector">
+                            <strong>Santé</strong>
+                            <p>Diagnostic précoce, découverte de médicaments</p>
+                        </div>
+                        <div class="sector">
+                            <strong>Finance</strong>
+                            <p>Détection de fraude, analyse de risque</p>
+                        </div>
+                        <div class="sector">
+                            <strong>Transport</strong>
+                            <p>GPS intelligent, véhicules autonomes</p>
+                        </div>
+                        <div class="sector">
+                            <strong>Éducation</strong>
+                            <p>Apprentissage personnalisé, tutorat virtuel</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Commencer -->
+            <section id="commencer" class="content-section">
+                <div class="section-icon">🎬</div>
+                <h2>Comment commencer avec l'IA ?</h2>
+
+                <div class="key-point">
+                    <strong>Bonne nouvelle :</strong> Vous n'avez pas besoin d'être technique pour utiliser l'IA !
+                </div>
+
+                <div class="start-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Choisissez votre premier outil</h3>
+                        <p>Commencez par un assistant IA généraliste :</p>
+                        <div class="tool-options">
+                            <div class="tool-option">
+                                <strong>ChatGPT</strong> - Le plus populaire
+                            </div>
+                            <div class="tool-option">
+                                <strong>Claude</strong> - Excellent pour l'analyse
+                            </div>
+                            <div class="tool-option">
+                                <strong>Gemini</strong> - Intégré à Google
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Apprenez à "prompter"</h3>
+                        <p>Le secret : être clair et spécifique dans vos demandes</p>
+                        <div class="prompt-examples">
+                            <div class="prompt-example bad">
+                                <span class="label">❌ Vague</span>
+                                <code>"Écris un email"</code>
+                            </div>
+                            <div class="prompt-example good">
+                                <span class="label">✅ Précis</span>
+                                <code>"Écris un email professionnel de 5 lignes pour reporter une réunion de mardi à jeudi, en restant courtois"</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Explorez les cas d'usage</h3>
+                        <div class="beginner-tasks">
+                            <h4>🌱 Tâches pour débuter :</h4>
+                            <ul>
+                                <li>Résumer un long article</li>
+                                <li>Traduire un texte</li>
+                                <li>Générer des idées de contenu</li>
+                                <li>Corriger et améliorer vos écrits</li>
+                                <li>Expliquer des concepts complexes</li>
+                                <li>Créer des listes et des plans</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Progressez étape par étape</h3>
+                        <div class="progression-path">
+                            <div class="level">
+                                <strong>Niveau 1:</strong> Utilisation basique (questions-réponses)
+                            </div>
+                            <div class="level">
+                                <strong>Niveau 2:</strong> Création de contenu
+                            </div>
+                            <div class="level">
+                                <strong>Niveau 3:</strong> Automatisation de tâches
+                            </div>
+                            <div class="level">
+                                <strong>Niveau 4:</strong> Intégration dans vos processus
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-box">
+                    <h3>💡 Conseils pratiques</h3>
+                    <ul>
+                        <li>Commencez par des tâches simples</li>
+                        <li>N'ayez pas peur d'expérimenter</li>
+                        <li>Affinez vos prompts progressivement</li>
+                        <li>Vérifiez toujours les informations importantes</li>
+                        <li>Gardez un œil critique sur les résultats</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5: Le Futur -->
+            <section id="futur" class="content-section">
+                <div class="section-icon">🔮</div>
+                <h2>L'IA et vous : Préparer l'avenir</h2>
+
+                <div class="key-point">
+                    L'IA n'est pas une menace mais <strong>une opportunité</strong> pour ceux qui apprennent à l'utiliser.
+                </div>
+
+                <div class="future-skills">
+                    <h3>🎯 Compétences clés pour demain</h3>
+                    <div class="skills-grid">
+                        <div class="skill">
+                            <div class="skill-icon">🤝</div>
+                            <h4>Collaboration Humain-IA</h4>
+                            <p>Savoir travailler avec l'IA comme partenaire</p>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-icon">🧩</div>
+                            <h4>Résolution créative</h4>
+                            <p>Utiliser l'IA pour innover et créer</p>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-icon">🎨</div>
+                            <h4>Jugement critique</h4>
+                            <p>Évaluer et améliorer les outputs de l'IA</p>
+                        </div>
+                        <div class="skill">
+                            <div class="skill-icon">📚</div>
+                            <h4>Apprentissage continu</h4>
+                            <p>S'adapter aux nouveaux outils et usages</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opportunities">
+                    <h3>✨ Opportunités à saisir</h3>
+                    <ul>
+                        <li><strong>Gagnez du temps</strong> sur les tâches répétitives</li>
+                        <li><strong>Améliorez votre productivité</strong> de 20 à 40%</li>
+                        <li><strong>Développez de nouvelles compétences</strong> plus rapidement</li>
+                        <li><strong>Créez du contenu</strong> de meilleure qualité</li>
+                        <li><strong>Innovez</strong> dans votre domaine</li>
+                    </ul>
+                </div>
+
+                <div class="action-call">
+                    <h3>🚀 Passez à l'action !</h3>
+                    <p>
+                        L'IA évolue rapidement, mais les principes fondamentaux restent les mêmes. 
+                        En commençant aujourd'hui, vous prenez une longueur d'avance.
+                    </p>
+                    <div class="next-steps">
+                        <h4>Vos prochaines étapes :</h4>
+                        <ol>
+                            <li>Créez un compte sur ChatGPT ou Claude (gratuit)</li>
+                            <li>Testez 3 cas d'usage cette semaine</li>
+                            <li>Rejoignez notre newsletter pour des tips hebdomadaires</li>
+                            <li>Explorez nos autres outils dans la boîte à outils</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="final-message">
+                    <p class="quote">
+                        "L'IA ne remplacera pas les humains, mais les humains qui utilisent l'IA 
+                        remplaceront ceux qui ne l'utilisent pas."
+                    </p>
+                    <p class="author">- Karim Lakhani, Harvard Business School</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer CTA -->
+        <footer class="guide-footer">
+            <div class="footer-content">
+                <h3>🎉 Félicitations !</h3>
+                <p>Vous venez de faire vos premiers pas dans le monde de l'IA.</p>
+                <div class="footer-actions">
+                    <button class="btn-primary" onclick="window.location.href='/outils'">
+                        Explorer d'autres outils
+                    </button>
+                    <button class="btn-secondary" onclick="shareGuide()">
+                        Partager ce guide
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="guide-debutant.js"></script>
+</body>
+</html>

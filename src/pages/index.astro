@@ -273,18 +273,42 @@ const analysesLimited = sortAndLimit(analysesPosts);
 						<a href="/blog" style="color: var(--color-primary); text-decoration: none; font-weight: var(--font-medium);">Tous les outils →</a>
 					</div>
 					
-					<div style="text-align: center; padding: 4rem 2rem; background: white; border-radius: var(--radius-2xl); border: 2px dashed #e5e7eb;">
-						<span style="font-size: 4rem;">🚀</span>
-						<h3 style="font-size: var(--text-2xl); margin: var(--space-6) 0;">Les outils arrivent bientôt !</h3>
-						<p style="color: #6b7280; font-size: var(--text-lg); max-width: 600px; margin: 0 auto 2rem;">
-							Templates Excel, checklists d'évaluation, scripts d'automatisation... 
-							Tous les outils pratiques pour implémenter l'IA dans votre PME seront disponibles ici.
-						</p>
-						<a href="#newsletter" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-primary); text-decoration: none; font-weight: var(--font-medium);">
-							Être notifié du lancement →
-						</a>
-					</div>
-				</div>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+	<!-- Guide du Débutant -->
+	<a href="/outils/guide-debutant" style="text-decoration: none; color: inherit; transition: transform 0.3s;" class="tool-card">
+		<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px solid #e5e7eb; transition: all 0.3s; height: 100%;">
+			<div style="font-size: 3rem; margin-bottom: 1.5rem;">🎯</div>
+			<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: var(--color-primary);">
+				Guide du Débutant IA
+			</h3>
+			<p style="color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6;">
+				L'Intelligence Artificielle expliquée simplement en 5 minutes. Parfait pour commencer !
+			</p>
+			<div style="display: flex; align-items: center; justify-content: space-between;">
+				<span style="background: rgba(102,126,234,0.1); color: var(--color-primary); padding: 0.25rem 0.75rem; border-radius: var(--radius-lg); font-size: 0.875rem; font-weight: 500;">
+					5 min de lecture
+				</span>
+				<span style="color: var(--color-primary); font-weight: 500;">
+					Commencer →
+				</span>
+			</div>
+		</div>
+	</a>
+
+	<!-- Placeholder pour futurs outils -->
+	<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px dashed #e5e7eb; text-align: center;">
+		<div style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.5;">🛠️</div>
+		<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: #9ca3af;">
+			Prochains outils
+		</h3>
+		<p style="color: #9ca3af; margin-bottom: 1.5rem;">
+			Templates Excel, checklists, scripts d'automatisation...
+		</p>
+		<a href="#newsletter" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">
+			Être notifié →
+		</a>
+	</div>
+</div>
 			</section>
 
 			<!-- Start Here Section -->
