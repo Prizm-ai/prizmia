@@ -1,89 +1,47 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boîte à Outils IA - Prizm AI</title>
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Boîte à Outils IA - Prizm AI">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --success-color: #10b981;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f9fafb;
-            --border-color: #e5e7eb;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #f9fafb, #ffffff);
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-        
-        .container {
+        .tools-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
         
-        /* Header */
-        .header {
+        /* Header Section */
+        .tools-header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--color-primary, #667eea) 0%, var(--color-primary-dark, #764ba2) 100%);
             color: white;
-            border-radius: 20px;
-            margin-bottom: 40px;
+            border-radius: 1.25rem;
+            margin-bottom: 3rem;
         }
         
-        .header h1 {
+        .tools-header h1 {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 0.75rem;
             font-weight: 700;
         }
         
-        .header p {
+        .tools-header p {
             font-size: 1.2rem;
             opacity: 0.95;
-            margin-bottom: 20px;
-        }
-        
-        .back-link {
-            display: inline-block;
-            color: white;
-            text-decoration: none;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            transition: opacity 0.3s;
-        }
-        
-        .back-link:hover {
-            opacity: 1;
         }
         
         /* Stats Bar */
         .stats-bar {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 3rem;
             flex-wrap: wrap;
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 40px;
+            padding: 1.75rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
         }
         
         .stat {
@@ -93,38 +51,60 @@
         .stat-number {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--primary-color);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stat-label {
-            color: var(--text-secondary);
+            color: #6b7280;
             font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #6b7280;
         }
         
         /* Tools Grid */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 1.75rem;
+            margin-bottom: 3rem;
         }
         
         .tool-card {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
+            border-radius: 1rem;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: block;
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
         }
         
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--color-primary);
         }
         
         .tool-card::before {
@@ -134,9 +114,9 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
             transform: translateX(-100%);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
         
         .tool-card:hover::before {
@@ -146,50 +126,51 @@
         .tool-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             border-radius: 12px;
-            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
+            margin-bottom: 1rem;
         }
         
         .tool-title {
-            font-size: 1.3rem;
-            color: var(--text-primary);
-            margin-bottom: 10px;
+            font-size: 1.25rem;
             font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
         }
         
         .tool-description {
-            color: var(--text-secondary);
+            color: #6b7280;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
         
         .tool-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 0.5rem;
         }
         
         .tag {
-            background: var(--bg-secondary);
-            color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 15px;
+            background: #f3f4f6;
+            color: var(--color-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
             font-size: 0.85rem;
             font-weight: 500;
         }
         
         .tag.new {
-            background: var(--success-color);
+            background: #10b981;
             color: white;
         }
         
+        /* Coming Soon Cards */
         .tool-card.coming-soon {
             opacity: 0.6;
             cursor: not-allowed;
@@ -209,61 +190,47 @@
             font-weight: bold;
         }
         
-        /* Section Title */
-        .section-title {
+        /* Footer CTA */
+        .tools-footer {
             text-align: center;
-            margin: 60px 0 30px;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-        
-        .section-title p {
-            color: var(--text-secondary);
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
+            padding: 3rem 2rem;
             background: white;
-            border-radius: 15px;
-            margin-top: 60px;
+            border-radius: 1rem;
+            margin-top: 4rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
-        .footer h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
+        .tools-footer h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
         }
         
-        .footer p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
+        .tools-footer p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
         }
         
         .suggest-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
         
         .suggest-btn:hover {
             transform: scale(1.05);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
+            .tools-header h1 {
                 font-size: 2rem;
             }
             
@@ -272,24 +239,22 @@
             }
             
             .stats-bar {
-                gap: 20px;
+                gap: 1.5rem;
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
+
+    <main class="tools-container">
         <!-- Header -->
-        <header class="header">
-            <a href="/" class="back-link">← Retour au site</a>
+        <div class="tools-header">
             <h1>Boîte à Outils IA</h1>
             <p>Tout pour comprendre, tester et implémenter l'IA dans votre organisation</p>
-        </header>
+        </div>
         
         <!-- Stats Bar -->
         <div class="stats-bar">
             <div class="stat">
-                <div class="stat-number">2</div>
+                <div class="stat-number">3</div>
                 <div class="stat-label">Outils disponibles</div>
             </div>
             <div class="stat">
@@ -311,7 +276,7 @@
             
             <div class="tools-grid">
                 <!-- Guide du Débutant -->
-                <a href="guide-debutant/guide-debutant.html" class="tool-card">
+                <a href="/outils/guide-debutant" class="tool-card">
                     <div class="tool-icon">G</div>
                     <div class="tool-title">Guide du Débutant</div>
                     <div class="tool-description">
@@ -326,7 +291,7 @@
                 </a>
                 
                 <!-- Glossaire IA -->
-                <a href="glossaire/glossaire-ia.html" class="tool-card">
+                <a href="/outils/glossaire" class="tool-card">
                     <div class="tool-icon">GL</div>
                     <div class="tool-title">Glossaire IA</div>
                     <div class="tool-description">
@@ -336,6 +301,21 @@
                     <div class="tool-tags">
                         <span class="tag">45+ termes</span>
                         <span class="tag">Recherche</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </a>
+
+                <!-- prompts-essentiels -->
+                <a href="/outils/prompts-essentiels" class="tool-card">
+                    <div class="tool-icon">PE</div>
+                    <div class="tool-title">Les 10 prompts essentiels</div>
+                    <div class="tool-description">
+                        Un concentré des meilleurs prompts pour gagner du temps et gagner en efficacité. 
+                        Des prompts qui vont simplifier vos tâches et booster vos résultats.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Éducatif</span>
+                        <span class="tag">Quiz</span>
                         <span class="tag new">Nouveau</span>
                     </div>
                 </a>
@@ -350,20 +330,6 @@
             </div>
             
             <div class="tools-grid">
-                <!-- Mythes vs Réalité -->
-                <div class="tool-card coming-soon">
-                    <div class="tool-icon">MR</div>
-                    <div class="tool-title">Mythes vs Réalité</div>
-                    <div class="tool-description">
-                        Démystifiez les idées reçues sur l'IA. Découvrez ce qui est vrai, 
-                        ce qui est faux, et ce qui reste à prouver.
-                    </div>
-                    <div class="tool-tags">
-                        <span class="tag">Éducatif</span>
-                        <span class="tag">Quiz</span>
-                    </div>
-                </div>
-                
                 <!-- Comparateur d'IA -->
                 <div class="tool-card coming-soon">
                     <div class="tool-icon">C</div>
@@ -408,16 +374,16 @@
             </div>
         </section>
         
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Footer CTA -->
+        <div class="tools-footer">
             <h3>Une idée d'outil ?</h3>
             <p>Nous sommes toujours à l'écoute de vos suggestions pour enrichir cette boîte à outils.</p>
             <button class="suggest-btn" onclick="window.location.href='mailto:contact@prizmai.com?subject=Suggestion pour la boîte à outils IA'">
                 Suggérer un outil
             </button>
-        </footer>
-    </div>
-    
+        </div>
+    </main>
+
     <script>
         // Animation au chargement
         document.addEventListener('DOMContentLoaded', function() {
@@ -431,15 +397,6 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
-            
-            // Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    page_title: 'Boîte à Outils IA',
-                    page_path: '/outils/'
-                });
-            }
         });
     </script>
-</body>
-</html>
+</PageLayout>
