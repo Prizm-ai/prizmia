@@ -1,0 +1,1248 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Glossaire IA - Prizm AI">
+    <style>
+        .glossary-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .glossary-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--color-primary, #667eea) 0%, var(--color-primary-dark, #764ba2) 100%);
+            color: white;
+            padding: 4rem 2.5rem 3rem;
+            border-radius: 1.25rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .glossary-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1f2937;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.25rem;
+            display: none;
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.25rem;
+            border-radius: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .alphabet-nav {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            padding: 1.25rem;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-btn {
+            background: none;
+            border: 1px solid #e5e7eb;
+            color: #6b7280;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .letter-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .letter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .letter-btn[data-letter="all"] {
+            width: auto;
+            padding: 0 1rem;
+            border-radius: 1.25rem;
+        }
+
+        .category-filter {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 0.625rem;
+            flex-wrap: wrap;
+            padding: 1.25rem;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #6b7280;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .category-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .glossary-content {
+            grid-column: 1;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: white;
+            border-radius: 0.625rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .term-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            border-left: 4px solid transparent;
+        }
+
+        .term-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--color-primary);
+        }
+
+        .term-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .term-category {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 0.25rem 0.625rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .term-definition {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .term-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .difficulty {
+            display: flex;
+            gap: 2px;
+        }
+
+        .difficulty-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+        }
+
+        .difficulty-dot.filled {
+            background: var(--color-primary);
+        }
+
+        .quick-access {
+            grid-column: 2;
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 1.25rem;
+        }
+
+        .quick-access h3 {
+            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .popular-terms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-term {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            color: #6b7280;
+            padding: 0.375rem 0.75rem;
+            border-radius: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .quick-term:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1.25rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1.25rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-header h2 {
+            color: #1f2937;
+            margin-bottom: 0.625rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.625rem;
+            font-size: 1.1rem;
+        }
+
+        .modal-body p {
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 1200px) {
+            .glossary-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-access {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <main class="glossary-container">
+        <header class="glossary-header">
+            <a href="/outils" class="back-link">← Retour à la boîte à outils</a>
+            <h1>Glossaire de l'Intelligence Artificielle</h1>
+            <p class="subtitle">Plus de 80 termes expliqués simplement</p>
+            
+            <div style="max-width: 400px; margin: 0 auto 1.5rem;">
+                <input type="text" 
+                       id="searchInput" 
+                       style="width: 100%; padding: 0.75rem 1rem; font-size: 0.95rem; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px; background: white; color: #333;"
+                       placeholder="Rechercher un terme..."
+                       autocomplete="off">
+                <button id="clearSearch" class="clear-search" style="display: none;">✕</button>
+            </div>
+            
+            <div class="quick-stats">
+                <span class="stat"><strong id="totalTerms">80</strong> termes</span>
+                <span class="stat"><strong id="categoriesCount">5</strong> catégories</span>
+                <span class="stat"><strong id="viewCount">0</strong> consultés</span>
+            </div>
+        </header>
+
+        <nav class="alphabet-nav">
+            <button class="letter-btn active" data-letter="all">Tous</button>
+            <button class="letter-btn" data-letter="A">A</button>
+            <button class="letter-btn" data-letter="B">B</button>
+            <button class="letter-btn" data-letter="C">C</button>
+            <button class="letter-btn" data-letter="D">D</button>
+            <button class="letter-btn" data-letter="E">E</button>
+            <button class="letter-btn" data-letter="F">F</button>
+            <button class="letter-btn" data-letter="G">G</button>
+            <button class="letter-btn" data-letter="H">H</button>
+            <button class="letter-btn" data-letter="I">I</button>
+            <button class="letter-btn" data-letter="L">L</button>
+            <button class="letter-btn" data-letter="M">M</button>
+            <button class="letter-btn" data-letter="N">N</button>
+            <button class="letter-btn" data-letter="O">O</button>
+            <button class="letter-btn" data-letter="P">P</button>
+            <button class="letter-btn" data-letter="R">R</button>
+            <button class="letter-btn" data-letter="S">S</button>
+            <button class="letter-btn" data-letter="T">T</button>
+            <button class="letter-btn" data-letter="V">V</button>
+            <button class="letter-btn" data-letter="Z">Z</button>
+        </nav>
+
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">Toutes</button>
+            <button class="category-btn" data-category="fondamentaux">Fondamentaux</button>
+            <button class="category-btn" data-category="machine-learning">Machine Learning</button>
+            <button class="category-btn" data-category="deep-learning">Deep Learning</button>
+            <button class="category-btn" data-category="generative">IA Générative</button>
+            <button class="category-btn" data-category="business">Business</button>
+        </div>
+
+        <div class="glossary-content">
+            <div class="results-info">
+                <span id="resultsCount">Affichage de tous les termes</span>
+            </div>
+
+            <div id="termsGrid" class="terms-grid"></div>
+        </div>
+
+        <aside class="quick-access">
+            <h3>Termes populaires</h3>
+            <div class="popular-terms">
+                <button class="quick-term" onclick="searchTerm('ChatGPT')">ChatGPT</button>
+                <button class="quick-term" onclick="searchTerm('Machine Learning')">Machine Learning</button>
+                <button class="quick-term" onclick="searchTerm('Prompt')">Prompt</button>
+                <button class="quick-term" onclick="searchTerm('LLM')">LLM</button>
+                <button class="quick-term" onclick="searchTerm('Token')">Token</button>
+            </div>
+        </aside>
+
+        <div id="termModal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div class="modal-header">
+                    <h2 id="modalTitle"></h2>
+                    <span id="modalCategory" class="term-category"></span>
+                </div>
+                <div class="modal-body">
+                    <h3>Définition</h3>
+                    <p id="modalDefinition"></p>
+                    <div id="exampleSection" style="display: none;">
+                        <h3>Exemple</h3>
+                        <p id="modalExample"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const glossaryTerms = [
+            {
+                id: 1,
+                term: "Intelligence Artificielle (IA)",
+                definition: "Ensemble de technologies permettant aux machines de simuler l'intelligence humaine, incluant l'apprentissage, le raisonnement et l'auto-correction.",
+                category: "fondamentaux",
+                difficulty: 1,
+                example: "Siri, Alexa et les recommandations Netflix sont des exemples d'IA au quotidien."
+            },
+            {
+                id: 2,
+                term: "Algorithm",
+                definition: "Ensemble d'instructions étape par étape pour résoudre un problème ou accomplir une tâche spécifique.",
+                category: "fondamentaux",
+                difficulty: 1,
+                example: "L'algorithme de recherche Google classe les pages web selon leur pertinence."
+            },
+            {
+                id: 3,
+                term: "Dataset",
+                definition: "Collection structurée de données utilisée pour entraîner, valider et tester des modèles d'IA.",
+                category: "fondamentaux",
+                difficulty: 1
+            },
+            {
+                id: 4,
+                term: "Model",
+                definition: "Représentation mathématique d'un système apprise à partir de données, capable de faire des prédictions.",
+                category: "fondamentaux",
+                difficulty: 2,
+                example: "GPT-4 est un modèle de langage capable de générer du texte."
+            },
+            {
+                id: 5,
+                term: "Machine Learning",
+                definition: "Sous-domaine de l'IA où les machines apprennent à partir de données sans être explicitement programmées.",
+                category: "machine-learning",
+                difficulty: 2,
+                example: "Un système de ML peut apprendre à reconnaître des chats après avoir vu des milliers d'exemples."
+            },
+            {
+                id: 6,
+                term: "Deep Learning",
+                definition: "Technique de ML utilisant des réseaux de neurones à plusieurs couches pour traiter des données complexes.",
+                category: "deep-learning",
+                difficulty: 3,
+                example: "La reconnaissance faciale de votre smartphone utilise le deep learning."
+            },
+            {
+                id: 7,
+                term: "Neural Network",
+                definition: "Système informatique inspiré du cerveau humain, composé de nœuds interconnectés en couches.",
+                category: "deep-learning",
+                difficulty: 3
+            },
+            {
+                id: 8,
+                term: "Large Language Model (LLM)",
+                definition: "Modèle d'IA massif entraîné sur d'énormes quantités de texte pour comprendre et générer du langage.",
+                category: "generative",
+                difficulty: 2,
+                example: "ChatGPT, Claude et Gemini sont des LLMs populaires."
+            },
+            {
+                id: 9,
+                term: "GPT",
+                definition: "Generative Pre-trained Transformer - Architecture développée par OpenAI pour la génération de texte.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 10,
+                term: "Prompt",
+                definition: "Instruction ou question donnée à un modèle d'IA pour obtenir une réponse spécifique.",
+                category: "generative",
+                difficulty: 1,
+                example: "\"Écris un email professionnel\" est un prompt simple."
+            },
+            {
+                id: 11,
+                term: "Token",
+                definition: "Unité de base de texte traitée par un modèle de langage, généralement un mot ou partie de mot.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 12,
+                term: "Hallucination",
+                definition: "Tendance d'un modèle d'IA à générer des informations fausses présentées comme vraies.",
+                category: "generative",
+                difficulty: 2,
+                example: "Un chatbot pourrait inventer une citation qui n'existe pas."
+            },
+            {
+                id: 13,
+                term: "Fine-tuning",
+                definition: "Processus d'adaptation d'un modèle pré-entraîné à une tâche spécifique avec des données supplémentaires.",
+                category: "machine-learning",
+                difficulty: 3
+            },
+            {
+                id: 14,
+                term: "Computer Vision",
+                definition: "Domaine de l'IA permettant aux machines d'interpréter et comprendre le contenu visuel.",
+                category: "deep-learning",
+                difficulty: 2,
+                example: "Les voitures autonomes utilisent la computer vision pour détecter les piétons."
+            },
+            {
+                id: 15,
+                term: "NLP (Natural Language Processing)",
+                definition: "Traitement automatique du langage naturel permettant aux machines de comprendre et générer du texte.",
+                category: "fondamentaux",
+                difficulty: 2
+            },
+            {
+                id: 16,
+                term: "Transformer",
+                definition: "Architecture révolutionnaire utilisant l'attention pour traiter des séquences de données.",
+                category: "deep-learning",
+                difficulty: 3
+            },
+            {
+                id: 17,
+                term: "Overfitting",
+                definition: "Quand un modèle apprend trop bien les données d'entraînement et généralise mal.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 18,
+                term: "AI Bias",
+                definition: "Préjugés ou discriminations systématiques dans les décisions prises par des systèmes d'IA.",
+                category: "fondamentaux",
+                difficulty: 2
+            },
+            {
+                id: 19,
+                term: "AGI (Artificial General Intelligence)",
+                definition: "IA hypothétique avec des capacités intellectuelles égales ou supérieures à l'humain dans tous les domaines.",
+                category: "fondamentaux",
+                difficulty: 2
+            },
+            {
+                id: 20,
+                term: "Chatbot",
+                definition: "Programme IA capable de converser avec des humains en langage naturel.",
+                category: "business",
+                difficulty: 1,
+                example: "Les assistants de support client sur les sites web."
+            },
+            {
+                id: 21,
+                term: "API",
+                definition: "Interface permettant à différents logiciels de communiquer et échanger des données.",
+                category: "business",
+                difficulty: 2
+            },
+            {
+                id: 22,
+                term: "Cloud Computing",
+                definition: "Utilisation de serveurs distants via internet pour stocker et traiter des données.",
+                category: "business",
+                difficulty: 1
+            },
+            {
+                id: 23,
+                term: "Inference",
+                definition: "Processus d'utilisation d'un modèle entraîné pour faire des prédictions sur de nouvelles données.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 24,
+                term: "Embedding",
+                definition: "Représentation numérique dense d'un mot ou concept dans un espace vectoriel.",
+                category: "deep-learning",
+                difficulty: 3
+            },
+            {
+                id: 25,
+                term: "Training",
+                definition: "Processus d'apprentissage où un modèle ajuste ses paramètres en analysant des données d'entraînement.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 26,
+                term: "Supervised Learning",
+                definition: "Type d'apprentissage où le modèle apprend à partir d'exemples étiquetés avec les bonnes réponses.",
+                category: "fondamentaux",
+                difficulty: 2
+            },
+            {
+                id: 27,
+                term: "Unsupervised Learning",
+                definition: "Apprentissage où le modèle découvre des patterns dans les données sans étiquettes prédéfinies.",
+                category: "fondamentaux",
+                difficulty: 2
+            },
+            {
+                id: 28,
+                term: "Reinforcement Learning",
+                definition: "Apprentissage par essai-erreur où un agent maximise ses récompenses dans un environnement.",
+                category: "fondamentaux",
+                difficulty: 3
+            },
+            {
+                id: 29,
+                term: "ChatGPT",
+                definition: "Chatbot IA développé par OpenAI, basé sur l'architecture GPT.",
+                category: "generative",
+                difficulty: 1
+            },
+            {
+                id: 30,
+                term: "Claude",
+                definition: "Assistant IA développé par Anthropic, conçu pour être utile, inoffensif et honnête.",
+                category: "generative",
+                difficulty: 1
+            },
+            {
+                id: 31,
+                term: "Gemini",
+                definition: "Modèle d'IA multimodal développé par Google, successeur de Bard.",
+                category: "generative",
+                difficulty: 1
+            },
+            {
+                id: 32,
+                term: "DALL-E",
+                definition: "Modèle d'OpenAI capable de générer des images à partir de descriptions textuelles.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 33,
+                term: "Midjourney",
+                definition: "Service de génération d'images par IA accessible via Discord.",
+                category: "generative",
+                difficulty: 1
+            },
+            {
+                id: 34,
+                term: "Stable Diffusion",
+                definition: "Modèle open-source de génération d'images développé par Stability AI.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 35,
+                term: "Prompt Engineering",
+                definition: "Art de formuler des prompts optimaux pour obtenir les meilleures réponses d'une IA.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 36,
+                term: "Temperature (paramètre)",
+                definition: "Paramètre contrôlant la créativité vs prévisibilité des réponses d'un modèle.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 37,
+                term: "Context Window",
+                definition: "Nombre maximum de tokens qu'un modèle peut traiter en une fois.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 38,
+                term: "Zero-shot Learning",
+                definition: "Capacité d'un modèle à effectuer une tâche sans exemples préalables.",
+                category: "generative",
+                difficulty: 3
+            },
+            {
+                id: 39,
+                term: "Few-shot Learning",
+                definition: "Apprentissage à partir de quelques exemples seulement dans le prompt.",
+                category: "generative",
+                difficulty: 3
+            },
+            {
+                id: 40,
+                term: "Chain of Thought",
+                definition: "Technique de prompting encourageant le modèle à expliquer son raisonnement étape par étape.",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 41,
+                term: "RAG (Retrieval Augmented Generation)",
+                definition: "Technique combinant recherche d'information et génération pour des réponses plus précises.",
+                category: "generative",
+                difficulty: 3
+            },
+            {
+                id: 42,
+                term: "Multimodal AI",
+                definition: "IA capable de traiter plusieurs types de données (texte, image, audio, vidéo).",
+                category: "generative",
+                difficulty: 2
+            },
+            {
+                id: 43,
+                term: "Copilot",
+                definition: "Assistant IA intégré dans des applications pour augmenter la productivité.",
+                category: "generative",
+                difficulty: 1
+            },
+            {
+                id: 44,
+                term: "Data Science",
+                definition: "Discipline combinant statistiques, analyse et machine learning pour extraire des insights des données.",
+                category: "fondamentaux",
+                difficulty: 1
+            },
+            {
+                id: 45,
+                term: "Big Data",
+                definition: "Ensembles de données trop volumineux ou complexes pour être traités par des méthodes traditionnelles.",
+                category: "fondamentaux",
+                difficulty: 1
+            },
+            {
+                id: 46,
+                term: "Gradient Descent",
+                definition: "Algorithme d'optimisation pour minimiser l'erreur d'un modèle en ajustant ses paramètres.",
+                category: "machine-learning",
+                difficulty: 3
+            },
+            {
+                id: 47,
+                term: "Loss Function",
+                definition: "Fonction mathématique mesurant l'écart entre les prédictions du modèle et les vraies valeurs.",
+                category: "machine-learning",
+                difficulty: 3
+            },
+            {
+                id: 48,
+                term: "Cross-validation",
+                definition: "Technique pour évaluer la performance d'un modèle en divisant les données en plusieurs sous-ensembles.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 49,
+                term: "Feature Engineering",
+                definition: "Processus de création et sélection des variables les plus pertinentes pour un modèle.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 50,
+                term: "Hyperparameters",
+                definition: "Paramètres du modèle définis avant l'entraînement, comme le taux d'apprentissage.",
+                category: "machine-learning",
+                difficulty: 3
+            },
+            {
+                id: 51,
+                term: "Clustering",
+                definition: "Technique pour regrouper des données similaires sans étiquettes prédéfinies.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 52,
+                term: "Classification",
+                definition: "Tâche de prédiction de la catégorie d'un élément parmi plusieurs classes prédéfinies.",
+                category: "machine-learning",
+                difficulty: 2
+            },
+            {
+                id: 53,
+                term: "Regression",
+                definition: "Prédiction d'une valeur numérique continue à partir de données d'entrée.",
+               category: "machine-learning",
+               difficulty: 2
+           },
+           {
+               id: 54,
+               term: "Random Forest",
+               definition: "Algorithme combinant plusieurs arbres de décision pour améliorer la précision.",
+               category: "machine-learning",
+               difficulty: 3
+           },
+           {
+               id: 55,
+               term: "CNN (Convolutional Neural Network)",
+               definition: "Type de réseau de neurones particulièrement efficace pour l'analyse d'images.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 56,
+               term: "RNN (Recurrent Neural Network)",
+               definition: "Réseau de neurones avec mémoire, adapté au traitement de séquences temporelles.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 57,
+               term: "Backpropagation",
+               definition: "Algorithme pour calculer les gradients et ajuster les poids dans un réseau de neurones.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 58,
+               term: "Activation Function",
+               definition: "Fonction mathématique appliquée aux neurones pour introduire de la non-linéarité.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 59,
+               term: "Dropout",
+               definition: "Technique pour prévenir l'overfitting en désactivant aléatoirement certains neurones.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 60,
+               term: "Transfer Learning",
+               definition: "Utilisation d'un modèle pré-entraîné comme point de départ pour une nouvelle tâche.",
+               category: "deep-learning",
+               difficulty: 2
+           },
+           {
+               id: 61,
+               term: "GAN (Generative Adversarial Network)",
+               definition: "Architecture où deux réseaux s'affrontent pour générer des données réalistes.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 62,
+               term: "Autoencoder",
+               definition: "Réseau qui apprend à compresser puis reconstruire des données.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 63,
+               term: "Attention Mechanism",
+               definition: "Technique permettant au modèle de se concentrer sur les parties pertinentes des données.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 64,
+               term: "Batch Normalization",
+               definition: "Technique pour stabiliser et accélérer l'entraînement des réseaux profonds.",
+               category: "deep-learning",
+               difficulty: 3
+           },
+           {
+               id: 65,
+               term: "Edge AI",
+               definition: "IA exécutée localement sur des appareils plutôt que dans le cloud.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 66,
+               term: "MLOps",
+               definition: "Pratiques pour déployer et maintenir des modèles ML en production.",
+               category: "business",
+               difficulty: 3
+           },
+           {
+               id: 67,
+               term: "Data Pipeline",
+               definition: "Flux automatisé de collecte, traitement et stockage des données.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 68,
+               term: "A/B Testing",
+               definition: "Méthode pour comparer deux versions d'un système et déterminer la meilleure.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 69,
+               term: "ROI (Return on Investment)",
+               definition: "Mesure du rendement financier d'un investissement en IA.",
+               category: "business",
+               difficulty: 1
+           },
+           {
+               id: 70,
+               term: "SaaS (Software as a Service)",
+               definition: "Modèle de distribution où le logiciel est hébergé dans le cloud et accessible par abonnement.",
+               category: "business",
+               difficulty: 1
+           },
+           {
+               id: 71,
+               term: "Automation",
+               definition: "Utilisation de l'IA pour exécuter des tâches sans intervention humaine.",
+               category: "business",
+               difficulty: 1
+           },
+           {
+               id: 72,
+               term: "Digital Twin",
+               definition: "Réplique numérique d'un objet ou système physique pour simulation et analyse.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 73,
+               term: "Predictive Analytics",
+               definition: "Utilisation de données et ML pour prédire des événements futurs.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 74,
+               term: "Sentiment Analysis",
+               definition: "Analyse automatique des émotions et opinions dans du texte.",
+               category: "business",
+               difficulty: 2
+           },
+           {
+               id: 75,
+               term: "OCR (Optical Character Recognition)",
+               definition: "Technologie convertissant du texte imprimé ou manuscrit en texte numérique.",
+               category: "business",
+               difficulty: 1
+           },
+           {
+               id: 76,
+               term: "Voice Assistant",
+               definition: "IA capable de comprendre et répondre aux commandes vocales.",
+               category: "business",
+               difficulty: 1
+           },
+           {
+               id: 77,
+               term: "Turing Test",
+               definition: "Test proposé par Alan Turing pour évaluer si une machine peut imiter l'intelligence humaine.",
+               category: "fondamentaux",
+               difficulty: 2
+           },
+           {
+               id: 78,
+               term: "Singularity",
+               definition: "Point hypothétique où l'IA dépasserait l'intelligence humaine de manière irréversible.",
+               category: "fondamentaux",
+               difficulty: 3
+           },
+           {
+               id: 79,
+               term: "Underfitting",
+               definition: "Quand un modèle est trop simple pour capturer les patterns dans les données.",
+               category: "machine-learning",
+               difficulty: 2
+           },
+           {
+               id: 80,
+               term: "ANI (Artificial Narrow Intelligence)",
+               definition: "IA spécialisée dans une tâche spécifique, contrairement à l'AGI.",
+               category: "fondamentaux",
+               difficulty: 2
+           }
+       ];
+
+       let currentTerms = [...glossaryTerms];
+       let currentFilter = { search: '', letter: 'all', category: 'all' };
+       let viewedTerms = new Set();
+
+       document.addEventListener('DOMContentLoaded', () => {
+           renderTerms();
+           initEventListeners();
+           loadViewedTerms();
+           updateStats();
+       });
+
+       function initEventListeners() {
+           const searchInput = document.getElementById('searchInput');
+           const clearBtn = document.getElementById('clearSearch');
+           
+           searchInput.addEventListener('input', (e) => {
+               currentFilter.search = e.target.value.toLowerCase();
+               clearBtn.style.display = e.target.value ? 'block' : 'none';
+               filterTerms();
+           });
+           
+           clearBtn.addEventListener('click', () => {
+               searchInput.value = '';
+               currentFilter.search = '';
+               clearBtn.style.display = 'none';
+               filterTerms();
+           });
+           
+           document.querySelectorAll('.letter-btn').forEach(btn => {
+               btn.addEventListener('click', () => {
+                   document.querySelectorAll('.letter-btn').forEach(b => b.classList.remove('active'));
+                   btn.classList.add('active');
+                   currentFilter.letter = btn.dataset.letter;
+                   filterTerms();
+               });
+           });
+           
+           document.querySelectorAll('.category-btn').forEach(btn => {
+               btn.addEventListener('click', () => {
+                   document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                   btn.classList.add('active');
+                   currentFilter.category = btn.dataset.category;
+                   filterTerms();
+               });
+           });
+       }
+
+       function filterTerms() {
+           currentTerms = glossaryTerms.filter(term => {
+               if (currentFilter.search) {
+                   const searchMatch = term.term.toLowerCase().includes(currentFilter.search) ||
+                                     term.definition.toLowerCase().includes(currentFilter.search);
+                   if (!searchMatch) return false;
+               }
+               
+               if (currentFilter.letter !== 'all') {
+                   if (!term.term.toUpperCase().startsWith(currentFilter.letter)) return false;
+               }
+               
+               if (currentFilter.category !== 'all') {
+                   if (term.category !== currentFilter.category) return false;
+               }
+               
+               return true;
+           });
+           
+           renderTerms();
+           updateResultsInfo();
+       }
+
+       function renderTerms() {
+           const grid = document.getElementById('termsGrid');
+           
+           if (currentTerms.length === 0) {
+               grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #6b7280;">Aucun terme trouvé</p>';
+               return;
+           }
+           
+           grid.innerHTML = currentTerms.map(term => `
+               <div class="term-card" onclick="showTermDetail(${term.id})">
+                   <h3 class="term-title">${term.term}</h3>
+                   <span class="term-category">${getCategoryLabel(term.category)}</span>
+                   <p class="term-definition">${term.definition}</p>
+                   <div class="term-meta">
+                       <div class="difficulty">
+                           ${generateDifficulty(term.difficulty || 1)}
+                       </div>
+                       <span style="color: var(--color-primary); font-size: 0.85rem;">Voir plus →</span>
+                   </div>
+               </div>
+           `).join('');
+       }
+
+       function showTermDetail(id) {
+           const term = glossaryTerms.find(t => t.id === id);
+           if (!term) return;
+           
+           viewedTerms.add(id);
+           saveViewedTerms();
+           updateStats();
+           
+           document.getElementById('modalTitle').textContent = term.term;
+           document.getElementById('modalCategory').textContent = getCategoryLabel(term.category);
+           document.getElementById('modalDefinition').textContent = term.definition;
+           
+           const exampleSection = document.getElementById('exampleSection');
+           if (term.example) {
+               exampleSection.style.display = 'block';
+               document.getElementById('modalExample').textContent = term.example;
+           } else {
+               exampleSection.style.display = 'none';
+           }
+           
+           document.getElementById('termModal').classList.add('active');
+       }
+
+       function closeModal() {
+           document.getElementById('termModal').classList.remove('active');
+       }
+
+       function searchTerm(termName) {
+           const searchInput = document.getElementById('searchInput');
+           searchInput.value = termName;
+           currentFilter.search = termName.toLowerCase();
+           document.getElementById('clearSearch').style.display = 'block';
+           filterTerms();
+       }
+
+       function getCategoryLabel(category) {
+           const labels = {
+               'fondamentaux': 'Fondamentaux',
+               'machine-learning': 'ML',
+               'deep-learning': 'Deep Learning',
+               'generative': 'IA Générative',
+               'business': 'Business'
+           };
+           return labels[category] || category;
+       }
+
+       function generateDifficulty(level) {
+           let dots = '';
+           for (let i = 1; i <= 3; i++) {
+               dots += `<span class="difficulty-dot ${i <= level ? 'filled' : ''}"></span>`;
+           }
+           return dots;
+       }
+
+       function updateResultsInfo() {
+           const resultsCount = document.getElementById('resultsCount');
+           const total = glossaryTerms.length;
+           const shown = currentTerms.length;
+           
+           if (currentFilter.search || currentFilter.letter !== 'all' || currentFilter.category !== 'all') {
+               resultsCount.textContent = `${shown} résultat${shown > 1 ? 's' : ''} sur ${total}`;
+           } else {
+               resultsCount.textContent = `Affichage de tous les termes (${total})`;
+           }
+       }
+
+       function updateStats() {
+           document.getElementById('totalTerms').textContent = glossaryTerms.length;
+           document.getElementById('viewCount').textContent = viewedTerms.size;
+           
+           const categories = new Set(glossaryTerms.map(t => t.category));
+           document.getElementById('categoriesCount').textContent = categories.size;
+       }
+
+       function saveViewedTerms() {
+           localStorage.setItem('glossaryViewed', JSON.stringify([...viewedTerms]));
+       }
+
+       function loadViewedTerms() {
+           const saved = localStorage.getItem('glossaryViewed');
+           if (saved) {
+               viewedTerms = new Set(JSON.parse(saved));
+           }
+       }
+
+       document.addEventListener('keydown', (e) => {
+           if (e.key === 'Escape') {
+               closeModal();
+           }
+       });
+
+       document.getElementById('termModal').addEventListener('click', (e) => {
+           if (e.target.id === 'termModal') {
+               closeModal();
+           }
+       });
+   </script>
+</PageLayout>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythes vs Réalité sur l'IA - Prizm AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2.5rem 3rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            background: white;
+            padding: 1.75rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #6b7280;
+            padding: 0.625rem 1.5rem;
+            border-radius: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .myths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .myth-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+        .myth-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .myth-side {
+            padding: 2rem;
+            height: 100%;
+            display: none;
+        }
+
+        .myth-card .myth-front {
+            display: block;
+            background: #fef2f2;
+            border: 3px solid #fecaca;
+        }
+
+        .myth-card.revealed .myth-front {
+            display: none;
+        }
+
+        .myth-card.revealed .myth-back {
+            display: block;
+            background: #f0fdf4;
+            border: 3px solid #86efac;
+        }
+
+        .myth-label {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .myth-card .myth-front .myth-label {
+            color: #dc2626;
+        }
+
+        .myth-card.revealed .myth-back .myth-label {
+            color: #16a34a;
+        }
+
+        .myth-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .myth-category {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            color: #4b5563;
+            display: inline-block;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .myths-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/outils/index.html" class="back-link">← Retour à la boîte à outils</a>
+            <h1>Mythes vs Réalité</h1>
+            <p>Démystifiez les idées reçues sur l'Intelligence Artificielle</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-number" id="totalMyths">15</div>
+                <div class="stat-label">Mythes à découvrir</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="mythsRevealed">0</div>
+                <div class="stat-label">Vérités révélées</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="progressPercent">0%</div>
+                <div class="stat-label">Progression</div>
+            </div>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">Tous</button>
+            <button class="filter-tab" data-filter="capabilities">Capacités</button>
+            <button class="filter-tab" data-filter="impact">Impact sociétal</button>
+            <button class="filter-tab" data-filter="technology">Technologie</button>
+            <button class="filter-tab" data-filter="business">Business</button>
+        </div>
+
+        <div class="myths-grid" id="mythsGrid"></div>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="resetAll()">Réinitialiser</button>
+            <button class="btn btn-primary" onclick="revealAll()">Révéler tout</button>
+        </div>
+    </div>
+
+    <script>
+        const myths = [
+            {
+                id: 1,
+                category: "capabilities",
+                myth: "L'IA peut penser et ressentir comme un humain",
+                reality: "L'IA actuelle n'a pas de conscience. Elle traite des données selon des patterns appris, sans compréhension réelle ni émotions."
+            },
+            {
+                id: 2,
+                category: "impact",
+                myth: "L'IA va remplacer tous les emplois",
+                reality: "L'IA transforme les emplois plutôt que de les remplacer. Elle automatise certaines tâches mais crée aussi de nouveaux métiers."
+            },
+            {
+                id: 3,
+                category: "technology",
+                myth: "L'IA est infaillible et toujours objective",
+                reality: "L'IA peut reproduire les biais présents dans ses données d'entraînement et faire des erreurs. Une supervision humaine reste essentielle."
+            },
+            {
+                id: 4,
+                category: "capabilities",
+                myth: "L'IA comprend vraiment ce qu'elle lit",
+                reality: "L'IA reconnaît des patterns statistiques dans le texte mais n'a pas de compréhension conceptuelle comme les humains."
+            },
+            {
+                id: 5,
+                category: "business",
+                myth: "Il faut être une grande entreprise pour utiliser l'IA",
+                reality: "De nombreux outils d'IA sont accessibles aux PME et même aux particuliers, souvent gratuitement ou à faible coût."
+            },
+            {
+                id: 6,
+                category: "technology",
+                myth: "L'IA peut apprendre toute seule sans données",
+                reality: "L'IA nécessite de grandes quantités de données de qualité pour apprendre. Sans données, pas d'apprentissage."
+            },
+            {
+                id: 7,
+                category: "capabilities",
+                myth: "L'IA est créative comme un artiste",
+                reality: "L'IA génère du contenu en combinant des éléments existants. Sa 'créativité' est une recombinaison, pas une création ex nihilo."
+            },
+            {
+                id: 8,
+                category: "impact",
+                myth: "L'AGI (IA générale) arrivera dans quelques années",
+                reality: "Malgré les progrès rapides, une IA vraiment générale reste un défi scientifique majeur sans échéance claire."
+            },
+            {
+                id: 9,
+                category: "business",
+                myth: "L'IA est trop chère pour les PME",
+                reality: "Beaucoup d'outils IA ont des versions gratuites ou abordables. Le ROI peut être rapide sur des cas d'usage simples."
+            },
+            {
+                id: 10,
+                category: "technology",
+                myth: "Plus un modèle d'IA est gros, mieux c'est",
+                reality: "Des modèles plus petits et spécialisés peuvent être plus efficaces et moins coûteux pour des tâches spécifiques."
+            },
+            {
+                id: 11,
+                category: "capabilities",
+                myth: "L'IA peut prédire l'avenir avec précision",
+                reality: "L'IA fait des projections basées sur des données historiques. Elle ne peut pas prédire des événements imprévisibles."
+            },
+            {
+                id: 12,
+                category: "impact",
+                myth: "L'IA va devenir hostile aux humains",
+                reality: "L'IA actuelle n'a pas de volonté propre. Les vrais risques sont les erreurs, les biais et les mauvais usages humains."
+            },
+            {
+                id: 13,
+                category: "business",
+                myth: "Implémenter l'IA nécessite de tout refaire",
+                reality: "L'IA peut s'intégrer progressivement dans les processus existants, sans révolution complète."
+            },
+            {
+                id: 14,
+                category: "technology",
+                myth: "L'IA fonctionne comme un cerveau humain",
+                reality: "Les réseaux de neurones sont inspirés du cerveau mais fonctionnent de manière fondamentalement différente."
+            },
+            {
+                id: 15,
+                category: "capabilities",
+                myth: "L'IA peut tout automatiser",
+                reality: "L'IA excelle sur des tâches spécifiques mais beaucoup d'activités humaines restent hors de sa portée."
+            }
+        ];
+
+        let revealedCards = new Set();
+        let currentFilter = 'all';
+
+        function renderMyths() {
+            const grid = document.getElementById('mythsGrid');
+            const filteredMyths = currentFilter === 'all' 
+                ? myths 
+                : myths.filter(m => m.category === currentFilter);
+            
+            grid.innerHTML = filteredMyths.map(myth => {
+                const isRevealed = revealedCards.has(myth.id);
+                
+                return `
+                    <div class="myth-card ${isRevealed ? 'revealed' : ''}" onclick="toggleCard(${myth.id})">
+                        <div class="myth-side myth-front">
+                            <span class="myth-label">Mythe</span>
+                            <div class="myth-text">${myth.myth}</div>
+                            <span class="myth-category">${getCategoryLabel(myth.category)}</span>
+                        </div>
+                        <div class="myth-side myth-back">
+                            <span class="myth-label">Réalité</span>
+                            <div class="myth-text">${myth.reality}</div>
+                            <span class="myth-category">${getCategoryLabel(myth.category)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleCard(id) {
+            if (revealedCards.has(id)) {
+                revealedCards.delete(id);
+            } else {
+                revealedCards.add(id);
+            }
+            renderMyths();
+            updateStats();
+            saveProgress();
+        }
+
+        function updateStats() {
+            const revealed = revealedCards.size;
+            const total = myths.length;
+            const percent = Math.round((revealed / total) * 100);
+            
+            document.getElementById('mythsRevealed').textContent = revealed;
+            document.getElementById('progressPercent').textContent = percent + '%';
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                capabilities: 'Capacités',
+                impact: 'Impact',
+                technology: 'Tech',
+                business: 'Business'
+            };
+            return labels[category] || category;
+        }
+
+        function resetAll() {
+            revealedCards.clear();
+            renderMyths();
+            updateStats();
+            saveProgress();
+        }
+
+        function revealAll() {
+            myths.forEach(myth => revealedCards.add(myth.id));
+            renderMyths();
+            updateStats();
+            saveProgress();
+        }
+
+        function saveProgress() {
+            localStorage.setItem('mythsRevealed', JSON.stringify([...revealedCards]));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('mythsRevealed');
+            if (saved) {
+                revealedCards = new Set(JSON.parse(saved));
+                renderMyths();
+                updateStats();
+            }
+        }
+
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.filter;
+                renderMyths();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProgress();
+            renderMyths();
+            updateStats();
+        });
+    </script>
+</body>
+</html>
