@@ -1,0 +1,11 @@
+﻿[[redirects]]
+  from = "/outils"
+  to = "/outils/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/outils/"
+  to = "/outils/index.html"
+  status = 200
+  force = true
