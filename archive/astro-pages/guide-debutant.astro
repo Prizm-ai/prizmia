@@ -1,0 +1,616 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Guide du Débutant IA - Prizm AI">
+    <style>
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header du guide */
+        .guide-header {
+            background: linear-gradient(135deg, var(--color-primary, #667eea) 0%, var(--color-primary-dark, #764ba2) 100%);
+            color: white;
+            padding: 4rem 2.5rem 3rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .reading-time {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: #f3f4f6;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+
+        /* Navigation par onglets */
+        .section-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: white;
+            border: 2px solid #e5e7eb;
+            color: #6b7280;
+            padding: 0.625rem 1.25rem;
+            border-radius: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-tab:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .nav-tab.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Sections de contenu */
+        .content-section {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            font-size: 1.3rem;
+            color: #1f2937;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .content-section p {
+            color: #6b7280;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Points clés */
+        .key-point {
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .key-point strong {
+            color: var(--color-primary);
+        }
+
+        /* Cartes info */
+        .info-card {
+            background: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* Mythe vs Réalité */
+        .myth-reality {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .myth, .reality {
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+        }
+
+        .myth {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+        }
+
+        .reality {
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
+        }
+
+        .myth .label {
+            color: #ef4444;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .reality .label {
+            color: #10b981;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Cartes concept */
+        .concept-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .concept-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .concept-card h3 {
+            font-size: 1.1rem;
+            margin: 0.75rem 0;
+        }
+
+        .concept-card p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin: 0.75rem 0;
+        }
+
+        .example {
+            background: #f3f4f6;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            margin-top: 0.75rem;
+        }
+
+        /* Étapes */
+        .step {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            padding-left: 4.5rem;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 1.25rem;
+            top: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Call to action */
+        .action-call {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2.5rem 0;
+        }
+
+        .action-call h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .action-call p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Footer du guide */
+        .guide-footer {
+            background: #f9fafb;
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.75rem 2rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .myth-reality {
+                grid-template-columns: 1fr;
+            }
+            .concept-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <main class="guide-container">
+        <!-- Header -->
+        <div class="guide-header">
+            <a href="/outils" style="color: white; text-decoration: none; opacity: 0.9;">← Retour à la boîte à outils</a>
+            <h1>Guide du Débutant</h1>
+            <p class="subtitle">L'Intelligence Artificielle expliquée simplement en 5 minutes</p>
+            <div class="reading-time">Temps de lecture : 5 min</div>
+        </div>
+
+        <!-- Barre de progression -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="section-nav">
+            <button class="nav-tab active" data-section="intro">Introduction</button>
+            <button class="nav-tab" data-section="comprendre">Comprendre l'IA</button>
+            <button class="nav-tab" data-section="applications">Applications</button>
+            <button class="nav-tab" data-section="commencer">Commencer</button>
+            <button class="nav-tab" data-section="futur">Le Futur</button>
+        </nav>
+
+        <!-- Sections de contenu -->
+        <!-- Section 1: Introduction -->
+        <section id="intro" class="content-section active">
+            <h2>Bienvenue dans le monde de l'IA</h2>
+            
+            <div class="key-point">
+                <strong>L'IA est partout autour de nous</strong> - de votre smartphone à Netflix, en passant par votre GPS. 
+                Mais qu'est-ce que c'est vraiment ?
+            </div>
+
+            <p>
+                Si vous lisez ce guide, c'est que vous avez déjà franchi le pas le plus important : 
+                vous voulez comprendre l'Intelligence Artificielle. Bonne nouvelle : c'est bien plus 
+                simple que ce qu'on imagine !
+            </p>
+
+            <div class="info-card">
+                <h3>Ce que vous allez découvrir</h3>
+                <ul>
+                    <li>Ce qu'est vraiment l'IA (sans jargon technique)</li>
+                    <li>Comment elle fonctionne concrètement</li>
+                    <li>Ce qu'elle peut faire pour vous aujourd'hui</li>
+                    <li>Comment commencer à l'utiliser dès maintenant</li>
+                </ul>
+            </div>
+
+            <div class="myth-reality">
+                <div class="myth">
+                    <span class="label">Mythe</span>
+                    <p>L'IA va remplacer tous les emplois et dominer le monde</p>
+                </div>
+                <div class="reality">
+                    <span class="label">Réalité</span>
+                    <p>L'IA est un outil qui augmente nos capacités et nous aide à être plus efficaces</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Comprendre l'IA -->
+        <section id="comprendre" class="content-section">
+            <h2>Qu'est-ce que l'Intelligence Artificielle ?</h2>
+
+            <div class="key-point">
+                <strong>Définition simple :</strong> L'IA est un ensemble de technologies qui permettent 
+                aux machines d'accomplir des tâches qui nécessitent normalement l'intelligence humaine.
+            </div>
+
+            <div class="concept-cards">
+                <div class="concept-card">
+                    <h3>Reconnaître</h3>
+                    <p>Identifier des images, comprendre la parole, lire du texte</p>
+                    <div class="example">Ex: Face ID de votre téléphone</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Prédire</h3>
+                    <p>Anticiper des tendances, prévoir des comportements</p>
+                    <div class="example">Ex: Suggestions Netflix</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Générer</h3>
+                    <p>Créer du contenu, répondre à des questions</p>
+                    <div class="example">Ex: ChatGPT, Claude</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Automatiser</h3>
+                    <p>Exécuter des tâches répétitives sans intervention</p>
+                    <div class="example">Ex: Filtres anti-spam</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Applications -->
+        <section id="applications" class="content-section">
+            <h2>L'IA dans votre quotidien</h2>
+
+            <div class="key-point">
+                Vous utilisez probablement déjà l'IA <strong>plusieurs fois par jour</strong> sans le savoir !
+            </div>
+
+            <p>
+                L'IA n'est pas une technologie du futur - elle fait déjà partie intégrante de notre quotidien.
+                Voici comment elle vous aide déjà, et comment elle peut faire encore plus pour vous.
+            </p>
+        </section>
+
+        <!-- Section 4: Commencer -->
+        <section id="commencer" class="content-section">
+            <h2>Comment commencer avec l'IA ?</h2>
+
+            <div class="key-point">
+                <strong>Bonne nouvelle :</strong> Vous n'avez pas besoin d'être technique pour utiliser l'IA !
+            </div>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Choisissez votre premier outil</h3>
+                <p>Commencez par un assistant IA généraliste comme ChatGPT, Claude ou Gemini - tous ont des versions gratuites.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Apprenez à "prompter"</h3>
+                <p>Le secret : être clair et spécifique dans vos demandes. Plus vous donnez de contexte, meilleurs sont les résultats.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Explorez les cas d'usage</h3>
+                <p>Commencez par des tâches simples : résumer un texte, traduire, générer des idées, corriger vos écrits.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Progressez étape par étape</h3>
+                <p>Une fois à l'aise avec les bases, explorez des usages plus avancés adaptés à votre métier.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Le Futur -->
+        <section id="futur" class="content-section">
+            <h2>L'IA et vous : Préparer l'avenir</h2>>Commencez par des tâches simples : résumer un texte, traduire, générer des idées, corriger vos écrits.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Progressez étape par étape</h3>
+                <p>Une fois à l'aise avec les bases, explorez des usages plus avancés adaptés à votre métier.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Le Futur -->
+        <section id="futur" class="content-section">
+            <div class="section-icon">🔮</div>
+            <h2>L'IA et vous : Préparer l'avenir</h2>
+
+            <div class="key-point">
+                L'IA n'est pas une menace mais <strong>une opportunité</strong> pour ceux qui apprennent à l'utiliser.
+            </div>
+
+            <div class="action-call">
+                <h3>Passez à l'action !</h3>
+                <p>
+                    L'IA évolue rapidement, mais les principes fondamentaux restent les mêmes. 
+                    En commençant aujourd'hui, vous prenez une longueur d'avance.
+                </p>
+            </div>
+
+            <p style="text-align: center; font-style: italic; color: #6b7280; margin-top: 2rem;">
+                "L'IA ne remplacera pas les humains, mais les humains qui utilisent l'IA 
+                remplaceront ceux qui ne l'utilisent pas."
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <div class="guide-footer">
+            <h3>Félicitations !</h3>
+            <p>Vous venez de faire vos premiers pas dans le monde de l'IA.</p>
+            <div class="footer-actions">
+                <button class="btn-primary" onclick="window.location.href='/outils'">
+                    Explorer d'autres outils
+                </button>
+                <button class="btn-secondary" onclick="shareGuide()">
+                    Partager ce guide
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Navigation entre sections
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const sections = document.querySelectorAll('.content-section');
+        const progressBar = document.getElementById('progressBar');
+        const sectionIds = ['intro', 'comprendre', 'applications', 'commencer', 'futur'];
+        
+        navTabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                const targetSection = tab.getAttribute('data-section');
+                showSection(targetSection);
+                updateProgress(index);
+            });
+        });
+        
+        function showSection(sectionId) {
+            sections.forEach(section => section.classList.remove('active'));
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            const targetSection = document.getElementById(sectionId);
+            const targetTab = document.querySelector(`[data-section="${sectionId}"]`);
+            
+            if (targetSection && targetTab) {
+                targetSection.classList.add('active');
+                targetTab.classList.add('active');
+            }
+        }
+        
+        function updateProgress(index) {
+            const progress = ((index + 1) / sectionIds.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+        
+        function shareGuide() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Guide du Débutant IA - Prizm AI',
+                    text: "Découvrez l'Intelligence Artificielle en 5 minutes !",
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Lien copié !');
+            }
+        }
+    </script>
+</PageLayout>

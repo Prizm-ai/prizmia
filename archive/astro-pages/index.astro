@@ -1,0 +1,402 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="Boîte à Outils IA - Prizm AI">
+    <style>
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header Section */
+        .tools-header {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--color-primary, #667eea) 0%, var(--color-primary-dark, #764ba2) 100%);
+            color: white;
+            border-radius: 1.25rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tools-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .tools-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            background: white;
+            padding: 1.75rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #6b7280;
+        }
+        
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: var(--color-primary);
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .tool-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+        
+        .tool-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: #f3f4f6;
+            color: var(--color-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .tag.new {
+            background: #10b981;
+            color: white;
+        }
+        
+        /* Coming Soon Cards */
+        .tool-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .tool-card.coming-soon::after {
+            content: "Bientôt disponible";
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #f59e0b;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Footer CTA */
+        .tools-footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 1rem;
+            margin-top: 4rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tools-footer h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+        }
+        
+        .tools-footer p {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .suggest-btn {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .suggest-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-header h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-bar {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+
+    <main class="tools-container">
+        <!-- Header -->
+        <div class="tools-header">
+            <h1>Boîte à Outils IA</h1>
+            <p>Tout pour comprendre, tester et implémenter l'IA dans votre organisation</p>
+        </div>
+        
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Outils disponibles</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">45+</div>
+                <div class="stat-label">Termes définis</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Gratuit</div>
+            </div>
+        </div>
+        
+        <!-- Outils disponibles -->
+        <section>
+            <div class="section-title">
+                <h2>Outils disponibles</h2>
+                <p>Commencez votre parcours IA avec ces ressources gratuites</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Guide du Débutant -->
+                <a href="/outils/guide-debutant" class="tool-card">
+                    <div class="tool-icon">G</div>
+                    <div class="tool-title">Guide du Débutant</div>
+                    <div class="tool-description">
+                        L'IA expliquée en 5 minutes : concepts clés, applications pratiques et premiers pas. 
+                        Un parcours interactif pour démystifier l'intelligence artificielle.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Interactif</span>
+                        <span class="tag">5 min</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </a>
+                
+                <!-- Glossaire IA -->
+                <a href="/outils/glossaire" class="tool-card">
+                    <div class="tool-icon">GL</div>
+                    <div class="tool-title">Glossaire IA</div>
+                    <div class="tool-description">
+                        Plus de 45 termes expliqués simplement. Recherche instantanée, filtres par catégorie 
+                        et niveau de difficulté. La référence pour comprendre le jargon de l'IA.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">45+ termes</span>
+                        <span class="tag">Recherche</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </a>
+
+                <!-- prompts-essentiels -->
+                <a href="/outils/prompts-essentiels" class="tool-card">
+                    <div class="tool-icon">PE</div>
+                    <div class="tool-title">Les 10 prompts essentiels</div>
+                    <div class="tool-description">
+                        Un concentré des meilleurs prompts pour gagner du temps et gagner en efficacité. 
+                        Des prompts qui vont simplifier vos tâches et booster vos résultats.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Éducatif</span>
+                        <span class="tag">Quiz</span>
+                        <span class="tag new">Nouveau</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Outils à venir -->
+        <section>
+            <div class="section-title">
+                <h2>Prochainement</h2>
+                <p>D'autres outils arrivent bientôt</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Comparateur d'IA -->
+                <div class="tool-card coming-soon">
+                    <div class="tool-icon">C</div>
+                    <div class="tool-title">Comparateur d'IA</div>
+                    <div class="tool-description">
+                        Comparez ChatGPT, Claude, Gemini et autres solutions. 
+                        Trouvez l'IA qui correspond à vos besoins.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Comparatif</span>
+                        <span class="tag">Business</span>
+                    </div>
+                </div>
+                
+                <!-- Générateur de Prompts -->
+                <div class="tool-card coming-soon">
+                    <div class="tool-icon">P</div>
+                    <div class="tool-title">Générateur de Prompts</div>
+                    <div class="tool-description">
+                        Créez des prompts optimisés pour obtenir les meilleurs résultats. 
+                        Templates par cas d'usage et bonnes pratiques.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Pratique</span>
+                        <span class="tag">Templates</span>
+                    </div>
+                </div>
+                
+                <!-- Calculateur ROI -->
+                <div class="tool-card coming-soon">
+                    <div class="tool-icon">ROI</div>
+                    <div class="tool-title">Calculateur ROI</div>
+                    <div class="tool-description">
+                        Estimez les gains de productivité et le retour sur investissement 
+                        de l'IA dans votre organisation.
+                    </div>
+                    <div class="tool-tags">
+                        <span class="tag">Business</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer CTA -->
+        <div class="tools-footer">
+            <h3>Une idée d'outil ?</h3>
+            <p>Nous sommes toujours à l'écoute de vos suggestions pour enrichir cette boîte à outils.</p>
+            <button class="suggest-btn" onclick="window.location.href='mailto:contact@prizmai.com?subject=Suggestion pour la boîte à outils IA'">
+                Suggérer un outil
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Animation au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</PageLayout>

@@ -1,0 +1,654 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+---
+
+<PageLayout title="10 Prompts IA qui vont révolutionner votre travail - Prizm AI">
+    <style>
+        .prompts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .prompts-header {
+            background: linear-gradient(135deg, var(--color-primary, #667eea) 0%, var(--color-primary-dark, #764ba2) 100%);
+            color: white;
+            padding: 4rem 2.5rem 3rem;
+            text-align: center;
+            border-radius: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .prompts-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .prompts-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        /* Intro */
+        .intro-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .intro-card h2 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Prompts Grid */
+        .prompts-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Prompt Card */
+        .prompt-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .prompt-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .prompt-number {
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.3;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+        }
+
+        .prompt-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .prompt-category {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .prompt-body {
+            padding: 2rem;
+        }
+
+        .prompt-example {
+            background: #f9fafb;
+            border-left: 4px solid var(--color-primary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .prompt-usage {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .usage-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .usage-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        .usage-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: white;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* Footer CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .prompts-header h1 {
+                font-size: 2rem;
+            }
+            
+            .prompt-example {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+
+    <main class="prompts-container">
+        <!-- Header -->
+        <div class="prompts-header">
+            <a href="/outils" class="back-link">← Retour à la boîte à outils</a>
+            <h1>10 Prompts qui vont révolutionner votre travail</h1>
+            <p>Des formules magiques pour maîtriser ChatGPT, Claude et autres IA</p>
+        </div>
+
+        <!-- Introduction -->
+        <div class="intro-card">
+            <h2>Pourquoi ces prompts sont-ils si puissants ?</h2>
+            <p>La différence entre une réponse médiocre et une réponse exceptionnelle de l'IA tient souvent à la qualité de votre prompt. Ces 10 formules, testées et optimisées, vous permettront d'obtenir des résultats professionnels en quelques secondes. Copiez-les, personnalisez-les et observez la transformation !</p>
+        </div>
+
+        <!-- Prompts Grid -->
+        <div class="prompts-grid">
+            <!-- Prompt 1 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">1</div>
+                    <div class="prompt-title">Le Rédacteur Expert</div>
+                    <div class="prompt-category">Rédaction & Communication</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Transformez l'IA en rédacteur professionnel adapté à votre audience.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(1, this)">Copier</button>
+                        <div class="prompt-example" id="prompt1">Tu es un expert en communication avec 20 ans d'expérience. Je vais te donner [SUJET/DOCUMENT], et j'aimerais que tu le récrives pour [AUDIENCE CIBLE].
+
+Contexte : [VOTRE CONTEXTE]
+Ton de voix : [professionnel/convivial/persuasif/etc.]
+Objectif : [informer/convaincre/engager/etc.]
+Format souhaité : [email/article/post LinkedIn/etc.]
+
+Assure-toi d'utiliser des exemples concrets et d'éviter le jargon technique sauf si nécessaire.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Emails professionnels percutants</li>
+                            <li>Articles de blog optimisés SEO</li>
+                            <li>Posts LinkedIn engageants</li>
+                            <li>Présentations commerciales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 2 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">2</div>
+                    <div class="prompt-title">L'Analyste de Données</div>
+                    <div class="prompt-category">Analyse & Insights</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Obtenez des analyses approfondies et des recommandations actionnables.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(2, this)">Copier</button>
+                        <div class="prompt-example" id="prompt2">Analyse ces données comme un consultant senior en stratégie :
+
+[COLLEZ VOS DONNÉES ICI]
+
+Je veux :
+1. Les 3 tendances principales
+2. Les anomalies ou points d'attention
+3. 5 recommandations concrètes et chiffrées
+4. Les risques potentiels à surveiller
+5. Un résumé exécutif en 3 phrases
+
+Format ta réponse avec des titres clairs et utilise des pourcentages quand c'est pertinent.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Analyse de tableaux de bord</li>
+                            <li>Rapports de performance</li>
+                            <li>Études de marché</li>
+                            <li>Benchmarks concurrentiels</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 3 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">3</div>
+                    <div class="prompt-title">Le Stratège Marketing</div>
+                    <div class="prompt-category">Marketing & Growth</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Générez des stratégies marketing complètes et innovantes.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(3, this)">Copier</button>
+                        <div class="prompt-example" id="prompt3">Agis comme un CMO expérimenté. Crée une stratégie marketing pour :
+
+Produit/Service : [DESCRIPTION]
+Cible : [PERSONA DÉTAILLÉ]
+Budget : [MONTANT]
+Durée : [PÉRIODE]
+
+Inclus :
+- 3 canaux d'acquisition prioritaires avec justification
+- KPIs spécifiques à tracker (avec objectifs chiffrés)
+- Timeline détaillée mois par mois
+- 5 idées de contenus viraux
+- Estimation du ROI attendu
+
+Structure ta réponse de manière claire et actionnable.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Plans de lancement produit</li>
+                            <li>Stratégies de contenu</li>
+                            <li>Campagnes publicitaires</li>
+                            <li>Growth hacking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 4 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">4</div>
+                    <div class="prompt-title">Le Résolveur de Problèmes</div>
+                    <div class="prompt-category">Problem-Solving</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Structurez votre réflexion pour résoudre des problèmes complexes.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(4, this)">Copier</button>
+                        <div class="prompt-example" id="prompt4">Aide-moi à résoudre ce problème en utilisant une approche structurée :
+
+Problème : [DÉCRIVEZ LE PROBLÈME]
+Contraintes : [LISTEZ LES CONTRAINTES]
+Ressources disponibles : [VOS RESSOURCES]
+
+Utilise cette méthodologie :
+1. Reformule le problème pour t'assurer de bien le comprendre
+2. Identifie les causes racines (utilise les 5 pourquoi)
+3. Propose 3 solutions avec leurs avantages/inconvénients
+4. Recommande LA meilleure solution avec justification
+5. Détaille un plan d'action en 5 étapes
+
+Sois créatif mais réaliste dans tes propositions.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Optimisation de processus</li>
+                            <li>Résolution de conflits</li>
+                            <li>Défis techniques</li>
+                            <li>Décisions stratégiques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 5 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">5</div>
+                    <div class="prompt-title">Le Coach Personnel</div>
+                    <div class="prompt-category">Développement Personnel</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Créez des plans de développement personnalisés et motivants.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(5, this)">Copier</button>
+                        <div class="prompt-example" id="prompt5">Tu es un coach professionnel certifié. Aide-moi à atteindre cet objectif :
+
+Objectif : [VOTRE OBJECTIF]
+Délai : [TIMEFRAME]
+Situation actuelle : [OÙ VOUS EN ÊTES]
+Obstacles principaux : [VOS DÉFIS]
+
+Crée pour moi :
+1. Un plan d'action sur 30/60/90 jours
+2. 3 habitudes quotidiennes à implémenter immédiatement
+3. Des métriques pour suivre mes progrès
+4. Des techniques pour rester motivé
+5. Un système de récompenses/célébrations
+
+Rends le plan réaliste et progressif pour maximiser les chances de succès.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Objectifs de carrière</li>
+                            <li>Amélioration de compétences</li>
+                            <li>Gestion du temps</li>
+                            <li>Habitudes productives</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 6 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">6</div>
+                    <div class="prompt-title">Le Formateur Pédagogue</div>
+                    <div class="prompt-category">Formation & Apprentissage</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Créez des contenus de formation clairs et engageants.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(6, this)">Copier</button>
+                        <div class="prompt-example" id="prompt6">Explique-moi [CONCEPT/SUJET] comme si tu étais le meilleur professeur du monde.
+
+Niveau de départ : [débutant/intermédiaire/avancé]
+Objectif d'apprentissage : [CE QUE JE VEUX SAVOIR FAIRE]
+
+Utilise cette structure :
+1. Analogie simple pour comprendre le concept
+2. Les 5 points clés à retenir
+3. Exemples concrets du monde réel
+4. Erreurs courantes à éviter
+5. Exercice pratique pour valider la compréhension
+6. Ressources pour approfondir
+
+Utilise un langage clair et évite le jargon inutile. Inclus des moyens mnémotechniques si pertinent.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Création de cours</li>
+                            <li>Documentation technique</li>
+                            <li>Onboarding nouveaux employés</li>
+                            <li>Tutoriels et guides</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 7 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">7</div>
+                    <div class="prompt-title">Le Négociateur Stratégique</div>
+                    <div class="prompt-category">Négociation & Persuasion</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Préparez des arguments persuasifs et anticipez les objections.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(7, this)">Copier</button>
+                        <div class="prompt-example" id="prompt7">Aide-moi à préparer cette négociation importante :
+
+Contexte : [SITUATION]
+Mon objectif : [CE QUE JE VEUX OBTENIR]
+Leur position probable : [CE QU'ILS VEULENT]
+
+Prépare-moi :
+1. 3 arguments clés avec données/preuves à l'appui
+2. Les 5 objections probables et comment y répondre
+3. Ma BATNA (meilleure alternative si pas d'accord)
+4. 3 concessions possibles qui ne compromettent pas mon objectif principal
+5. Une stratégie d'ouverture et de closing
+6. Les signaux à observer pendant la négociation
+
+Sois tactique et psychologique dans ton approche.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Négociations salariales</li>
+                            <li>Contrats commerciaux</li>
+                            <li>Partenariats stratégiques</li>
+                            <li>Résolution de litiges</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 8 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">8</div>
+                    <div class="prompt-title">L'Innovateur Créatif</div>
+                    <div class="prompt-category">Innovation & Créativité</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Générez des idées innovantes et sortez des sentiers battus.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(8, this)">Copier</button>
+                        <div class="prompt-example" id="prompt8">Utilise les techniques de créativité pour m'aider à innover :
+
+Domaine : [VOTRE SECTEUR]
+Défi : [PROBLÈME À RÉSOUDRE]
+Contraintes : [LIMITATIONS]
+
+Applique ces méthodes :
+1. SCAMPER : génère 7 idées (une par lettre)
+2. Pensée latérale : 3 approches non conventionnelles
+3. Benchmark croisé : inspire-toi de 3 industries différentes
+4. Futurisme : imagine la solution dans 10 ans
+5. Contrainte créative : et si tu n'avais que [X] euros/jours ?
+
+Pour chaque idée, donne un nom accrocheur, décris le concept en 2 phrases et estime le potentiel d'impact (faible/moyen/fort).</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Brainstorming produit</li>
+                            <li>Solutions disruptives</li>
+                            <li>Campagnes créatives</li>
+                            <li>Amélioration continue</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 9 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">9</div>
+                    <div class="prompt-title">L'Assistant Juridique</div>
+                    <div class="prompt-category">Légal & Compliance</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Rédigez des documents légaux clairs et anticipez les risques.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(9, this)">Copier</button>
+                        <div class="prompt-example" id="prompt9">Aide-moi avec cette question légale/contractuelle (sans te substituer à un avocat) :
+
+Contexte : [SITUATION]
+Type de document : [contrat/CGV/accord/etc.]
+Parties impliquées : [QUI]
+Juridiction : [PAYS/RÉGION]
+
+J'ai besoin de :
+1. Les clauses essentielles à inclure
+2. Les risques potentiels à anticiper
+3. Les points de vigilance spécifiques à mon cas
+4. Une formulation claire et sans ambiguïté
+5. Les questions à poser à un avocat
+
+Important : précise bien que ceci est une base de travail à valider avec un professionnel du droit.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Rédaction de contrats</li>
+                            <li>CGV et mentions légales</li>
+                            <li>Accords de confidentialité</li>
+                            <li>Analyse de risques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prompt 10 -->
+            <div class="prompt-card">
+                <div class="prompt-header">
+                    <div class="prompt-number">10</div>
+                    <div class="prompt-title">L'Automatiseur de Tâches</div>
+                    <div class="prompt-category">Productivité & Automatisation</div>
+                </div>
+                <div class="prompt-body">
+                    <p>Créez des workflows et automatisez vos processus répétitifs.</p>
+                    <div style="position: relative;">
+                        <button class="copy-btn" onclick="copyPrompt(10, this)">Copier</button>
+                        <div class="prompt-example" id="prompt10">Aide-moi à automatiser ce processus répétitif :
+
+Tâche actuelle : [DESCRIPTION DÉTAILLÉE]
+Fréquence : [QUOTIDIEN/HEBDO/MENSUEL]
+Outils disponibles : [LOGICIELS/APPS QUE VOUS UTILISEZ]
+Niveau technique : [débutant/intermédiaire/avancé]
+
+Crée pour moi :
+1. Un workflow optimisé étape par étape
+2. Les outils/apps recommandés (gratuits si possible)
+3. Les templates/modèles réutilisables
+4. Un script ou des formules si applicable
+5. Une estimation du temps gagné par semaine
+6. Les métriques pour mesurer l'efficacité
+
+Privilégie la simplicité et la facilité de mise en place.</div>
+                    </div>
+                    <div class="prompt-usage">
+                        <div class="usage-title">Cas d'usage :</div>
+                        <ul class="usage-list">
+                            <li>Email automation</li>
+                            <li>Rapports récurrents</li>
+                            <li>Gestion de données</li>
+                            <li>Workflows créatifs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Prêt à transformer votre productivité ?</h2>
+            <p>Ces prompts sont votre boîte à outils pour maîtriser l'IA. Sauvegardez cette page et revenez-y régulièrement !</p>
+        </div>
+    </main>
+
+    <script>
+        function copyPrompt(id, button) {
+            const promptText = document.getElementById('prompt' + id).textContent;
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                // Change button text
+                const originalText = button.textContent;
+                button.textContent = 'Copié !';
+                button.classList.add('copied');
+                
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.textContent = 'Copié !';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copier';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</PageLayout>
