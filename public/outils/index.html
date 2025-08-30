@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boîte à Outils IA - Prizm AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f9fafb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1f2937;
+        }
+
+        .tool-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .tool-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .tool-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .coming-soon .tool-icon {
+            background: #e5e7eb;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-new {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Boîte à Outils IA</h1>
+            <p class="subtitle">Ressources pratiques pour maîtriser l'intelligence artificielle</p>
+        </div>
+
+        <div class="tools-grid">
+            <!-- Guide du Débutant -->
+            <a href="/outils/guide-debutant/guide-debutant.html" class="tool-card">
+                <div class="tool-icon">GD</div>
+                <h2 class="tool-title">Guide du Débutant</h2>
+                <p class="tool-description">Découvrez les concepts essentiels de l'IA en 5 étapes progressives.</p>
+                <div class="tool-meta">
+                    <span>⏱ 15 min</span>
+                    <span>📚 5 sections</span>
+                </div>
+            </a>
+
+            <!-- Glossaire -->
+            <a href="/outils/glossaire/glossaire-ia.html" class="tool-card">
+                <div class="tool-icon">GL</div>
+                <h2 class="tool-title">Glossaire IA</h2>
+                <p class="tool-description">Plus de 45 termes expliqués simplement avec exemples et recherche instantanée.</p>
+                <div class="tool-meta">
+                    <span>🔍 Recherche</span>
+                    <span>📖 45+ termes</span>
+                </div>
+            </a>
+
+            <!-- Mythes vs Réalité -->
+            <a href="/outils/mythes-realite.html" class="tool-card">
+                <span class="badge-new">NOUVEAU</span>
+                <div class="tool-icon">MR</div>
+                <h2 class="tool-title">Mythes vs Réalité</h2>
+                <p class="tool-description">Démystifiez 15 idées reçues sur l'IA avec des explications claires.</p>
+                <div class="tool-meta">
+                    <span>💡 15 mythes</span>
+                    <span>🎯 Interactif</span>
+                </div>
+            </a>
+
+            <!-- Prompts Essentiels -->
+            <a href="/outils/prompts-essentiels.html" class="tool-card">
+                <span class="badge-new">NOUVEAU</span>
+                <div class="tool-icon">PE</div>
+                <h2 class="tool-title">10 Prompts Essentiels</h2>
+                <p class="tool-description">Templates professionnels pour ChatGPT, Claude et autres IA génératives.</p>
+                <div class="tool-meta">
+                    <span>📋 Copiables</span>
+                    <span>🚀 Pro</span>
+                </div>
+            </a>
+
+            <!-- FAQ (Coming Soon) -->
+            <div class="tool-card coming-soon">
+                <div class="tool-icon">FAQ</div>
+                <h2 class="tool-title">FAQ IA</h2>
+                <p class="tool-description">Réponses aux questions les plus fréquentes sur l'IA.</p>
+                <div class="tool-meta">
+                    <span>Prochainement</span>
+                </div>
+            </div>
+
+            <!-- Comparateur (Coming Soon) -->
+            <div class="tool-card coming-soon">
+                <div class="tool-icon">CP</div>
+                <h2 class="tool-title">Comparateur d'IA</h2>
+                <p class="tool-description">Comparez les fonctionnalités et prix des principales IA.</p>
+                <div class="tool-meta">
+                    <span>Prochainement</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
