@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && xcopy /E /I /Y public\\outils dist\\outils",
+    "build": "astro build"
     "preview": "astro preview",
     "astro": "astro",
     "content:generate": "cd pipelines/content-generation/agents && node pipeline-v5-batch.cjs",
