@@ -1,4 +1,0 @@
-Test d'encodage avec caractères français :
-é è à ç ô ù â ê î
-L'équipe de développement
-Réglementation européenne
