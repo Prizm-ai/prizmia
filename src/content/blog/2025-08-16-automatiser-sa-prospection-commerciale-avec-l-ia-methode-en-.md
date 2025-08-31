@@ -1,6 +1,6 @@
 ---
 title: "Automatiser sa prospection commerciale avec l'IA : méthode complète"
-description: "Guide pratique pour les PME : Automatiser sa prospection commerciale avec l'IA : méthode complète"
+description: "Méthode complète pour automatiser votre prospection commerciale avec l'IA : outils, techniques et retours d'expérience concrets."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

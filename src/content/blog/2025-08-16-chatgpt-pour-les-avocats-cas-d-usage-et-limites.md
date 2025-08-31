@@ -1,6 +1,6 @@
 ---
 title: "ChatGPT pour les avocats : cas d'usage et limites"
-description: "Guide pratique pour les PME : ChatGPT pour les avocats : cas d'usage et limites"
+description: "Cas d'usage pratiques et limites éthiques de ChatGPT pour les professionnels du droit : rédaction, recherche juridique et confidentialité."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

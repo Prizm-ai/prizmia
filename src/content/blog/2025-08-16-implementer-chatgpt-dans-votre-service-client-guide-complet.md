@@ -1,6 +1,6 @@
 ---
 title: "Implémenter ChatGPT dans votre service client : guide pratique"
-description: "Guide pratique pour les PME : Implémenter ChatGPT dans votre service client : guide pratique"
+description: "Guide pratique pour intégrer ChatGPT dans votre service client : configuration, formation des équipes et mesure du ROI."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

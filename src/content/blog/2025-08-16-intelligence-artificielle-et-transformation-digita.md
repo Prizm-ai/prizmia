@@ -1,6 +1,6 @@
 ---
 title: "Intelligence artificielle et transformation digitale des PME"
-description: "Guide pratique pour les PME : Intelligence artificielle et transformation digitale des PME"
+description: "Comment l'IA accélère la transformation digitale des PME : stratégies, exemples sectoriels et feuille de route sur 12 mois."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

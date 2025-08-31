@@ -1,6 +1,6 @@
 ---
 title: "Adoption de l'IA dans les PME françaises : état des lieux 2025"
-description: "Guide pratique pour les PME : Adoption de l'IA dans les PME françaises : état des lieux 2025"
+description: "État des lieux 2025 de l'adoption de l'IA dans les PME françaises : chiffres clés, freins principaux et opportunités de croissance."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

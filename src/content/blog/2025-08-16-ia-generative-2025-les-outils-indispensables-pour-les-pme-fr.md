@@ -1,6 +1,6 @@
 ---
 title: "IA générative 2025 : les outils indispensables pour les PME"
-description: "Guide pratique pour les PME : IA générative 2025 : les outils indispensables pour les PME"
+description: "Sélection 2025 des outils d'IA générative indispensables pour les PME : ChatGPT, Claude, Midjourney et alternatives françaises."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

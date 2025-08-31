@@ -1,6 +1,6 @@
 ---
 title: "L'IA dans la comptabilité : automatisation et gains de productivité"
-description: "Guide pratique pour les PME : L'IA dans la comptabilité : automatisation et gains de productivité"
+description: "Automatisation comptable par l'IA : gains de productivité mesurés, outils spécialisés et retours d'expérience de cabinets."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"

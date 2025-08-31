@@ -1,6 +1,6 @@
 ---
 title: "Créer du contenu marketing avec l'IA : workflow complet et outils"
-description: "Guide pratique pour les PME : Créer du contenu marketing avec l'IA : workflow complet et outils"
+description: "Workflow complet et outils IA pour créer du contenu marketing efficace : de l'idéation à la publication, avec exemples concrets."
 pubDate: 2025-08-16
 author: "L'équipe Prizm AI"
 emoji: "🚀"
