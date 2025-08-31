@@ -1,0 +1,22 @@
+{
+  "total": 10,
+  "reussis": 2,
+  "echecs": 0,
+  "articles": [
+    {
+      "sujet": "IA générative 2025 : les outils indispensables pour les PME françaises",
+      "category": "actualites",
+      "fichier": "2025-08-16-01-ia-generative-2025-les-outils-indispensables-pour-les-pme-fr.md",
+      "chemin": "..\\output\\articles-batch-v5-ready\\2025-08-16-01-ia-generative-2025-les-outils-indispensables-pour-les-pme-fr.md",
+      "duree": 131
+    },
+    {
+      "sujet": "Réglementation IA européenne : guide de conformité pratique pour PME",
+      "category": "actualites",
+      "fichier": "2025-08-16-02-reglementation-ia-europeenne-guide-de-conformite-pratique-po.md",
+      "chemin": "..\\output\\articles-batch-v5-ready\\2025-08-16-02-reglementation-ia-europeenne-guide-de-conformite-pratique-po.md",
+      "duree": 102
+    }
+  ],
+  "erreurs": []
+}

@@ -75,26 +75,18 @@ L'avenir du marketing de contenu se dessine à travers cette synergie entre huma
 *Cet article a été rédigé à partir de sources vérifiées :*
 
 1. **Deloitte Digital** - Article
-   - Date : 21/02/2024
-   - URL : https://www.deloittedigital.com/us/en/insights/perspective/ai-ready-content-creation.html
-   - Fiabilité : 9/10
-
-2. **Marketer Milk** - Article pratique
-   - Date : 09/07/2025
-   - URL : https://www.marketermilk.com/blog/ai-marketing-workflow
-   - Fiabilité : 8/10
-
-3. **Content Marketing World 2025** - Conférence / Article d’annonce
-   - Date : 17/07/2025
-   - URL : https://www.contentmarketingworld.com/stay-ahead-of-ai-at-cmworld-2025/
-   - Fiabilité : 8/10
-
-4. **Chad Wyatt** - Guide pratique
-   - Date : 08/08/2025
-   - URL : https://chad-wyatt.com/ai/ai-in-content-marketing-2025-guide/
-   - Fiabilité : 7/10
-
-5. **SE Ranking** - Plateforme SEO avec IA
-   - Date : 29/07/2025
-   - URL : https://seranking.com
-   - Fiabilité : 8/10
+ - Date : 21/02/2024
+ - URL : https://www.deloittedigital.com/us/en/insights/perspective/ai-ready-content-creation.html
+ - 2. **Marketer Milk** - Article pratique
+ - Date : 09/07/2025
+ - URL : https://www.marketermilk.com/blog/ai-marketing-workflow
+ - 3. **Content Marketing World 2025** - Conférence / Article d’annonce
+ - Date : 17/07/2025
+ - URL : https://www.contentmarketingworld.com/stay-ahead-of-ai-at-cmworld-2025/
+ - 4. **Chad Wyatt** - Guide pratique
+ - Date : 08/08/2025
+ - URL : https://chad-wyatt.com/ai/ai-in-content-marketing-2025-guide/
+ - 5. **SE Ranking** - Plateforme SEO avec IA
+ - Date : 29/07/2025
+ - URL : https://seranking.com
+ - 

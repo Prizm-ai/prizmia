@@ -95,21 +95,15 @@ Cette démarche structurée d'accompagnement personnalisé ouvre la voie à une 
 *Cet article a été rédigé à partir de sources vérifiées :*
 
 1. **Village de la Justice** - Article
-   - Date : 23/03/2023
-   - URL : https://www.village-justice.com/articles/comment-utiliser-chatgpt-tant-avocat,45590.html
-   - Fiabilité : 8/10
-
-2. **Chat Français** - Guide Pratique pour Avocats 2025
-   - Date : 02/06/2025
-   - URL : https://chatfrancais.org/chatgpt-juridique/
-   - Fiabilité : 9/10
-
-3. **Tomorrow Solutions** - Comparatif Microsoft Copilot vs ChatGPT vs Claude
-   - Date : 01/03/2025
-   - URL : https://tomorrow-solutions.com/fr/blog/microsoft-copilot-vs-chatgpt-vs-claude-quel-est-le-meilleur-assistant-ia-pour-votre-cabinet-en-2025/
-   - Fiabilité : 8/10
-
-4. **Facilaw** - ChatGPT et IA pour la communication des avocats
-   - Date : 07/05/2024 (mise à jour mai 2025)
-   - URL : https://facilaw.fr/chat-gpt-pour-la-communication-des-avocats/
-   - Fiabilité : 7/10
+ - Date : 23/03/2023
+ - URL : https://www.village-justice.com/articles/comment-utiliser-chatgpt-tant-avocat,45590.html
+ - 2. **Chat Français** - Guide Pratique pour Avocats 2025
+ - Date : 02/06/2025
+ - URL : https://chatfrancais.org/chatgpt-juridique/
+ - 3. **Tomorrow Solutions** - Comparatif Microsoft Copilot vs ChatGPT vs Claude
+ - Date : 01/03/2025
+ - URL : https://tomorrow-solutions.com/fr/blog/microsoft-copilot-vs-chatgpt-vs-claude-quel-est-le-meilleur-assistant-ia-pour-votre-cabinet-en-2025/
+ - 4. **Facilaw** - ChatGPT et IA pour la communication des avocats
+ - Date : 07/05/2024 (mise à jour mai 2025)
+ - URL : https://facilaw.fr/chat-gpt-pour-la-communication-des-avocats/
+ - 

@@ -1,0 +1,63 @@
+{
+  "session": "20250816-072814",
+  "timestamp": "2025-08-16T07:29:07.795Z",
+  "pipeline": "v4",
+  "dureeTotal": 53008,
+  "etapes": [
+    {
+      "nom": "redaction-factuelle",
+      "duree": 33477,
+      "succes": true
+    },
+    {
+      "nom": "style-conversationnel",
+      "duree": 19514,
+      "succes": true
+    }
+  ],
+  "resultats": {
+    "veille": {
+      "fichier": "output\\01-veille\\2025\\08-août\\2025-08-15\\veille-2025-08-15.md",
+      "nbSujets": 4,
+      "sujetChoisi": "IA générative et productivité : opportunités concrètes pour PME/ETI\n\n### Sources vérifiées\n\n**Source 1** : DFM.fr – Article  \n- URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/  \n- Date : 22/05/2025  \n- Fiabilité : 8/10  \n- Extraits clés :  \n  * \"L’IA générative est utilisée pour automatiser la rédaction, la génération de contenu marketing et la synthèse de données.\"  \n  * \"Les PME gagnent en productivité sur les tâches répétitives et créatives.\"  \n  * \"L’impact sur le chiffre d’affaires est encore difficile à mesurer mais prometteur.\"  \n  * \"Les usages restent souvent basiques, limitant le potentiel.\"  \n  * \"L’IA générative peut libérer du temps pour l’innovation et la relation client.\"  \n- Données factuelles :  \n  * 66 % des PME utilisent l’IA, dont une part croissante d’IA générative.  \n  * Gains de productivité estimés entre 10 % et 20 % sur certaines fonctions.\n\n**Source 2** : Bpifrance Le Lab – Étude  \n- URL : https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution  \n- Date : 04/06/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"L’IA générative révolutionne la création de contenu et la conception produit.\"  \n  * \"Les dirigeants innovateurs investissent dans des outils génératifs pour accélérer les cycles.\"  \n  * \"Les PME/ETI doivent former leurs équipes pour exploiter pleinement ces technologies.\"  \n  * \"L’automatisation via l’IA générative permet de réduire les coûts opérationnels.\"  \n  * \"Les gains de productivité peuvent atteindre 15 à 30 % selon les secteurs.\"  \n- Données factuelles :  \n  * 15-30 % de gains de productivité potentiels.  \n  * 43 % des PME-ETI ont une stratégie IA incluant l’IA générative.\n\n**Source 3** : Usine Digitale – Article (connu)  \n- Date : 10/08/2025  \n- Fiabilité : 8/10  \n- Extraits clés :  \n  * \"L’IA générative est un levier clé pour la transformation digitale des PME.\"  \n  * \"Elle permet d’automatiser la relation client, la gestion documentaire et la R&D.\"  \n  * \"Les PME doivent intégrer ces outils dans leurs processus pour rester compétitives.\"  \n  * \"La formation est un enjeu majeur pour éviter les erreurs et maximiser les bénéfices.\"  \n  * \"Les premiers retours montrent une amélioration notable de la productivité et de la qualité.\"  \n- Données factuelles :  \n  * Gains de productivité constatés : +20 % en moyenne.  \n  * 50 % des PME envisagent d’adopter l’IA générative dans les 12 prochains mois.\n\n### Synthèse et angles\n\n- **Convergences** : IA générative utilisée pour automatiser tâches créatives et répétitives, gains de productivité entre 10 et 30 %, besoin fort de formation, impact positif sur coûts et innovation.  \n- **Divergences** : Variabilité des gains selon secteurs et maturité IA.  \n- **Angle Prizm recommandé** : Développer des formations ciblées IA générative et accompagnement à l’intégration dans les processus métiers des PME/ETI.  \n- **Score global** : 8.5/10\n\n---\n\nSi vous souhaitez, je peux compléter avec un 5e sujet sur la cybersécurité IA ou le"
+    },
+    "corpus": null,
+    "articleFactuel": {
+      "fichier": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "chemin": "output\\03-articles-factuels\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "mots": 1207,
+      "validation": "✅"
+    },
+    "articleConversationnel": {
+      "fichier": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "chemin": "output\\04-articles-conversationnels\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md"
+    }
+  },
+  "configuration": {
+    "AGENTS": {
+      "veille": "./agent-veille-v4.cjs",
+      "redacteurFactuel": "./agent-redacteur-factuel.cjs",
+      "styleConversationnel": "./agent-style-conversationnel.cjs"
+    },
+    "STRUCTURE": {
+      "base": "./output",
+      "veille": "01-veille",
+      "corpus": "02-corpus",
+      "factuels": "03-articles-factuels",
+      "conversationnels": "04-articles-conversationnels",
+      "finaux": "05-articles-finaux",
+      "rapports": "06-rapports",
+      "archives": "07-archives"
+    },
+    "VALIDATION": {
+      "longueurMin": 1200,
+      "longueurMax": 1800,
+      "longueurCible": 1500
+    },
+    "OPTIONS": {
+      "archiver": true,
+      "genererRapport": true,
+      "afficherStats": true
+    }
+  }
+}

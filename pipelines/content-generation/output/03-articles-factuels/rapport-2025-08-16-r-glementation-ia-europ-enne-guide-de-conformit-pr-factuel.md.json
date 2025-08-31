@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-08-16T19:07:40.998Z",
+  "titre": "Réglementation IA européenne : guide de conformité pratique pour PME",
+  "nombreSources": 5,
+  "nombreMots": 938,
+  "corpusUtilise": {
+    "titre": "Réglementation IA européenne : guide de conformité pratique pour PME",
+    "dateCreation": "2025-08-16T19:07:15.843Z",
+    "scoreQualite": 1.052,
+    "modeGeneration": "DIRIGE",
+    "category": "actualites",
+    "sources": [
+      {
+        "nom": "Chambers and Partners",
+        "type": "Article pratique",
+        "url": "https://practiceguides.chambers.com/practice-guides/artificial-intelligence-2025/france/trends-and-developments",
+        "date": "22/05/2025",
+        "fiabilite": 8,
+        "extraits": [
+          "The AI Act establishes product-specific regulations for artificial intelligence systems marketed within the EU.",
+          "It applies to all businesses developing, providing, or deploying AI systems and includes specific provisions for generative AI models.",
+          "Companies must assess their AI systems’ risk levels and adapt their compliance accordingly.",
+          "Compliance requirements vary depending on whether the AI model is open-source or not.",
+          "Specialised compliance tools, such as Naaia, have emerged to help organisations streamline compliance efforts."
+        ]
+      },
+      {
+        "nom": "Latham & Watkins",
+        "type": "Rapport PDF détaillé",
+        "url": "https://www.lw.com/admin/upload/SiteAttachments/EU-AI-Act-Navigating-a-Brave-New-World.pdf",
+        "date": "21/05/2024",
+        "fiabilite": 9,
+        "extraits": [
+          "The AI Act will enter into force on August 2, 2024.",
+          "February 2, 2025: Prohibited AI practices must be withdrawn from the market.",
+          "August 2, 2026: All rules become applicable, including obligations for high-risk systems.",
+          "Member States must establish at least one operational AI regulatory sandbox at national level.",
+          "Governance structure includes AI Office, European Artificial Intelligence Board, and national authorities."
+        ]
+      },
+      {
+        "nom": "Wikipédia",
+        "type": "Article synthétique sur l’AI Act",
+        "url": "https://en.wikipedia.org/wiki/Artificial_Intelligence_Act",
+        "date": "07/09/2021 (mise à jour continue, dernière majeure en 2024)",
+        "fiabilite": 7,
+        "extraits": [
+          "The AI Act is a European Union regulation concerning artificial intelligence (AI).",
+          "It came into force on 1 August 2024, with provisions that shall come into operation gradually over the following 6 to 36 months.",
+          "The Act classifies AI applications by risk: unacceptable, high, limited, minimal, plus general-purpose AI.",
+          "High-risk applications must comply with security, transparency and quality obligations, and undergo conformity assessments.",
+          "The Act creates a European Artificial Intelligence Board to promote national cooperation and ensure compliance."
+        ]
+      },
+      {
+        "nom": "Jones Day",
+        "type": "Article sur le Code de Pratique GPAI",
+        "url": "https://www.jonesday.com/en/insights/2025/08/eu-ai-act-european-commission-publishes-generalpurpose-ai-code-of-practice",
+        "date": "06/08/2025",
+        "fiabilite": 8,
+        "extraits": [
+          "Starting on 2 August 2025, the AI Office will work closely with the Code of Practice signatories.",
+          "Providers not fully compliant immediately will be recognized for good-faith efforts.",
+          "Starting on 2 August 2026, the EU Commission will enforce all obligations and may impose fines.",
+          "The Code of Practice offers practical guidance to help providers comply with transparency, copyright, and safety obligations.",
+          "Several prominent GPAI model providers have indicated willingness to become signatories."
+        ]
+      },
+      {
+        "nom": "Commission Européenne",
+        "type": "Page officielle AI Act",
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+        "date": "01/08/2025 (mise à jour régulière)",
+        "fiabilite": 10,
+        "extraits": [
+          "The AI Act entered into force on 1 August 2024, fully applicable on 2 August 2026.",
+          "General-purpose AI models carry systemic risks and must comply with transparency and risk mitigation rules.",
+          "The Commission introduced 3 key instruments to support compliance: Guidelines on GPAI obligations, GPAI Code of Practice, and Template for public summary of training content.",
+          "These tools reduce administrative burden and foster innovation while safeguarding fundamental rights.",
+          "Providers must disclose data sources and processing aspects to enable rights under EU law."
+        ]
+      }
+    ],
+    "synthese": {
+      "convergences": "Toutes les sources confirment l’entrée en vigueur de l’AI Act en août 2024 avec une montée en charge progressive jusqu’en 2026-2027. La réglementation impose une classification des IA selon leur niveau de risque, avec des obligations renforcées pour les systèmes à haut risque et les modèles d’IA à usage général (GPAI). La conformité implique des évaluations de risque, des obligations de transparence, et la mise en place d’une gouvernance à plusieurs niveaux (EU, national, entreprise). Les PME/ETI doivent anticiper ces exigences, notamment en matière d’évaluation de risque et de documentation. Des outils et codes de pratique sont proposés pour faciliter la mise en conformité.",
+      "divergences": "Peu de divergences majeures, mais un focus plus juridique et procédural dans les rapports d’avocats (source 2 et 4) versus un angle plus opérationnel et pratique dans les guides (source 1 et 5). Wikipédia offre une synthèse plus générale et moins détaillée sur les outils pratiques.",
+      "anglePrizm": "Proposer un guide pratique pour PME/ETI intégrant une **check-list de conformité** claire :",
+      "scoreGlobal": 0
+    }
+  }
+}

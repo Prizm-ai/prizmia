@@ -1,0 +1,63 @@
+{
+  "session": "20250815-095051",
+  "timestamp": "2025-08-15T09:51:58.891Z",
+  "pipeline": "v4",
+  "dureeTotal": 67270,
+  "etapes": [
+    {
+      "nom": "redaction-factuelle",
+      "duree": 40088,
+      "succes": true
+    },
+    {
+      "nom": "style-conversationnel",
+      "duree": 26977,
+      "succes": true
+    }
+  ],
+  "resultats": {
+    "veille": {
+      "fichier": "output\\01-veille\\2025\\08-août\\2025-08-15\\veille-2025-08-15.md",
+      "nbSujets": 4,
+      "sujetChoisi": "IA générative et automatisation : accélération des usages dans les PME françaises\n\n### Sources vérifiées\n\n**Source 1** : DFM.fr – Article  \n- URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/  \n- Date : 22/05/2025  \n- Fiabilité : 8/10  \n- Extraits clés :  \n  * \"L’IA générative est désormais utilisée dans deux tiers des PME françaises.\"  \n  * \"Les usages restent majoritairement centrés sur l’automatisation des tâches répétitives.\"  \n  * \"Les PME doivent dépasser les usages basiques pour exploiter le vrai potentiel de l’IA.\"  \n  * \"L’IA générative améliore la productivité en réduisant les temps de traitement.\"  \n  * \"Les secteurs du marketing, service client et production de contenu sont les plus avancés.\"  \n- Données factuelles :  \n  * 66 % des PME utilisent l’IA générative  \n  * Gains de productivité estimés à 15-20 % sur les tâches automatisées\n\n**Source 2** : Bpifrance Le Lab – Étude  \n- URL : https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution  \n- Date : 04/06/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"L’IA permet d’automatiser la production de biens et services.\"  \n  * \"La création d’idées nouvelles est révolutionnée par l’IA générative.\"  \n  * \"Les PME-ETI doivent investir dans les compétences pour maximiser les bénéfices.\"  \n  * \"Les projets IA sont souvent initiés par les dirigeants innovateurs.\"  \n  * \"L’automatisation via IA génère des gains mesurables sur les coûts et délais.\"  \n- Données factuelles :  \n  * 43 % des PME-ETI ont une stratégie IA intégrant l’automatisation  \n  * Réduction des coûts opérationnels jusqu’à 25 % dans certains cas\n\n**Source 3** : La French Tech – Communiqué  \n- URL : https://lafrenchtech.gouv.fr/fr/ia-au-service-du-public-place-aux-laureats/  \n- Date : 05/08/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"Les solutions d’IA générative sélectionnées pour le service public démontrent une maturité technologique.\"  \n  * \"Ces solutions facilitent l’automatisation des processus administratifs.\"  \n  * \"Le catalogue de solutions inclut des outils adaptés aux PME.\"  \n  * \"L’accompagnement vise à déployer rapidement ces technologies dans les entreprises.\"  \n  * \"La souveraineté numérique est un enjeu clé dans le choix des solutions.\"  \n- Données factuelles :  \n  * 100 solutions IA sélectionnées dont plusieurs adaptées aux PME  \n  * Déploiement prévu dès septembre 2025\n\n### Synthèse et angles\n\n- **Convergences** : L’IA générative est largement adoptée dans les PME françaises, principalement pour automatiser des tâches répétitives et améliorer la productivité ; gains mesurables sur coûts et délais ; solutions matures disponibles et accompagnement public actif.  \n- **Divergences** : Niveau de maturité variable selon les secteurs et la taille des entreprises ; certains PME restent sur des usages basiques.  \n- **Angle Prizm recommandé** : Encourager les PME à passer d’usages basiques à des projets d’automatisation avancée avec IA générative, en s’appuyant sur des solutions françaises validées et un accompagnement ciblé pour maximiser ROI et compétitivité.  \n- **Score global** : 8.5/10\n\n---"
+    },
+    "corpus": null,
+    "articleFactuel": {
+      "fichier": "2025-08-15-loi-europ-enne-sur-l-ia-eu-ai-act-obligations-et-i-factuel.md",
+      "chemin": "output\\03-articles-factuels\\2025-08-15-loi-europ-enne-sur-l-ia-eu-ai-act-obligations-et-i-factuel.md",
+      "mots": 1173,
+      "validation": "⚠️ (trop court)"
+    },
+    "articleConversationnel": {
+      "fichier": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "chemin": "output\\04-articles-conversationnels\\2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md"
+    }
+  },
+  "configuration": {
+    "AGENTS": {
+      "veille": "./agent-veille-v4.cjs",
+      "redacteurFactuel": "./agent-redacteur-factuel.cjs",
+      "styleConversationnel": "./agent-style-conversationnel.cjs"
+    },
+    "STRUCTURE": {
+      "base": "./output",
+      "veille": "01-veille",
+      "corpus": "02-corpus",
+      "factuels": "03-articles-factuels",
+      "conversationnels": "04-articles-conversationnels",
+      "finaux": "05-articles-finaux",
+      "rapports": "06-rapports",
+      "archives": "07-archives"
+    },
+    "VALIDATION": {
+      "longueurMin": 1200,
+      "longueurMax": 1800,
+      "longueurCible": 1500
+    },
+    "OPTIONS": {
+      "archiver": true,
+      "genererRapport": true,
+      "afficherStats": true
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "titre": "IA générative pour PME en 2025",
+  "dateCreation": "2025-08-16T08:57:12.137Z",
+  "scoreQualite": 1.046,
+  "modeGeneration": "DIRIGE",
+  "category": "actualites",
+  "sources": [
+    {
+      "nom": "Bpifrance Le Lab",
+      "type": "Rapport d’étude",
+      "url": "https://lelab.bpifrance.fr/Etudes/31-des-tpe-et-pme-utilisent-l-ia-generative",
+      "date": "10/02/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "En un an, l'utilisation d'IA génératives a doublé chez les TPE et PME françaises, passant de 15 à 31 %.",
+        "Seulement 8 % des entreprises utilisent l’IA générative de façon régulière.",
+        "La proportion des dirigeants réfractaires aux IA génératives est passée de 72 % à 50 % en un an.",
+        "Plus de 2/3 des dirigeants ont du mal à identifier des cas d’usages pour leur activité.",
+        "Quatre cas d’usage concrets d’IA génératives sont présentés pour inspirer les PME."
+      ]
+    },
+    {
+      "nom": "DFM.fr",
+      "type": "Article d’analyse",
+      "url": "https://dfm.fr/articles/etat-des-lieux-ia-pme-france/",
+      "date": "22/05/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "Seules 11 % des PME françaises revendiquent un usage avancé de l’IA.",
+        "Deux tiers des PME françaises sont équipées d’outils d’IA générative.",
+        "L’IA progresse plus vite dans les jeunes entreprises.",
+        "Les secteurs à forte densité informationnelle creusent l’écart dans l’adoption.",
+        "Les PME utilisent l’IA principalement pour automatiser des tâches existantes, sans exploiter tout le potentiel."
+      ]
+    },
+    {
+      "nom": "La French Fab",
+      "type": "Article sectoriel",
+      "url": "https://www.lafrenchfab.fr/2025/06/19/intelligence-artificielle-dans-les-pme-et-eti-lindustrie-un-secteur-experimentateur/",
+      "date": "19/06/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "1 PME/ETI française sur 3 utilise une IA, dont 23 % une IA générative.",
+        "57 % des dirigeants n’ont aucune stratégie IA, 43 % en ont défini une.",
+        "54 % des entreprises utilisent des solutions gratuites ou prêtes à l’emploi.",
+        "L’IA pourrait accroître le PIB français d’au moins 1,3 point par an d’ici 2034.",
+        "Les promesses incluent automatisation, amélioration de la performance et stimulation de la créativité."
+      ]
+    },
+    {
+      "nom": "Bpifrance Le Lab",
+      "type": "Étude sur la stratégie IA dans PME/ETI",
+      "url": "https://presse.bpifrance.fr/lia-dans-les-pme-et-eti-francaises-une-revolution-tranquille",
+      "date": "04/06/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "58 % des dirigeants considèrent l’IA comme une question de survie à 3-5 ans.",
+        "43 % des dirigeants ont défini une stratégie IA.",
+        "26 % utilisent une IA générative, 16 % une IA non générative, 10 % les deux.",
+        "Les secteurs TIC, finance et assurances sont les plus avancés.",
+        "Les freins principaux sont le manque de compétences et la difficulté à identifier les cas d’usage."
+      ]
+    },
+    {
+      "nom": "Squid Impact",
+      "type": "Article synthèse chiffres clés IA",
+      "url": "https://www.squid-impact.fr/chiffres-cles-ia-france-entreprises-2025/",
+      "date": "24/07/2025",
+      "fiabilite": 7,
+      "extraits": [
+        "Seulement 2 % des entreprises estiment que l’IA a généré le meilleur retour sur investissement en 2024.",
+        "France Num publie des fiches pratiques sur l’IA générative pour les TPE/PME.",
+        "Exemple concret : un chargé de recrutement dans une PME du BTP utilise l’IA générative pour rédiger des offres.",
+        "L’IA générative est utilisée pour automatiser la rédaction, la relation client, et la gestion documentaire.",
+        "Le retour sur investissement reste encore faible mais prometteur."
+      ]
+    }
+  ],
+  "synthese": {
+    "convergences": "",
+    "divergences": "",
+    "anglePrizm": "",
+    "scoreGlobal": 0
+  }
+}

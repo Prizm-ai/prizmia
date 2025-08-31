@@ -1,0 +1,32 @@
+
+============================================================
+📊 RAPPORT DE GÉNÉRATION
+============================================================
+
+📅 Date : 16/08/2025 23:51:41
+⏱️ Durée totale : 11m 13s
+📄 Articles générés : 9/10
+📝 Mots totaux : 14676
+📈 Moyenne : 1631 mots/article
+
+✅ ARTICLES GÉNÉRÉS AVEC SUCCÈS
+----------------------------------------
+• Adoption de l'IA dans les PME françaises : état des lieux 2025
+  └─ 1631 mots | 80s
+• Automatiser sa prospection commerciale avec l'IA : méthode en 5 étapes
+  └─ 1671 mots | 64s
+• Créer du contenu marketing avec l'IA : workflow complet et outils testés
+  └─ 1604 mots | 64s
+• Créer du contenu marketing avec l'IA : workflow et outils
+  └─ 1595 mots | 76s
+• IA générative 2025 : les outils indispensables pour les PME
+  └─ 1646 mots | 94s
+• IA générative 2025 : les outils indispensables pour les PME françaises
+  └─ 1622 mots | 65s
+• IA générative pour PME en 2025
+  └─ 1665 mots | 53s
+• Implémenter ChatGPT dans votre service client : guide complet
+  └─ 1609 mots | 63s
+• Implémenter ChatGPT dans votre service client : guide complet étape par étape
+  └─ 1633 mots | 63s
+

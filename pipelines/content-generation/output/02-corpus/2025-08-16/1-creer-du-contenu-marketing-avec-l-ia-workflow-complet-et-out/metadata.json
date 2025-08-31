@@ -1,0 +1,85 @@
+{
+  "titre": "Créer du contenu marketing avec l'IA : workflow complet et outils testés",
+  "dateCreation": "2025-08-16T09:28:57.848Z",
+  "scoreQualite": 1.04,
+  "modeGeneration": "DIRIGE",
+  "category": "guides",
+  "sources": [
+    {
+      "nom": "Deloitte Digital",
+      "type": "Article",
+      "url": "https://www.deloittedigital.com/us/en/insights/perspective/ai-ready-content-creation.html",
+      "date": "21/02/2024",
+      "fiabilite": 9,
+      "extraits": [
+        "Only 55% of marketing teams can keep up with the ever-escalating demand for content today.",
+        "Generative AI (GenAI) is rapidly becoming a viable part of the solution to this challenge.",
+        "9 out of 10 marketing leaders cited a noticeable increase in the importance of delivering impactful content.",
+        "Early adopters of GenAI for content production are more likely to report that their content marketing strategy is highly effective — 30% versus only 8% for non-adopters.",
+        "Five critical questions marketing leaders should ask before scaling GenAI solutions include readiness for test-and-learn, integration with existing workflows, and governance."
+      ]
+    },
+    {
+      "nom": "Marketer Milk",
+      "type": "Article pratique",
+      "url": "https://www.marketermilk.com/blog/ai-marketing-workflow",
+      "date": "09/07/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "Just like you would train a real human on your team, and give them feedback over time to improve, you need to do this with AI as well.",
+        "Director understands content strategy; Manager uses ChatGPT and Claude Opus 4 for topic ideation and keyword research.",
+        "IC (Individual Contributor) uses Claude Opus 4 to draft articles from outlines, ensuring clarity and grammar.",
+        "Workflow includes scraping tool listings, community insights, and personal frameworks fed into AI to generate ideas.",
+        "Final content is uploaded to CMS after AI-assisted drafting and human review."
+      ]
+    },
+    {
+      "nom": "Content Marketing World 2025",
+      "type": "Conférence / Article d’annonce",
+      "url": "https://www.contentmarketingworld.com/stay-ahead-of-ai-at-cmworld-2025/",
+      "date": "17/07/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "AI is rewriting the rules of marketing — but it doesn’t have to be scary.",
+        "Sessions cover Creativity + AI, Data + Insights, Strategy + Leadership, Search + Structure, Workflow + Automation, Ethics + Legal.",
+        "Find the right balance between efficiency and quality with sessions like Workflow + Automation.",
+        "Whether testing first AI drafts or building fully automated workflows, practical takeaways are provided.",
+        "Frameworks and inspiration to help marketers evolve their AI journey."
+      ]
+    },
+    {
+      "nom": "Chad Wyatt",
+      "type": "Guide pratique",
+      "url": "https://chad-wyatt.com/ai/ai-in-content-marketing-2025-guide/",
+      "date": "08/08/2025",
+      "fiabilite": 7,
+      "extraits": [
+        "AI in Content Marketing is transforming how content is created, personalized, and scaled.",
+        "Top tools include ChatGPT, Jasper, Claude, and others for drafting, ideation, and optimization.",
+        "Implementation requires clear workflows integrating AI with human oversight.",
+        "AI can generate articles, social posts, and newsletters faster while maintaining brand voice.",
+        "Measuring AI impact involves tracking engagement metrics and content performance continuously."
+      ]
+    },
+    {
+      "nom": "SE Ranking",
+      "type": "Plateforme SEO avec IA",
+      "url": "https://seranking.com",
+      "date": "29/07/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "Build winning SEO strategies with unique traffic, keyword, and backlink datasets powered by advanced AI and ML technologies.",
+        "Create new content faster and get AI-powered optimization tips to help your existing pages rock the SERP.",
+        "Track your SEO progress and make timely adjustments based on actionable insights.",
+        "Analyze brand visibility across AI search engines and benchmark competitors.",
+        "Fair and flexible pricing that scales with your business goals."
+      ]
+    }
+  ],
+  "synthese": {
+    "convergences": "",
+    "divergences": "",
+    "anglePrizm": "",
+    "scoreGlobal": 0
+  }
+}

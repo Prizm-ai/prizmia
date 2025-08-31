@@ -1,0 +1,55 @@
+{
+  "titre": "IA générative et automatisation : accélération des usages dans les PME françaises",
+  "dateCreation": "2025-08-15",
+  "scoreQualite": 0.85,
+  "sources": [
+    {
+      "nom": "DFM.fr",
+      "type": "Article",
+      "url": "https://dfm.fr/articles/etat-des-lieux-ia-pme-france/",
+      "date": "22/05/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "L'IA générative est désormais utilisée dans deux tiers des PME françaises.",
+        "Les usages restent majoritairement centrés sur l'automatisation des tâches répétitives.",
+        "Les PME doivent dépasser les usages basiques pour exploiter le vrai potentiel de l'IA.",
+        "L'IA générative améliore la productivité en réduisant les temps de traitement.",
+        "Les secteurs du marketing, service client et production de contenu sont les plus avancés."
+      ]
+    },
+    {
+      "nom": "Bpifrance Le Lab",
+      "type": "Étude",
+      "url": "https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution",
+      "date": "04/06/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "L'IA permet d'automatiser la production de biens et services.",
+        "La création d'idées nouvelles est révolutionnée par l'IA générative.",
+        "Les PME-ETI doivent investir dans les compétences pour maximiser les bénéfices.",
+        "Les projets IA sont souvent initiés par les dirigeants innovateurs.",
+        "L'automatisation via IA génère des gains mesurables sur les coûts et délais."
+      ]
+    },
+    {
+      "nom": "La French Tech",
+      "type": "Communiqué",
+      "url": "https://lafrenchtech.gouv.fr/fr/ia-au-service-du-public-place-aux-laureats/",
+      "date": "05/08/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "Les solutions d'IA générative sélectionnées pour le service public démontrent une maturité technologique.",
+        "Ces solutions facilitent l'automatisation des processus administratifs.",
+        "Le catalogue de solutions inclut des outils adaptés aux PME.",
+        "L'accompagnement vise à déployer rapidement ces technologies dans les entreprises.",
+        "La souveraineté numérique est un enjeu clé dans le choix des solutions."
+      ]
+    }
+  ],
+  "synthese": {
+    "convergences": "L'IA générative est largement adoptée dans les PME françaises, principalement pour automatiser des tâches répétitives et améliorer la productivité ; gains mesurables sur coûts et délais ; solutions matures disponibles et accompagnement public actif.",
+    "divergences": "Niveau de maturité variable selon les secteurs et la taille des entreprises ; certains PME restent sur des usages basiques.",
+    "anglePrizm": "Encourager les PME à passer d'usages basiques à des projets d'automatisation avancée avec IA générative, en s'appuyant sur des solutions françaises validées et un accompagnement ciblé pour maximiser ROI et compétitivité.",
+    "scoreGlobal": 8.5
+  }
+}

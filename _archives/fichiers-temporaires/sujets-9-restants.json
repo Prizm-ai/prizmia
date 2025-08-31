@@ -1,0 +1,62 @@
+[
+  {
+    "titre": "IA générative 2025 : les outils indispensables pour les PME françaises",
+    "category": "actualites",
+    "angle": "Présentation des nouveaux outils avec ROI prouvé et cas d'usage concrets",
+    "keywords": "ChatGPT Enterprise, Claude, Microsoft Copilot, Mistral, productivité, PME, France"
+  },
+  {
+    "titre": "Réglementation IA européenne : guide de conformité pratique pour PME",
+    "category": "actualites",
+    "angle": "Décryptage de l'AI Act avec check-list de mise en conformité",
+    "keywords": "AI Act, RGPD, conformité, réglementation, éthique IA, Europe, PME"
+  },
+  {
+    "titre": "Microsoft Copilot vs ChatGPT Enterprise : comparatif détaillé pour PME",
+    "category": "actualites",
+    "angle": "Analyse comparative avec prix, fonctionnalités et recommandations",
+    "keywords": "Copilot, ChatGPT, comparatif, assistant IA, productivité, entreprise"
+  },
+  {
+    "titre": "L'IA dans la comptabilité : automatisation et gains de productivité mesurés",
+    "category": "actualites",
+    "angle": "Solutions concrètes pour automatiser saisie, facturation et reporting",
+    "keywords": "comptabilité, automatisation, Pennylane, Dext, gains productivité, PME"
+  },
+  {
+    "titre": "Implémenter ChatGPT dans votre service client : guide complet étape par étape",
+    "category": "guides",
+    "angle": "Tutoriel détaillé avec paramétrage, formation équipes et mesure ROI",
+    "keywords": "service client, chatbot, ChatGPT, implementation, ROI, support"
+  },
+  {
+    "titre": "Automatiser sa prospection commerciale avec l'IA : méthode en 5 étapes",
+    "category": "guides",
+    "angle": "Process pour identifier, qualifier et contacter automatiquement les prospects",
+    "keywords": "prospection, commercial, automatisation, CRM, leads, Sales"
+  },
+  {
+    "titre": "Créer du contenu marketing avec l'IA : workflow complet et outils testés",
+    "category": "guides",
+    "angle": "Méthodologie pour générer articles, posts sociaux et newsletters",
+    "keywords": "content marketing, rédaction, IA générative, workflow, création contenu"
+  },
+  {
+    "titre": "Calculer le ROI de l'IA dans votre PME : méthode et exemples chiffrés",
+    "category": "guides",
+    "angle": "Framework de calcul avec cas pratiques et template Excel",
+    "keywords": "ROI, rentabilité, investissement, métriques, calcul, KPI"
+  },
+  {
+    "titre": "Adoption de l'IA dans les PME françaises 2025 : chiffres et tendances",
+    "category": "analyses",
+    "angle": "État des lieux chiffré avec freins, opportunités et projections",
+    "keywords": "statistiques, adoption IA, PME, France, tendances, étude marché"
+  },
+  {
+    "titre": "IA et cybersécurité : nouveaux risques et solutions pour les PME",
+    "category": "analyses",
+    "angle": "Analyse des menaces et guide de protection des données",
+    "keywords": "cybersécurité, risques IA, protection données, RGPD, sécurité"
+  }
+]

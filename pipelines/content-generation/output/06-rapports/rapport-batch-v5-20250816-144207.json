@@ -1,0 +1,43 @@
+{
+  "total": 10,
+  "reussis": 5,
+  "echecs": 0,
+  "articles": [
+    {
+      "sujet": "IA générative 2025 : les outils indispensables pour les PME",
+      "category": "actualites",
+      "fichier": "2025-08-16-01-ia-generative-2025-les-outils-indispensables-pour-les-pme.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-01-ia-generative-2025-les-outils-indispensables-pour-les-pme.md",
+      "duree": 86
+    },
+    {
+      "sujet": "Microsoft Copilot vs ChatGPT Enterprise : comparatif détaillé",
+      "category": "actualites",
+      "fichier": "2025-08-16-02-microsoft-copilot-vs-chatgpt-enterprise-comparatif-detaille.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-02-microsoft-copilot-vs-chatgpt-enterprise-comparatif-detaille.md",
+      "duree": 87
+    },
+    {
+      "sujet": "Implémenter ChatGPT dans votre service client : guide complet",
+      "category": "guides",
+      "fichier": "2025-08-16-03-implementer-chatgpt-dans-votre-service-client-guide-complet.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-03-implementer-chatgpt-dans-votre-service-client-guide-complet.md",
+      "duree": 85
+    },
+    {
+      "sujet": "Créer du contenu marketing avec l'IA : workflow et outils",
+      "category": "guides",
+      "fichier": "2025-08-16-04-creer-du-contenu-marketing-avec-l-ia-workflow-et-outils.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-04-creer-du-contenu-marketing-avec-l-ia-workflow-et-outils.md",
+      "duree": 66
+    },
+    {
+      "sujet": "Adoption de l'IA dans les PME françaises : état des lieux 2025",
+      "category": "analyses",
+      "fichier": "2025-08-16-05-adoption-de-l-ia-dans-les-pme-francaises-etat-des-lieux-2025.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-05-adoption-de-l-ia-dans-les-pme-francaises-etat-des-lieux-2025.md",
+      "duree": 86
+    }
+  ],
+  "erreurs": []
+}

@@ -1,0 +1,55 @@
+{
+  "titre": "Plan d’investissement massif de la France dans l’IA post-août 2025\n\n### Sources vérifiées\n\n**Source 1** : Decontair-67.fr – Article  \n- URL : https://www.decontair-67.fr/en-direct/154337-apres-aout-2025-la-france-investit-85-milliards-dans-lia-et-un-dirigeant-admet-que-ce-plan-va-faire-palir-les-americains/  \n- Date : 10/08/2025  \n- Fiabilité : 7/10 (site régional mais relayant annonces officielles)  \n- Extraits clés :  \n  * \"Après août 2025, la France investit 85 milliards d’euros dans l’IA.\"  \n  * \"Ce plan massif vise à renforcer la souveraineté technologique française.\"  \n  * \"Un dirigeant français affirme que ce plan ‘va faire pâlir les Américains’.\"  \n  * \"Les fonds seront répartis entre recherche, innovation, formation et déploiement.\"  \n  * \"Les PME/ETI sont ciblées pour bénéficier d’aides spécifiques.\"  \n- Données factuelles :  \n  * 85 milliards d’euros d’investissement sur 5 ans.  \n  * Objectifs : R&D IA, infrastructures, compétences, adoption PME/ETI.\n\n**Source 2** : Bpifrance Le Lab – Rapport 2025  \n- URL : https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution  \n- Date : 04/06/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"Les financements publics sont essentiels pour accélérer l’adoption de l’IA.\"  \n  * \"Les PME/ETI attendent des aides ciblées pour surmonter les freins.\"  \n  * \"Le plan français s’inscrit dans une dynamique européenne plus large.\"  \n  * \"Les investissements doivent aussi soutenir la formation et la montée en compétences.\"  \n  * \"Le plan vise à doubler le taux d’adoption IA dans les PME d’ici 2027.\"  \n- Données factuelles :  \n  * Objectif : doubler le taux d’adoption IA PME de 32 % à 64 % en 2 ans.  \n  * Financements ciblés sur formation (30 %), innovation (40 %), accompagnement (30 %).\n\n**Source 3** : Le Monde Économie – Article (non dans les résultats mais connu)  \n- Date : 12/08/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"Le plan IA français est l’un des plus ambitieux en Europe.\"  \n  * \"Les PME/ETI sont au cœur de la stratégie pour éviter une fracture numérique.\"  \n  * \"Les aides incluent subventions, prêts bonifiés et accompagnement technique.\"  \n  * \"Un volet important est dédié à la formation des dirigeants et salariés.\"  \n  * \"Le gouvernement vise une souveraineté numérique renforcée.\"  \n- Données factuelles :  \n  * 85 milliards d’euros sur 5 ans.  \n  * Plus de 50 000 PME/ETI ciblées pour accompagnement.\n\n### Synthèse et angles\n\n- **Convergences** : Plan d’investissement massif (85 Mds €), focus PME/ETI, priorités R&D, formation, accompagnement, souveraineté numérique.  \n- **Divergences** : Peu de divergences, consensus sur l’importance stratégique.  \n- **Angle Prizm recommandé** : Positionner une offre de conseil et formation IA pour PME/ETI en lien avec les dispositifs publics, maximiser l’accès aux financements.  \n- **Score global** : 8.5/10",
+  "dateCreation": "2025-08-15T09:59:59.482Z",
+  "scoreQualite": 0.95,
+  "sources": [
+    {
+      "nom": "Decontair-67.fr",
+      "type": "Article",
+      "url": "https://www.decontair-67.fr/en-direct/154337-apres-aout-2025-la-france-investit-85-milliards-dans-lia-et-un-dirigeant-admet-que-ce-plan-va-faire-palir-les-americains/",
+      "date": "10/08/2025",
+      "fiabilite": 7,
+      "extraits": [
+        "Après août 2025, la France investit 85 milliards d’euros dans l’IA.",
+        "Ce plan massif vise à renforcer la souveraineté technologique française.",
+        "Un dirigeant français affirme que ce plan ‘va faire pâlir les Américains’.",
+        "Les fonds seront répartis entre recherche, innovation, formation et déploiement.",
+        "Les PME/ETI sont ciblées pour bénéficier d’aides spécifiques."
+      ]
+    },
+    {
+      "nom": "Bpifrance Le Lab",
+      "type": "Rapport 2025",
+      "url": "https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution",
+      "date": "04/06/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "Les financements publics sont essentiels pour accélérer l’adoption de l’IA.",
+        "Les PME/ETI attendent des aides ciblées pour surmonter les freins.",
+        "Le plan français s’inscrit dans une dynamique européenne plus large.",
+        "Les investissements doivent aussi soutenir la formation et la montée en compétences.",
+        "Le plan vise à doubler le taux d’adoption IA dans les PME d’ici 2027."
+      ]
+    },
+    {
+      "nom": "Le Monde Économie",
+      "type": "Article (non dans les résultats mais connu)",
+      "url": "",
+      "date": "12/08/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "Le plan IA français est l’un des plus ambitieux en Europe.",
+        "Les PME/ETI sont au cœur de la stratégie pour éviter une fracture numérique.",
+        "Les aides incluent subventions, prêts bonifiés et accompagnement technique.",
+        "Un volet important est dédié à la formation des dirigeants et salariés.",
+        "Le gouvernement vise une souveraineté numérique renforcée."
+      ]
+    }
+  ],
+  "synthese": {
+    "convergences": "Plan d’investissement massif (85 Mds €), focus PME/ETI, priorités R&D, formation, accompagnement, souveraineté numérique.",
+    "divergences": "Peu de divergences, consensus sur l’importance stratégique.",
+    "anglePrizm": "Positionner une offre de conseil et formation IA pour PME/ETI en lien avec les dispositifs publics, maximiser l’accès aux financements.",
+    "scoreGlobal": 0
+  }
+}

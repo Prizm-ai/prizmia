@@ -1,0 +1,15 @@
+{
+  "total": 10,
+  "reussis": 1,
+  "echecs": 0,
+  "articles": [
+    {
+      "sujet": "Intelligence artificielle et PME françaises en 2025",
+      "category": "actualites",
+      "fichier": "2025-08-16-01-intelligence-artificielle-et-pme-francaises-en-2025.md",
+      "chemin": "output\\articles-batch-v5-ready\\2025-08-16-01-intelligence-artificielle-et-pme-francaises-en-2025.md",
+      "duree": 91
+    }
+  ],
+  "erreurs": []
+}

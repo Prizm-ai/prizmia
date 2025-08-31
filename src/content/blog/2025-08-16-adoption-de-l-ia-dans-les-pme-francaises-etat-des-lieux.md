@@ -88,26 +88,18 @@ L'horizon 2026 s'annonce comme une année charnière où la maturité digitale d
 *Cet article a été rédigé à partir de sources vérifiées :*
 
 1. **DFM.fr** - Article
-   - Date : 22/05/2025
-   - URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/
-   - Fiabilité : 8/10
-
-2. **Bpifrance Le Lab** - Étude
-   - Date : 10/02/2025
-   - URL : https://lelab.bpifrance.fr/Etudes/31-des-tpe-et-pme-utilisent-l-ia-generative
-   - Fiabilité : 9/10
-
-3. **Bpifrance Le Lab** - Rapport
-   - Date : 04/06/2025
-   - URL : https://presse.bpifrance.fr/lia-dans-les-pme-et-eti-francaises-une-revolution-tranquille
-   - Fiabilité : 9/10
-
-4. **CoMarketing-News** - Article
-   - Date : 04/07/2025
-   - URL : https://comarketing-news.fr/ia-le-retard-des-entreprises-francaises/
-   - Fiabilité : 7/10
-
-5. **France Numérique (Magazine du numérique)** - Article
-   - Date : 15/06/2025
-   - URL : https://www.francenum.gouv.fr/magazine-du-numerique/numerique-et-ia-ou-en-sont-les-tpe-pme-europeennes
-   - Fiabilité : 8/10
+ - Date : 22/05/2025
+ - URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/
+ - 2. **Bpifrance Le Lab** - Étude
+ - Date : 10/02/2025
+ - URL : https://lelab.bpifrance.fr/Etudes/31-des-tpe-et-pme-utilisent-l-ia-generative
+ - 3. **Bpifrance Le Lab** - Rapport
+ - Date : 04/06/2025
+ - URL : https://presse.bpifrance.fr/lia-dans-les-pme-et-eti-francaises-une-revolution-tranquille
+ - 4. **CoMarketing-News** - Article
+ - Date : 04/07/2025
+ - URL : https://comarketing-news.fr/ia-le-retard-des-entreprises-francaises/
+ - 5. **France Numérique (Magazine du numérique)** - Article
+ - Date : 15/06/2025
+ - URL : https://www.francenum.gouv.fr/magazine-du-numerique/numerique-et-ia-ou-en-sont-les-tpe-pme-europeennes
+ - 

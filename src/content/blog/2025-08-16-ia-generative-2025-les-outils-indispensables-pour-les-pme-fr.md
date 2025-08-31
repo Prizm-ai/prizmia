@@ -80,21 +80,15 @@ L'IA générative n'est pas qu'une révolution technologique, c'est un levier de
 *Cet article a été rédigé à partir de sources vérifiées :*
 
 1. **France Num** - Guide pratique pour TPE/PME sur l’IA générative
-   - Date : 27/11/2024
-   - URL : https://www.francenum.gouv.fr/guides-et-conseils/intelligence-artificielle/generation-de-contenus-texte-image-son-video/tpe-pme
-   - Fiabilité : 9/10
-
-2. **DFM.fr** - État des lieux de l’IA dans les PME françaises en 2025
-   - Date : 22/05/2025
-   - URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/
-   - Fiabilité : 8/10
-
-3. **Le Blog du Dirigeant** - Les meilleurs outils d’IA pour PME en 2025
-   - Date : 18/07/2025
-   - URL : https://www.leblogdudirigeant.com/les-meilleurs-outils-d-ia-pour-les-petites-entreprises/
-   - Fiabilité : 7/10
-
-4. **Pollen.fr** - Startups françaises IA générative à connaître en 2025
-   - Date : 10/06/2025
-   - URL : https://pollen.fr/blog/entreprise-intelligence-artificielle-france
-   - Fiabilité : 8/10
+ - Date : 27/11/2024
+ - URL : https://www.francenum.gouv.fr/guides-et-conseils/intelligence-artificielle/generation-de-contenus-texte-image-son-video/tpe-pme
+ - 2. **DFM.fr** - État des lieux de l’IA dans les PME françaises en 2025
+ - Date : 22/05/2025
+ - URL : https://dfm.fr/articles/etat-des-lieux-ia-pme-france/
+ - 3. **Le Blog du Dirigeant** - Les meilleurs outils d’IA pour PME en 2025
+ - Date : 18/07/2025
+ - URL : https://www.leblogdudirigeant.com/les-meilleurs-outils-d-ia-pour-les-petites-entreprises/
+ - 4. **Pollen.fr** - Startups françaises IA générative à connaître en 2025
+ - Date : 10/06/2025
+ - URL : https://pollen.fr/blog/entreprise-intelligence-artificielle-france
+ - 

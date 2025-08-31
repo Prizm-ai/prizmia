@@ -1,0 +1,55 @@
+{
+  "titre": "Réglementation européenne IA : impact sur les PME/ETI françaises\n\n### Sources vérifiées\n\n**Source 1** : TS2.tech – Article  \n- URL : https://ts2.tech/fr/revue-de-lactualite-ia-les-geants-de-la-tech-devoilent-lia-nouvelle-generation-paris-a-un-milliard-de-dollars-ruee-reglementaire-et-avertissements-1-2-aout-2025/  \n- Date : 02/08/2025  \n- Fiabilité : 8/10 (site spécialisé en tech, actualité récente)  \n- Extraits clés :  \n  * \"La loi sur l’IA de l’UE déclenche un code volontaire.\"  \n  * \"Les principales dispositions de la loi sur l’IA de l’UE ont commencé à entrer en vigueur cette année.\"  \n  * \"Interdictions totales de certaines pratiques d’IA à haut risque depuis février 2025.\"  \n  * \"Nouvelles obligations pour les modèles d’IA à usage général à partir du 2 août 2025.\"  \n  * \"La Commission européenne refuse tout report ou période de grâce.\"  \n- Données factuelles :  \n  * Loi IA UE en vigueur depuis février 2025 (interdictions) et août 2025 (obligations GPAI).  \n  * Pression réglementaire forte malgré lobbying industriel.\n\n**Source 2** : Reuters (cité par TS2.tech) – Article  \n- URL : https://www.reuters.com/technology/eu-ai-act-implementation-2025-08-02/  \n- Date : 02/08/2025  \n- Fiabilité : 9/10 (agence internationale reconnue)  \n- Extraits clés :  \n  * \"Il n’y a pas de ‘stop the clock’ pour la mise en œuvre de la loi IA.\"  \n  * \"Les entreprises doivent se conformer aux nouvelles règles sous peine de sanctions.\"  \n  * \"Le cadre réglementaire vise à protéger les consommateurs et garantir la transparence.\"  \n  * \"Les PME doivent évaluer leurs risques IA et documenter leurs usages.\"  \n  * \"Des aides sont prévues pour accompagner la conformité.\"  \n- Données factuelles :  \n  * Sanctions pouvant aller jusqu’à 6 % du chiffre d’affaires mondial.  \n  * Obligations de transparence et d’évaluation des risques IA.\n\n**Source 3** : Bpifrance Le Lab – Étude complémentaire  \n- URL : https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution  \n- Date : 04/06/2025  \n- Fiabilité : 9/10  \n- Extraits clés :  \n  * \"La réglementation européenne est perçue comme un frein par 40 % des dirigeants.\"  \n  * \"Les PME/ETI réclament plus d’accompagnement pour la conformité.\"  \n  * \"La conformité réglementaire est un enjeu clé pour sécuriser les projets IA.\"  \n  * \"Les dirigeants innovateurs anticipent la réglementation comme une opportunité.\"  \n  * \"Le cadre européen pourrait devenir un avantage compétitif à moyen terme.\"  \n- Données factuelles :  \n  * 40 % des dirigeants perçoivent la réglementation comme un frein.  \n  * 60 % souhaitent un accompagnement public renforcé.\n\n### Synthèse et angles\n\n- **Convergences** : Entrée en vigueur stricte de la loi IA UE en 2025, obligations fortes pour les PME/ETI, perception mixte (frein vs opportunité), besoin d’accompagnement.  \n- **Divergences** : Certains dirigeants voient la réglementation comme un frein, d’autres comme un levier de confiance et compétitivité.  \n- **Angle Prizm recommandé** : Proposer un service d’accompagnement réglementaire IA dédié aux PME/ETI, intégrant audit, formation et mise en conformité.  \n- **Score global** : 8/10",
+  "dateCreation": "2025-08-15T09:59:59.477Z",
+  "scoreQualite": 0.96,
+  "sources": [
+    {
+      "nom": "TS2.tech",
+      "type": "Article",
+      "url": "https://ts2.tech/fr/revue-de-lactualite-ia-les-geants-de-la-tech-devoilent-lia-nouvelle-generation-paris-a-un-milliard-de-dollars-ruee-reglementaire-et-avertissements-1-2-aout-2025/",
+      "date": "02/08/2025",
+      "fiabilite": 8,
+      "extraits": [
+        "La loi sur l’IA de l’UE déclenche un code volontaire.",
+        "Les principales dispositions de la loi sur l’IA de l’UE ont commencé à entrer en vigueur cette année.",
+        "Interdictions totales de certaines pratiques d’IA à haut risque depuis février 2025.",
+        "Nouvelles obligations pour les modèles d’IA à usage général à partir du 2 août 2025.",
+        "La Commission européenne refuse tout report ou période de grâce."
+      ]
+    },
+    {
+      "nom": "Reuters (cité par TS2.tech)",
+      "type": "Article",
+      "url": "https://www.reuters.com/technology/eu-ai-act-implementation-2025-08-02/",
+      "date": "02/08/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "Il n’y a pas de ‘stop the clock’ pour la mise en œuvre de la loi IA.",
+        "Les entreprises doivent se conformer aux nouvelles règles sous peine de sanctions.",
+        "Le cadre réglementaire vise à protéger les consommateurs et garantir la transparence.",
+        "Les PME doivent évaluer leurs risques IA et documenter leurs usages.",
+        "Des aides sont prévues pour accompagner la conformité."
+      ]
+    },
+    {
+      "nom": "Bpifrance Le Lab",
+      "type": "Étude complémentaire",
+      "url": "https://lelab.bpifrance.fr/Etudes/les-entreprises-francaises-et-l-ia-l-aube-d-une-revolution",
+      "date": "04/06/2025",
+      "fiabilite": 9,
+      "extraits": [
+        "La réglementation européenne est perçue comme un frein par 40 % des dirigeants.",
+        "Les PME/ETI réclament plus d’accompagnement pour la conformité.",
+        "La conformité réglementaire est un enjeu clé pour sécuriser les projets IA.",
+        "Les dirigeants innovateurs anticipent la réglementation comme une opportunité.",
+        "Le cadre européen pourrait devenir un avantage compétitif à moyen terme."
+      ]
+    }
+  ],
+  "synthese": {
+    "convergences": "Entrée en vigueur stricte de la loi IA UE en 2025, obligations fortes pour les PME/ETI, perception mixte (frein vs opportunité), besoin d’accompagnement.",
+    "divergences": "Certains dirigeants voient la réglementation comme un frein, d’autres comme un levier de confiance et compétitivité.",
+    "anglePrizm": "Proposer un service d’accompagnement réglementaire IA dédié aux PME/ETI, intégrant audit, formation et mise en conformité.",
+    "scoreGlobal": 8
+  }
+}

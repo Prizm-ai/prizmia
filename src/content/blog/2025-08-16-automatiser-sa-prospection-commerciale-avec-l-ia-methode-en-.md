@@ -89,26 +89,18 @@ L'automatisation intelligente de la prospection n'est plus une option mais une n
 *Cet article a été rédigé à partir de sources vérifiées :*
 
 1. **Tekzone** - Article
-   - Date : 12/06/2025
-   - URL : https://tekzone.fr/2025/06/12/meilleurs-outils-ia-pour-automatiser-votre-prospection-commerciale/
-   - Fiabilité : 8/10
-
-2. **AI French Touch** - Rapport/Diagnostic stratégique
-   - Date : 21/05/2025
-   - URL : https://ai-french-touch.systeme.io
-   - Fiabilité : 7/10
-
-3. **Simple CRM** - Article explicatif
-   - Date : 21/04/2024
-   - URL : https://crm-pour-pme.fr/automatiser-sa-prospection-commerciale.php
-   - Fiabilité : 7/10
-
-4. **WSI Marseille** - Article sur usages IA en PME
-   - Date : 08/07/2025
-   - URL : https://www.wsimarseille.fr/5-exemples-concrets-dusages-de-lintelligence-artificielle-dans-les-pme-francaises
-   - Fiabilité : 8/10
-
-5. **Yes We Prompt** - Article sur agents IA
-   - Date : 06/03/2025
-   - URL : https://yes-we-prompt.fr/actualites-ia/agents-ia-2025/
-   - Fiabilité : 7/10
+ - Date : 12/06/2025
+ - URL : https://tekzone.fr/2025/06/12/meilleurs-outils-ia-pour-automatiser-votre-prospection-commerciale/
+ - 2. **AI French Touch** - Rapport/Diagnostic stratégique
+ - Date : 21/05/2025
+ - URL : https://ai-french-touch.systeme.io
+ - 3. **Simple CRM** - Article explicatif
+ - Date : 21/04/2024
+ - URL : https://crm-pour-pme.fr/automatiser-sa-prospection-commerciale.php
+ - 4. **WSI Marseille** - Article sur usages IA en PME
+ - Date : 08/07/2025
+ - URL : https://www.wsimarseille.fr/5-exemples-concrets-dusages-de-lintelligence-artificielle-dans-les-pme-francaises
+ - 5. **Yes We Prompt** - Article sur agents IA
+ - Date : 06/03/2025
+ - URL : https://yes-we-prompt.fr/actualites-ia/agents-ia-2025/
+ - 

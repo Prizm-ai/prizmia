@@ -1,0 +1,844 @@
+// pipeline-v5-batch.cjs - Pipeline batch utilisant l'agent-veille-v5 en mode dirigé
+require('dotenv').config({ path: './config/.env' });
+const fs = require('fs').promises;
+const path = require('path');
+const { exec } = require('child_process');
+const util = require('util');
+const execPromise = util.promisify(exec);
+
+// Configuration
+const CONFIG = {
+  AGENTS: {
+    veille: './agent-veille-v5.cjs', // Nouvelle version
+    redacteurFactuel: './agent-redacteur-factuel.cjs',
+    styleConversationnel: './agent-style-conversationnel.cjs'
+  },
+  STRUCTURE: {
+    base: './output',
+    veille: '01-veille',
+    corpus: '02-corpus',
+    factuels: '03-articles-factuels',
+    conversationnels: '04-articles-conversationnels',
+    finaux: '05-articles-finaux',
+    rapports: '06-rapports',
+    archives: '07-archives'
+  },
+  VALIDATION: {
+    longueurMin: 1400,
+    longueurMax: 1800,
+    longueurCible: 1500
+  },
+  BATCH: {
+    pauseEntreSujets: 20000, // 20 secondes entre chaque article
+    pauseCourtePourAPI: 5000, // 5 secondes pour éviter rate limiting
+    maxRetries: 2
+  }
+};
+
+// LISTE DES SUJETS À TRAITER
+const SUJETS_BATCH = [
+  // Actualités (4 articles)
+  {
+    titre: "IA générative 2025 : les outils indispensables pour les PME françaises",
+    category: "actualites",
+    angle: "Présentation des nouveaux outils avec ROI prouvé et cas d'usage concrets",
+    keywords: "ChatGPT Enterprise, Claude, Microsoft Copilot, Mistral, productivité, PME, France"
+  },
+  {
+    titre: "Réglementation IA européenne : guide de conformité pratique pour PME",
+    category: "actualites",
+    angle: "Décryptage de l'AI Act avec check-list de mise en conformité",
+    keywords: "AI Act, RGPD, conformité, réglementation, éthique IA, Europe, PME"
+  },
+  {
+    titre: "Microsoft Copilot vs ChatGPT Enterprise : comparatif détaillé pour PME",
+    category: "actualites",
+    angle: "Analyse comparative avec prix, fonctionnalités et recommandations",
+    keywords: "Copilot, ChatGPT, comparatif, assistant IA, productivité, entreprise"
+  },
+  {
+    titre: "L'IA dans la comptabilité : automatisation et gains de productivité mesurés",
+    category: "actualites",
+    angle: "Solutions concrètes pour automatiser saisie, facturation et reporting",
+    keywords: "comptabilité, automatisation, Pennylane, Dext, gains productivité, PME"
+  },
+  
+  // Guides Pratiques (4 articles)
+  {
+    titre: "Implémenter ChatGPT dans votre service client : guide complet étape par étape",
+    category: "guides",
+    angle: "Tutoriel détaillé avec paramétrage, formation équipes et mesure ROI",
+    keywords: "service client, chatbot, ChatGPT, implementation, ROI, support"
+  },
+  {
+    titre: "Automatiser sa prospection commerciale avec l'IA : méthode en 5 étapes",
+    category: "guides",
+    angle: "Process pour identifier, qualifier et contacter automatiquement les prospects",
+    keywords: "prospection, commercial, automatisation, CRM, leads, Sales"
+  },
+  {
+    titre: "Créer du contenu marketing avec l'IA : workflow complet et outils testés",
+    category: "guides",
+    angle: "Méthodologie pour générer articles, posts sociaux et newsletters",
+    keywords: "content marketing, rédaction, IA générative, workflow, création contenu"
+  },
+  {
+    titre: "Calculer le ROI de l'IA dans votre PME : méthode et exemples chiffrés",
+    category: "guides",
+    angle: "Framework de calcul avec cas pratiques et template Excel",
+    keywords: "ROI, rentabilité, investissement, métriques, calcul, KPI"
+  },
+  
+  // Analyses (2 articles)
+  {
+    titre: "Adoption de l'IA dans les PME françaises 2025 : chiffres et tendances",
+    category: "analyses",
+    angle: "État des lieux chiffré avec freins, opportunités et projections",
+    keywords: "statistiques, adoption IA, PME, France, tendances, étude marché"
+  },
+  {
+    titre: "IA et cybersécurité : nouveaux risques et solutions pour les PME",
+    category: "analyses",
+    angle: "Analyse des menaces et guide de protection des données",
+    keywords: "cybersécurité, risques IA, protection données, RGPD, sécurité"
+  }
+];
+
+class PipelineV5Batch {
+  constructor() {
+    this.sessionId = this.genererSessionId();
+    this.resultats = {
+      total: SUJETS_BATCH.length,
+      reussis: 0,
+      echecs: 0,
+      articles: [],
+      erreurs: []
+    };
+    this.startTime = Date.now();
+  }
+
+  genererSessionId() {
+    const date = new Date();
+    return `batch-v5-${date.toISOString().slice(0, 19).replace(/[:-]/g, '').replace('T', '-')}`;
+  }
+
+  async initialiser() {
+    console.log(`
+╔════════════════════════════════════════════════════════╗
+║          PIPELINE V5 BATCH - PRIZM AI                  ║
+║      Génération dirigée de ${String(SUJETS_BATCH.length).padEnd(2)} articles               ║
+║                                                        ║
+║  Session : ${this.sessionId}            ║
+╚════════════════════════════════════════════════════════╝
+    `);
+
+    // Créer la structure
+    await this.creerStructure();
+    
+    // Vérifier les agents
+    await this.verifierAgents();
+    
+    // Archiver les anciennes veilles pour éviter les conflits
+    await this.archiverAnciennesVeilles();
+    
+    console.log('\n✅ Pipeline batch v5 initialisé');
+    console.log('🎯 Mode : DIRIGÉ (sujets imposés)\n');
+    console.log(`📋 Articles à générer :`);
+    SUJETS_BATCH.forEach((s, i) => {
+      console.log(`   ${i + 1}. [${s.category}] ${s.titre}`);
+    });
+    console.log('\n' + '═'.repeat(60) + '\n');
+    
+    return true;
+  }
+
+  async creerStructure() {
+    for (const [key, dossier] of Object.entries(CONFIG.STRUCTURE)) {
+      if (key !== 'base') {
+        const chemin = path.join(CONFIG.STRUCTURE.base, dossier);
+        await fs.mkdir(chemin, { recursive: true });
+      }
+    }
+  }
+
+  async verifierAgents() {
+    console.log('🔍 Vérification des agents...');
+    for (const [nom, fichier] of Object.entries(CONFIG.AGENTS)) {
+      try {
+        await fs.access(fichier);
+        console.log(`   ✓ ${nom} (${fichier})`);
+      } catch {
+        throw new Error(`Agent ${nom} introuvable : ${fichier}`);
+      }
+    }
+  }
+
+  async archiverAnciennesVeilles() {
+    try {
+      const veilleDir = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.veille);
+      const archiveDir = path.join(
+        CONFIG.STRUCTURE.base, 
+        CONFIG.STRUCTURE.archives, 
+        'veilles-avant-batch-v5',
+        this.sessionId
+      );
+      
+      await fs.mkdir(archiveDir, { recursive: true });
+      
+      // Fonction récursive pour archiver
+      async function archiverRecursif(source, dest) {
+        const entrees = await fs.readdir(source, { withFileTypes: true });
+        
+        for (const entree of entrees) {
+          const sourcePath = path.join(source, entree.name);
+          const destPath = path.join(dest, entree.name);
+          
+          if (entree.isDirectory()) {
+            await fs.mkdir(destPath, { recursive: true });
+            await archiverRecursif(sourcePath, destPath);
+          } else if (entree.isFile() && entree.name.endsWith('.md')) {
+            await fs.rename(sourcePath, destPath);
+          }
+        }
+      }
+      
+      const files = await fs.readdir(veilleDir);
+      if (files.length > 0) {
+        await archiverRecursif(veilleDir, archiveDir);
+        console.log(`   📦 Anciennes veilles archivées dans : ${archiveDir}`);
+      }
+    } catch (e) {
+      // Pas grave si le dossier est vide
+    }
+  }
+
+  /**
+   * Générer un article pour un sujet imposé
+   */
+  async genererArticlePourSujet(sujet, numero) {
+    console.log(`\n${'─'.repeat(60)}`);
+    console.log(`[${numero}/${SUJETS_BATCH.length}] ${sujet.titre}`);
+    console.log(`   📂 Catégorie : ${sujet.category}`);
+    console.log(`   🎯 Angle : ${sujet.angle.substring(0, 60)}...`);
+    
+    try {
+      // Étape 1 : Lancer l'agent-veille-v5 en mode DIRIGÉ
+      console.log(`\n   📰 Lancement de la veille dirigée...`);
+      const debutVeille = Date.now();
+      
+      // Construire la commande avec tous les paramètres
+      const commande = [
+        `node ${CONFIG.AGENTS.veille}`,
+        '--dirige',
+        `--titre "${sujet.titre}"`,
+        `--angle "${sujet.angle}"`,
+        `--keywords "${sujet.keywords}"`,
+        `--category "${sujet.category}"`
+      ].join(' ');
+      
+      try {
+        const { stdout, stderr } = await execPromise(commande);
+        
+        if (stderr && !stderr.includes('Warning')) {
+          console.log('   ⚠️ Avertissements :', stderr.substring(0, 100));
+        }
+        
+        // Attendre que le corpus soit créé
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        console.log(`   ✅ Veille et corpus créés en ${Math.round((Date.now() - debutVeille) / 1000)}s`);
+        
+      } catch (error) {
+        throw new Error(`Erreur veille dirigée : ${error.message}`);
+      }
+      
+      // Étape 2 : Trouver le corpus créé
+      const corpusPath = await this.trouverDernierCorpus(sujet.titre);
+      
+      if (!corpusPath) {
+        throw new Error('Corpus non trouvé après la veille');
+      }
+      
+      console.log(`   📚 Corpus trouvé : ${path.basename(corpusPath)}`);
+      
+      // Étape 3 : Lancer la rédaction factuelle
+      console.log(`   ✍️ Génération de l'article factuel...`);
+      const debutRedaction = Date.now();
+      
+      const commandeRedaction = `node ${CONFIG.AGENTS.redacteurFactuel} "${corpusPath}"`;
+      
+      try {
+        await execPromise(commandeRedaction);
+        console.log(`   ✅ Article factuel généré en ${Math.round((Date.now() - debutRedaction) / 1000)}s`);
+      } catch (error) {
+        throw new Error(`Erreur rédaction : ${error.message}`);
+      }
+      
+      // Étape 4 : Appliquer le style conversationnel (optionnel)
+      const articleFactuel = await this.trouverDernierArticleFactuel();
+      
+      if (articleFactuel) {
+        console.log(`   🗣️ Application du style conversationnel...`);
+        try {
+          await execPromise(`node ${CONFIG.AGENTS.styleConversationnel} "${articleFactuel}"`);
+          console.log(`   ✅ Style conversationnel appliqué`);
+        } catch (error) {
+          console.log(`   ⚠️ Style conversationnel échoué (non bloquant)`);
+        }
+      }
+      
+      // Étape 5 : Récupérer et formater l'article final
+      const articleFinal = await this.recupererEtFormaterArticle(sujet, numero);
+      
+      if (articleFinal) {
+        this.resultats.articles.push({
+          sujet: sujet.titre,
+          category: sujet.category,
+          fichier: articleFinal.fichier,
+          chemin: articleFinal.chemin,
+          duree: Math.round((Date.now() - debutVeille) / 1000)
+        });
+        this.resultats.reussis++;
+        
+        console.log(`   ✅ Article complété en ${Math.round((Date.now() - debutVeille) / 1000)}s total`);
+      }
+      
+      return true;
+      
+    } catch (error) {
+      console.log(`   ❌ Échec : ${error.message}`);
+      this.resultats.echecs++;
+      this.resultats.erreurs.push({
+        sujet: sujet.titre,
+        erreur: error.message
+      });
+      return false;
+    }
+  }
+
+  /**
+   * Trouver le corpus créé pour un sujet
+   */
+  async trouverDernierCorpus(titreSujet) {
+    const date = new Date().toISOString().split('T')[0];
+    const corpusDir = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.corpus, date);
+    
+    try {
+      const dossiers = await fs.readdir(corpusDir);
+      
+      // Créer un slug du titre pour la recherche
+      const titreSanitize = titreSujet.toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .substring(0, 50);
+      
+      // Chercher un dossier qui correspond
+      const dossierTrouve = dossiers.find(d => {
+        const dLower = d.toLowerCase();
+        // Chercher par mots clés du titre
+        const motsCles = titreSanitize.split('-').filter(m => m.length > 3);
+        return motsCles.some(mot => dLower.includes(mot));
+      });
+      
+      if (dossierTrouve) {
+        return path.join(corpusDir, dossierTrouve);
+      }
+      
+      // Si pas trouvé, prendre le plus récent
+      if (dossiers.length > 0) {
+        const dernierDossier = dossiers.sort().pop();
+        return path.join(corpusDir, dernierDossier);
+      }
+      
+    } catch (error) {
+      console.log('   ⚠️ Erreur recherche corpus :', error.message);
+    }
+    
+    return null;
+  }
+
+  /**
+   * Trouver le dernier article factuel généré
+   */
+  async trouverDernierArticleFactuel() {
+    const factuelDir = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.factuels);
+    
+    try {
+      const fichiers = await fs.readdir(factuelDir);
+      const articles = fichiers.filter(f => f.endsWith('.md'));
+      
+      if (articles.length > 0) {
+        const dernier = articles.sort().pop();
+        return path.join(factuelDir, dernier);
+      }
+    } catch (error) {
+      console.log('   ⚠️ Article factuel non trouvé');
+    }
+    
+    return null;
+  }
+
+  /**
+   * Récupérer et formater l'article final
+   */
+  async recupererEtFormaterArticle(sujet, numero) {
+    try {
+      // Chercher dans les articles finaux
+      const finauxDir = path.join(CONFIG.STRUCTURE.base, CONFIG.STRUCTURE.finaux);
+      const fichiers = await fs.readdir(finauxDir);
+      
+      const articles = fichiers.filter(f => f.endsWith('.md'));
+      if (articles.length === 0) return null;
+      
+      // Prendre le plus récent
+      const dernierArticle = articles.sort().pop();
+      const cheminArticle = path.join(finauxDir, dernierArticle);
+      
+      // Lire le contenu
+      let contenu = await fs.readFile(cheminArticle, 'utf-8');
+      
+      // Corriger l'encodage
+      contenu = this.corrigerEncodage(contenu);
+      
+      // Ajouter/corriger le frontmatter
+      contenu = this.ajouterFrontmatter(contenu, sujet);
+      
+      // Créer le nom final
+      const date = new Date().toISOString().split('T')[0];
+      const slug = sujet.titre.toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .substring(0, 60);
+      
+      const nomFinal = `${date}-${String(numero).padStart(2, '0')}-${slug}.md`;
+      
+      // Sauvegarder dans le dossier de staging
+      const stagingDir = path.join(CONFIG.STRUCTURE.base, 'articles-batch-v5-ready');
+      await fs.mkdir(stagingDir, { recursive: true });
+      
+      const cheminFinal = path.join(stagingDir, nomFinal);
+      await fs.writeFile(cheminFinal, contenu, 'utf-8');
+      
+      console.log(`   📄 Article formaté : ${nomFinal}`);
+      
+      return {
+        fichier: nomFinal,
+        chemin: cheminFinal
+      };
+      
+    } catch (error) {
+      console.log('   ⚠️ Erreur formatage article :', error.message);
+      return null;
+    }
+  }
+
+  corrigerEncodage(texte) {
+    const replacements = {
+      'Ã©': 'é', 'Ã¨': 'è', 'Ã ': 'à', 'Ã¢': 'â', 'Ãª': 'ê',
+      'Ã´': 'ô', 'Ã¹': 'ù', 'Ã»': 'û', 'Ã§': 'ç', 'Ã®': 'î',
+      'Ã¯': 'ï', 'Å"': 'œ', 'Ã‰': 'É', 'Ãˆ': 'È', 'Ã€': 'À',
+      'â€™': "'", 'â€œ': '"', 'â€': '"', 'â€¦': '...',
+      'â€"': '—', 'â€"': '–', 'â„¢': '™', 'Â©': '©'
+    };
+    
+    let fixed = texte;
+    for (const [bad, good] of Object.entries(replacements)) {
+      fixed = fixed.replace(new RegExp(bad, 'g'), good);
+    }
+    return fixed;
+  }
+
+  ajouterFrontmatter(contenu, sujet) {
+    // Supprimer l'ancien frontmatter s'il existe
+    contenu = contenu.replace(/^---[\s\S]*?---\n*/m, '');
+    
+    // Extraire le titre du contenu
+    const titleMatch = contenu.match(/^#\s+(.+)$/m);
+    const title = titleMatch ? titleMatch[1] : sujet.titre;
+    
+    // Calculer le temps de lecture
+    const wordCount = contenu.split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 250);
+    
+    // Générer la description
+    const description = sujet.angle.substring(0, 150) + '...';
+    
+    // Déterminer l'emoji selon la catégorie
+    const emojis = {
+      'actualites': '🚀',
+      'guides': '📚',
+      'analyses': '📊'
+    };
+    
+    const date = new Date().toISOString().split('T')[0];
+    
+    // Créer le frontmatter
+    const frontmatter = `---
+title: "${title}"
+description: "${description}"
+pubDate: ${date}
+author: "L'équipe Prizm AI"
+emoji: "${emojis[sujet.category] || '💡'}"
+category: "${sujet.category}"
+featured: ${this.resultats.reussis < 3 ? 'true' : 'false'}
+readingTime: "${readingTime} min"
+---
+
+`;
+    
+    return frontmatter + contenu;
+  }
+
+  /**
+   * Exécuter le batch complet
+   */
+  async executer() {
+    try {
+      await this.initialiser();
+      
+      // Traiter chaque sujet
+      for (let i = 0; i < SUJETS_BATCH.length; i++) {
+        const sujet = SUJETS_BATCH[i];
+        const numero = i + 1;
+        
+        // Générer l'article
+        await this.genererArticlePourSujet(sujet, numero);
+        
+        // Pause entre les articles (sauf pour le dernier)
+        if (i < SUJETS_BATCH.length - 1) {
+          const pauseSeconds = CONFIG.BATCH.pauseEntreSujets / 1000;
+          console.log(`\n   ⏸️ Pause de ${pauseSeconds}s avant le prochain article...`);
+          await new Promise(resolve => setTimeout(resolve, CONFIG.BATCH.pauseEntreSujets));
+        }
+      }
+      
+      // Rapport final
+      await this.genererRapport();
+      
+      return this.resultats;
+      
+    } catch (error) {
+      console.error('\n❌ ERREUR PIPELINE BATCH :', error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Générer le rapport final et le script de publication
+   */
+  async genererRapport() {
+    const dureeTotal = Math.round((Date.now() - this.startTime) / 1000 / 60);
+    
+    console.log(`
+╔════════════════════════════════════════════════════════╗
+║              BATCH V5 TERMINÉ                          ║
+╚════════════════════════════════════════════════════════╝
+
+📊 RÉSUMÉ DE LA SESSION ${this.sessionId}
+────────────────────────────────────────────────────────
+⏱️ Durée totale : ${dureeTotal} minutes
+✅ Articles réussis : ${this.resultats.reussis}/${this.resultats.total}
+❌ Échecs : ${this.resultats.echecs}
+`);
+
+    if (this.resultats.reussis > 0) {
+      console.log('\n📄 ARTICLES GÉNÉRÉS :');
+      
+      // Grouper par catégorie
+      const parCategorie = {};
+      this.resultats.articles.forEach(article => {
+        if (!parCategorie[article.category]) {
+          parCategorie[article.category] = [];
+        }
+        parCategorie[article.category].push(article);
+      });
+      
+      for (const [category, articles] of Object.entries(parCategorie)) {
+        console.log(`\n   ${category.toUpperCase()} (${articles.length}) :`);
+        articles.forEach((article, i) => {
+          console.log(`   ${i + 1}. ${article.sujet}`);
+          console.log(`      📁 ${article.fichier}`);
+          console.log(`      ⏱️ ${article.duree}s`);
+        });
+      }
+    }
+
+    if (this.resultats.echecs > 0) {
+      console.log('\n⚠️ ERREURS RENCONTRÉES :');
+      this.resultats.erreurs.forEach(err => {
+        console.log(`   - ${err.sujet}`);
+        console.log(`     ${err.erreur}`);
+      });
+    }
+
+    // Sauvegarder le rapport JSON
+    const rapportPath = path.join(
+      CONFIG.STRUCTURE.base,
+      CONFIG.STRUCTURE.rapports,
+      `rapport-${this.sessionId}.json`
+    );
+    
+    await fs.writeFile(
+      rapportPath,
+      JSON.stringify(this.resultats, null, 2),
+      'utf-8'
+    );
+    
+    // Créer un script PowerShell pour publier
+    const scriptPublish = `
+# Script de publication des articles générés - Pipeline V5
+# Session : ${this.sessionId}
+# Date : ${new Date().toLocaleString('fr-FR')}
+
+$source = "${path.resolve(CONFIG.STRUCTURE.base, 'articles-batch-v5-ready')}"
+$dest = "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog"
+
+Write-Host ""
+Write-Host "📚 PUBLICATION DES ARTICLES BATCH V5" -ForegroundColor Cyan
+Write-Host "════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Source : $source" -ForegroundColor Gray
+Write-Host "Destination : $dest" -ForegroundColor Gray
+Write-Host ""
+
+$files = Get-ChildItem -Path $source -Filter "*.md"
+$count = $files.Count
+
+Write-Host "📊 $count articles à copier" -ForegroundColor Yellow
+Write-Host ""
+
+$copied = 0
+foreach ($file in $files) {
+    try {
+        Copy-Item $file.FullName -Destination $dest -Force
+        $copied++
+        Write-Host "  ✅ $($file.Name)" -ForegroundColor Green
+    } catch {
+        Write-Host "  ❌ Erreur avec $($file.Name): $_" -ForegroundColor Red
+    }
+}
+
+Write-Host ""
+Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "✨ Terminé ! $copied/$count articles copiés." -ForegroundColor Green
+Write-Host ""
+Write-Host "Prochaines étapes :" -ForegroundColor Yellow
+Write-Host "  1. cd C:\\Users\\Samuel\\Documents\\prizmia" -ForegroundColor White
+Write-Host "  2. npm run dev  # Pour tester localement" -ForegroundColor White
+Write-Host "  3. git add ." -ForegroundColor White
+Write-Host "  4. git commit -m 'Ajout de $copied articles - Batch V5'" -ForegroundColor White
+Write-Host "  5. git push" -ForegroundColor White
+Write-Host ""
+`;
+
+    const scriptPath = path.join(CONFIG.STRUCTURE.base, 'articles-batch-v5-ready', 'publish-to-blog.ps1');
+    await fs.writeFile(scriptPath, scriptPublish, 'utf-8');
+    
+    console.log(`
+📋 PROCHAINES ÉTAPES
+────────────────────────────────────────────────────────
+1. Vérifier les articles :
+   cd output/articles-batch-v5-ready
+   dir *.md
+   
+2. Publier avec PowerShell :
+   .\\publish-to-blog.ps1
+   
+3. Tester localement :
+   cd C:\\Users\\Samuel\\Documents\\prizmia
+   npm run dev
+   # Ouvrir http://localhost:4321
+   
+4. Déployer :
+   git add .
+   git commit -m "Ajout de ${this.resultats.reussis} articles - Pipeline V5 Batch"
+   git push
+
+💾 Rapport sauvegardé : ${rapportPath}
+📜 Script de publication : publish-to-blog.ps1
+
+✨ Pipeline V5 Batch terminé avec succès !
+`);
+  }
+}
+
+// === POINT D'ENTRÉE ===
+async function main() {
+  const args = process.argv.slice(2);
+  
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`
+🚀 Pipeline V5 Batch - Prizm AI
+================================
+
+Génère des articles en mode DIRIGÉ avec trois options possibles.
+
+Usage :
+  node pipeline-v5-batch.cjs [options]              # Sujets prédéfinis
+  node pipeline-v5-batch.cjs --single [params]      # Un seul sujet
+  node pipeline-v5-batch.cjs --file <fichier.json>  # Liste depuis fichier
+
+Options générales :
+  --test       Mode test (génère seulement 2 articles)
+  --rapide     Pauses réduites (10s au lieu de 20s)
+  --help, -h   Affiche cette aide
+
+Mode SINGLE (un seul sujet) :
+  --single     Active le mode sujet unique
+  --titre      Titre du sujet (obligatoire)
+  --category   actualites|guides|analyses (défaut: actualites)
+  --angle      Angle éditorial (optionnel)
+  --keywords   Mots-clés séparés par virgules (optionnel)
+
+Mode FILE (liste depuis fichier) :
+  --file       Chemin vers un fichier JSON contenant les sujets
+
+Exemples :
+  # Utiliser les 10 sujets prédéfinis
+  node pipeline-v5-batch.cjs
+  
+  # Générer un seul article sur un sujet spécifique
+  node pipeline-v5-batch.cjs --single \\
+    --titre "L'IA dans le e-commerce en 2025" \\
+    --category "guides" \\
+    --angle "Solutions pratiques pour boutiques en ligne"
+  
+  # Utiliser une liste personnalisée
+  node pipeline-v5-batch.cjs --file mes-sujets.json
+  
+  # Mode test avec sujets prédéfinis
+  node pipeline-v5-batch.cjs --test
+
+Format du fichier JSON :
+[
+  {
+    "titre": "Titre du sujet",
+    "category": "actualites",
+    "angle": "Angle éditorial",
+    "keywords": "mot1, mot2, mot3"
+  },
+  ...
+]
+
+Durée estimée : 
+  - Un sujet : ~2-3 minutes
+  - 10 sujets : ~30-40 minutes
+    `);
+    process.exit(0);
+  }
+  
+  const pipeline = new PipelineV5Batch();
+  
+  try {
+    let sujetsATraiter = SUJETS_BATCH;
+    
+    // Mode SINGLE : un seul sujet depuis la ligne de commande
+    if (args.includes('--single')) {
+      const titreIndex = args.findIndex(a => a === '--titre');
+      if (titreIndex === -1 || !args[titreIndex + 1]) {
+        console.error('❌ Le mode --single nécessite un --titre');
+        process.exit(1);
+      }
+      
+      const sujetUnique = {
+        titre: args[titreIndex + 1],
+        category: 'actualites',
+        angle: 'Analyse pratique pour PME/ETI',
+        keywords: 'PME, ETI, France, transformation digitale'
+      };
+      
+      // Paramètres optionnels
+      const categoryIndex = args.findIndex(a => a === '--category');
+      if (categoryIndex !== -1 && args[categoryIndex + 1]) {
+        sujetUnique.category = args[categoryIndex + 1];
+      }
+      
+      const angleIndex = args.findIndex(a => a === '--angle');
+      if (angleIndex !== -1 && args[angleIndex + 1]) {
+        sujetUnique.angle = args[angleIndex + 1];
+      }
+      
+      const keywordsIndex = args.findIndex(a => a === '--keywords');
+      if (keywordsIndex !== -1 && args[keywordsIndex + 1]) {
+        sujetUnique.keywords = args[keywordsIndex + 1];
+      }
+      
+      sujetsATraiter = [sujetUnique];
+      console.log('\n📝 MODE SINGLE : Un seul article');
+      console.log(`   Sujet : ${sujetUnique.titre}`);
+      console.log(`   Catégorie : ${sujetUnique.category}\n`);
+    }
+    
+    // Mode FILE : charger depuis un fichier JSON
+    else if (args.includes('--file')) {
+      const fileIndex = args.findIndex(a => a === '--file');
+      if (fileIndex === -1 || !args[fileIndex + 1]) {
+        console.error('❌ Le mode --file nécessite un nom de fichier');
+        process.exit(1);
+      }
+      
+      const filepath = args[fileIndex + 1];
+      try {
+        const fileContent = await fs.readFile(filepath, 'utf-8');
+        sujetsATraiter = JSON.parse(fileContent);
+        
+        // Validation basique
+        if (!Array.isArray(sujetsATraiter) || sujetsATraiter.length === 0) {
+          throw new Error('Le fichier doit contenir un tableau de sujets');
+        }
+        
+        // Vérifier que chaque sujet a au moins un titre
+        sujetsATraiter.forEach((s, i) => {
+          if (!s.titre) {
+            throw new Error(`Le sujet ${i + 1} n'a pas de titre`);
+          }
+          // Ajouter les valeurs par défaut si manquantes
+          s.category = s.category || 'actualites';
+          s.angle = s.angle || 'Analyse pratique pour PME/ETI';
+          s.keywords = s.keywords || 'PME, ETI, France';
+        });
+        
+        console.log(`\n📄 MODE FILE : ${sujetsATraiter.length} sujets chargés depuis ${filepath}\n`);
+        
+      } catch (error) {
+        console.error(`❌ Erreur lecture fichier : ${error.message}`);
+        process.exit(1);
+      }
+    }
+    
+    // Mode test : limiter le nombre de sujets
+    if (args.includes('--test')) {
+      const nbTest = Math.min(2, sujetsATraiter.length);
+      sujetsATraiter = sujetsATraiter.slice(0, nbTest);
+      console.log(`\n⚠️ MODE TEST : ${nbTest} articles seulement\n`);
+    }
+    
+    // Mode rapide : pauses réduites
+    if (args.includes('--rapide')) {
+      CONFIG.BATCH.pauseEntreSujets = 10000;
+      console.log('\n⚡ MODE RAPIDE : Pauses réduites\n');
+    }
+    
+    // Remplacer SUJETS_BATCH par les sujets à traiter
+    SUJETS_BATCH.length = 0;
+    SUJETS_BATCH.push(...sujetsATraiter);
+    
+    console.time('⏱️ Durée totale du batch');
+    await pipeline.executer();
+    console.timeEnd('⏱️ Durée totale du batch');
+    
+    process.exit(0);
+    
+  } catch (error) {
+    console.error('\n💥 Batch échoué :', error.message);
+    console.error(error.stack);
+    process.exit(1);
+  }
+}
+
+// Lancer si exécuté directement
+if (require.main === module) {
+  main();
+}

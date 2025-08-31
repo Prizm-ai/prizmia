@@ -1,0 +1,506 @@
+{
+  "articlesFinaux": [
+    {
+      "filename": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\05-articles-finaux\\2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 628,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA dans votre PME : pourquoi 87% des entreprises comme la vôtre passent encore à côté ?",
+      "category": "guides",
+      "lastModified": "2025-08-12"
+    },
+    {
+      "filename": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\05-articles-finaux\\2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 605,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA générative peut-elle vraiment booster votre productivité ? Voici ce que disent les chiffres",
+      "category": "guides",
+      "lastModified": "2025-08-15"
+    },
+    {
+      "filename": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\05-articles-finaux\\2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "size": "9 KB",
+      "wordCount": 1169,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "IA générative et productivité : opportunités concrètes pour PME/ETI",
+      "category": "analyses",
+      "lastModified": "2025-08-15"
+    },
+    {
+      "filename": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\05-articles-finaux\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 616,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA générative en PME : comment gagner vraiment en productivité ?",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\05-articles-finaux\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "size": "9 KB",
+      "wordCount": 1160,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "IA générative et productivité : opportunités concrètes pour PME/ETI",
+      "category": "analyses",
+      "lastModified": "2025-08-16"
+    }
+  ],
+  "articlesConversationnels": [
+    {
+      "filename": "2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final-rapport-style.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final-rapport-style.md",
+      "size": "0 KB",
+      "wordCount": 60,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation - Agent Style Prizm v2",
+      "category": "actualites",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final.md",
+      "size": "3 KB",
+      "wordCount": 515,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA générative dans les PME françaises : le grand paradoxe de 2024",
+      "category": "guides",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "size": "3 KB",
+      "wordCount": 550,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "87% des PME françaises nutilisent pas encore lIA : pourquoi une telle hésitation ?",
+      "category": "guides",
+      "lastModified": "2025-07-29"
+    },
+    {
+      "filename": "2025-07-29-article.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-29-article.md",
+      "size": "1 KB",
+      "wordCount": 176,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Article Prizm AI",
+      "category": "analyses",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "size": "3 KB",
+      "wordCount": 535,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA en PME : pourquoi 87% des entreprises françaises passent encore à côté ?",
+      "category": "guides",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 600,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA dans votre PME : êtes-vous prêt à franchir le pas ? Le plan Osez lIA peut vous y aider.",
+      "category": "guides",
+      "lastModified": "2025-07-30"
+    },
+    {
+      "filename": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-08-12"
+    },
+    {
+      "filename": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 628,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA dans votre PME : pourquoi 87% des entreprises comme la vôtre passent encore à côté ?",
+      "category": "guides",
+      "lastModified": "2025-08-12"
+    },
+    {
+      "filename": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-08-15"
+    },
+    {
+      "filename": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 605,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LIA générative peut-elle vraiment booster votre productivité ? Voici ce que disent les chiffres",
+      "category": "guides",
+      "lastModified": "2025-08-15"
+    },
+    {
+      "filename": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 656,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Ces PME qui cartonnent avec lIA générative : et si cétait votre tour ?",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel-rapport.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel-rapport.md",
+      "size": "0 KB",
+      "wordCount": 75,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "Rapport doptimisation conversationnelle",
+      "category": "actualites",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\pipelines\\content-generation\\output\\04-articles-conversationnels\\2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel.md",
+      "size": "4 KB",
+      "wordCount": 612,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "LAI Act arrive : êtes-vous prêt à mettre votre PME en conformité ?",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    }
+  ],
+  "articlesPublies": [
+    {
+      "filename": "2025-08-12-manifeste-prizm-ai.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-12-manifeste-prizm-ai.md",
+      "size": "6 KB",
+      "wordCount": 855,
+      "hasEncoding": false,
+      "hasFrontmatter": false,
+      "title": "De spectateurs à acteurs en 6 mois : notre révélation IA",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-adoption-de-l-ia-dans-les-pme-francaises-etat-des-lieux.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-adoption-de-l-ia-dans-les-pme-francaises-etat-des-lieux.md",
+      "size": "13 KB",
+      "wordCount": 1789,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "Adoption de lIA dans les PME françaises : état des lieux 2025",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-automatiser-sa-prospection-commerciale-avec-l-ia-methode-en-.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-automatiser-sa-prospection-commerciale-avec-l-ia-methode-en-.md",
+      "size": "13 KB",
+      "wordCount": 1808,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "Automatiser sa prospection commerciale avec lIA : méthode en 5 étapes",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-chatgpt-pour-les-avocats-cas-d-usage-et-limites.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-chatgpt-pour-les-avocats-cas-d-usage-et-limites.md",
+      "size": "10 KB",
+      "wordCount": 1422,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "ChatGPT pour les avocats : cas dusage et limites",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-creer-du-contenu-marketing-avec-l-ia-workflow-complet-et-out.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-creer-du-contenu-marketing-avec-l-ia-workflow-complet-et-out.md",
+      "size": "12 KB",
+      "wordCount": 1735,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "Créer du contenu marketing avec lIA : workflow complet et outils testés",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-ia-generative-2025-les-outils-indispensables-pour-les-pme-fr.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-ia-generative-2025-les-outils-indispensables-pour-les-pme-fr.md",
+      "size": "13 KB",
+      "wordCount": 1767,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "IA générative 2025 : les outils indispensables pour les PME françaises",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-implementer-chatgpt-dans-votre-service-client-guide-complet.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-implementer-chatgpt-dans-votre-service-client-guide-complet.md",
+      "size": "13 KB",
+      "wordCount": 1771,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "Implémenter ChatGPT dans votre service client : guide complet",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-intelligence-artificielle-et-transformation-digita.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-intelligence-artificielle-et-transformation-digita.md",
+      "size": "10 KB",
+      "wordCount": 1382,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "Intelligence artificielle et transformation digitale des PME",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    },
+    {
+      "filename": "2025-08-16-l-ia-dans-la-comptabilit-automatisation-et-gains-d.md",
+      "path": "C:\\Users\\Samuel\\Documents\\prizmia\\src\\content\\blog\\2025-08-16-l-ia-dans-la-comptabilit-automatisation-et-gains-d.md",
+      "size": "8 KB",
+      "wordCount": 1147,
+      "hasEncoding": false,
+      "hasFrontmatter": true,
+      "title": "LIA dans la comptabilité : automatisation et gains de productivité mesurés",
+      "category": "guides",
+      "lastModified": "2025-08-16"
+    }
+  ],
+  "articlesAPousser": [
+    {
+      "original": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "nouveau": "2025-08-12-lia-dans-votre-pme-pourquoi-87-des-entreprises-comme-la-votr.md",
+      "categorie": "guides",
+      "mots": 628
+    },
+    {
+      "original": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "nouveau": "2025-08-15-lia-generative-peut-elle-vraiment-booster-votre-productivite.md",
+      "categorie": "guides",
+      "mots": 605
+    },
+    {
+      "original": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "nouveau": "2025-08-15-ia-generative-et-productivite-opportunites-concretes-pour-pm.md",
+      "categorie": "analyses",
+      "mots": 1169
+    },
+    {
+      "original": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "nouveau": "2025-08-16-lia-generative-en-pme-comment-gagner-vraiment-en-productivit.md",
+      "categorie": "guides",
+      "mots": 616
+    },
+    {
+      "original": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-factuel.md",
+      "nouveau": "2025-08-16-ia-generative-et-productivite-opportunites-concretes-pour-pm.md",
+      "categorie": "analyses",
+      "mots": 1160
+    },
+    {
+      "original": "2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final-rapport-style.md",
+      "nouveau": "2025-07-30-rapport-doptimisation-agent-style-prizm-v2.md",
+      "categorie": "actualites",
+      "mots": 60
+    },
+    {
+      "original": "2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final.md",
+      "nouveau": "2025-07-30-lia-generative-dans-les-pme-francaises-le-grand-paradoxe-de-.md",
+      "categorie": "guides",
+      "mots": 515
+    },
+    {
+      "original": "2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "nouveau": "2025-07-30-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "nouveau": "2025-07-29-87-des-pme-francaises-nutilisent-pas-encore-lia-pourquoi-une.md",
+      "categorie": "guides",
+      "mots": 550
+    },
+    {
+      "original": "2025-07-29-article.md",
+      "nouveau": "2025-07-30-article-prizm-ai.md",
+      "categorie": "analyses",
+      "mots": 176
+    },
+    {
+      "original": "2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+      "nouveau": "2025-07-30-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+      "nouveau": "2025-07-30-lia-en-pme-pourquoi-87-des-entreprises-francaises-passent-en.md",
+      "categorie": "guides",
+      "mots": 535
+    },
+    {
+      "original": "2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "nouveau": "2025-07-30-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "nouveau": "2025-07-30-lia-dans-votre-pme-etes-vous-pret-a-franchir-le-pas-le-plan-.md",
+      "categorie": "guides",
+      "mots": 600
+    },
+    {
+      "original": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+      "nouveau": "2025-08-12-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+      "nouveau": "2025-08-12-lia-dans-votre-pme-pourquoi-87-des-entreprises-comme-la-votr.md",
+      "categorie": "guides",
+      "mots": 628
+    },
+    {
+      "original": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "nouveau": "2025-08-15-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "nouveau": "2025-08-15-lia-generative-peut-elle-vraiment-booster-votre-productivite.md",
+      "categorie": "guides",
+      "mots": 605
+    },
+    {
+      "original": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+      "nouveau": "2025-08-16-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+      "nouveau": "2025-08-16-ces-pme-qui-cartonnent-avec-lia-generative-et-si-cetait-votr.md",
+      "categorie": "guides",
+      "mots": 656
+    },
+    {
+      "original": "2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel-rapport.md",
+      "nouveau": "2025-08-16-rapport-doptimisation-conversationnelle.md",
+      "categorie": "actualites",
+      "mots": 75
+    },
+    {
+      "original": "2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel.md",
+      "nouveau": "2025-08-16-lai-act-arrive-etes-vous-pret-a-mettre-votre-pme-en-conformi.md",
+      "categorie": "guides",
+      "mots": 612
+    }
+  ],
+  "problemes": [
+    "⚠️ Pas de frontmatter : 2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final-rapport-style.md",
+    "⚠️ Pas de frontmatter : 2025-07-29-2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-final.md",
+    "⚠️ Pas de frontmatter : 2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-07-29-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-07-29-article.md",
+    "⚠️ Pas de frontmatter : 2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-07-30-adoption-et-ma-trise-de-l-ia-g-n-rative-dans-les-p-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-07-30-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-08-12-plan-national-osez-l-ia-acc-l-rer-l-adoption-de-l--conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-08-15-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-08-16-ia-g-n-rative-et-productivit-opportunit-s-concr-te-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel-rapport.md",
+    "⚠️ Pas de frontmatter : 2025-08-16-r-glementation-ia-europ-enne-guide-de-conformit-pr-conversationnel.md",
+    "⚠️ Pas de frontmatter : 2025-08-12-manifeste-prizm-ai.md"
+  ]
+}
