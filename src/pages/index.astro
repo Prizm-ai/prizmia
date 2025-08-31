@@ -9,6 +9,27 @@ import { getCollection } from 'astro:content';
 
 // Recuperer tous les articles du blog
 const allPosts = await getCollection('blog');
+// Fonction pour déterminer l'image à afficher
+function getImagePath(title) {
+  const imageMap = {
+    'manifeste': '/images/blog/manifeste-prizm-ai.jpg',
+    'spectateurs': '/images/blog/manifeste-prizm-ai.jpg',
+    'adoption': '/images/blog/adoption-ia-pme.jfif',
+    'prospection': '/images/blog/prospection-commerciale.jfif',
+    'avocats': '/images/blog/chatgpt-avocat.jfif',
+    'contenu marketing': '/images/blog/contenu-marketing.jfif',
+    'générative': '/images/blog/ia-generative.jfif',
+    'service client': '/images/blog/chatgpt-service-client.jfif'
+  };
+  
+  const titleLower = title ? title.toLowerCase() : '';
+  for (const [keyword, imagePath] of Object.entries(imageMap)) {
+    if (titleLower.includes(keyword)) {
+      return imagePath;
+    }
+  }
+  return null;
+}
 
 // Fonction pour classifier les articles
 function classifyPost(post) {
@@ -133,7 +154,7 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="lessentiel"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1000) / 1500)} min`}
 									emoji={post.data.emoji || "📰"}
-									image={post.data.heroImage}
+									image={getImagePath(post.data.title)}
 									href={`/blog/${post.id}`}
 									featured={index === 0}
 								/>
@@ -189,7 +210,7 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="guides"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1500) / 1500)} min`}
 									emoji={post.data.emoji || "🎯"}
-									image={post.data.heroImage}
+									image={getImagePath(post.data.title)}
 									href={`/blog/${post.id}`}
 								/>
 							))
@@ -244,7 +265,7 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="analyses"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1200) / 1500)} min`}
 									emoji={post.data.emoji || "🔍"}
-									image={post.data.heroImage}
+									image={getImagePath(post.data.title)}
 									href={`/blog/${post.id}`}
 								/>
 							))
