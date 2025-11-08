@@ -12,7 +12,18 @@ const blog = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
+			
+			// ⭐ IMAGES : Toutes les variantes
 			heroImage: image().optional(),
+			image: z.string().optional(),         // ⭐ AJOUTÉ
+			imageUrl: z.string().optional(),      // ⭐ AJOUTÉ : Pour articles générés
+			
+			// ⭐ Autres métadonnées des articles générés
+			author: z.string().optional(),
+			emoji: z.string().optional(),
+			category: z.string().optional(),
+			featured: z.boolean().optional(),
+			readingTime: z.string().optional(),
 		}),
 });
 

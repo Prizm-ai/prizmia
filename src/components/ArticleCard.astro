@@ -1,5 +1,5 @@
 ---
-// ArticleCard V3 - Style Hybride Premium
+// ArticleCard V4 - Hauteurs Uniformes + Responsive
 export interface Props {
   title: string;
   description: string;
@@ -70,18 +70,24 @@ const categoryStyle = getCategoryStyle(category);
 </article>
 
 <style>
+  /* ==========================================================================
+     CARTE PRINCIPALE - Hauteur 100% pour remplir la cellule grid
+     ========================================================================== */
   .article-card {
     background: white;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
+    
+    /* 🎯 CLEF : Remplir toute la hauteur de la cellule grid */
+    height: 100%;
   }
   
+  /* Barre supérieure au survol */
   .article-card::before {
     content: '';
     position: absolute;
@@ -99,15 +105,18 @@ const categoryStyle = getCategoryStyle(category);
     transform: scaleX(1);
   }
   
+  /* Animation survol */
   .article-card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(102,126,234,0.15);
   }
   
+  /* Featured : occupe 2 colonnes sur desktop */
   .article-card.featured {
     grid-column: span 2;
   }
   
+  /* Lien invisible qui remplit toute la carte */
   .card-link {
     text-decoration: none;
     color: inherit;
@@ -116,28 +125,33 @@ const categoryStyle = getCategoryStyle(category);
     height: 100%;
   }
   
+  /* ==========================================================================
+     HEADER - Hauteur UNIFORME pour toutes les cartes
+     ========================================================================== */
   .card-header {
     position: relative;
-    height: 220px;
+    /* 🎯 Hauteur uniforme : 240px pour TOUTES les cartes */
+    height: 240px;
     overflow: hidden;
+    flex-shrink: 0; /* Ne pas rétrécir */
   }
   
-  .featured .card-header {
-    height: 280px;
-  }
-  
+  /* Image hero */
   .card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
   
+  /* Fond dégradé si pas d'image */
   .gradient-bg {
     width: 100%;
     height: 100%;
     position: relative;
   }
   
+  /* Container emoji */
   .emoji-container {
     width: 100%;
     height: 100%;
@@ -148,6 +162,7 @@ const categoryStyle = getCategoryStyle(category);
     backdrop-filter: blur(10px);
   }
   
+  /* Emoji animé */
   .emoji {
     font-size: 80px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
@@ -159,10 +174,7 @@ const categoryStyle = getCategoryStyle(category);
     50% { transform: translateY(-10px); }
   }
   
-  .featured .emoji {
-    font-size: 100px;
-  }
-  
+  /* Badge catégorie flottant */
   .category-float {
     position: absolute;
     top: 20px;
@@ -177,14 +189,18 @@ const categoryStyle = getCategoryStyle(category);
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
   
+  /* ==========================================================================
+     BODY - Flex pour occuper l'espace restant
+     ========================================================================== */
   .card-body {
     padding: 28px;
-    flex: 1;
+    flex: 1; /* 🎯 Occupe tout l'espace restant */
     display: flex;
     flex-direction: column;
     position: relative;
   }
   
+  /* Badge temps de lecture */
   .reading-time-badge {
     display: inline-flex;
     align-items: center;
@@ -199,10 +215,11 @@ const categoryStyle = getCategoryStyle(category);
     width: fit-content;
   }
   
+  /* Titre */
   .card-title {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: var(--font-extrabold);
-    line-height: 1.2;
+    line-height: 1.3;
     margin-bottom: 14px;
     color: #1a202c;
     transition: color 0.3s;
@@ -212,34 +229,34 @@ const categoryStyle = getCategoryStyle(category);
     color: var(--color-primary);
   }
   
-  .featured .card-title {
-    font-size: 28px;
-  }
-  
+  /* Description - Troncature 3 lignes */
   .card-description {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.7;
     color: #64748b;
     margin-bottom: 20px;
-    flex: 1;
+    flex: 1; /* 🎯 Pousse le footer en bas */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
   
+  /* Footer */
   .card-footer {
     padding-top: 20px;
     border-top: 2px solid #f1f5f9;
+    margin-top: auto; /* 🎯 Toujours en bas */
   }
   
+  /* Lien "Découvrir" */
   .read-more {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     color: var(--color-primary);
     font-weight: var(--font-bold);
-    font-size: 15px;
+    font-size: 14px;
     transition: all 0.3s;
     position: relative;
   }
@@ -263,7 +280,9 @@ const categoryStyle = getCategoryStyle(category);
     gap: 16px;
   }
   
-  /* Gradient backgrounds for categories */
+  /* ==========================================================================
+     GRADIENTS POUR CATÉGORIES
+     ========================================================================== */
   .bg-gradient-to-br {
     background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
   }
@@ -278,4 +297,37 @@ const categoryStyle = getCategoryStyle(category);
   .to-red-600 { --tw-gradient-to: #dc2626; }
   .from-gray-400 { --tw-gradient-from: #9ca3af; }
   .to-gray-600 { --tw-gradient-to: #4b5563; }
+  
+  /* ==========================================================================
+     RESPONSIVE - Mobile garde hauteurs naturelles
+     ========================================================================== */
+  @media (max-width: 767px) {
+    /* Mobile : header plus petit */
+    .card-header {
+      height: 200px;
+    }
+    
+    /* Titre plus petit */
+    .card-title {
+      font-size: 20px;
+    }
+    
+    /* Description plus compacte */
+    .card-description {
+      font-size: 14px;
+      -webkit-line-clamp: 2;
+    }
+    
+    /* Padding réduit */
+    .card-body {
+      padding: 20px;
+    }
+  }
+  
+  /* Tablette */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .card-title {
+      font-size: 21px;
+    }
+  }
 </style>

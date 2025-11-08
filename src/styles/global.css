@@ -1,17 +1,15 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+  PRIZM AI - SYSTÈME DE DESIGN UNIFIÉ v2
+  Refactorisation complète pour responsive design optimal
+  Date : 8 novembre 2025
+*/
 
-/* ========================================
-   SYSTÈME DE DESIGN UNIFIÉ - PRIZM AI
-   ======================================== */
+/* ==========================================================================
+   VARIABLES CSS - Système de design tokens
+   ========================================================================== */
 
 :root {
-  /* ========================================
-     COULEURS EXISTANTES (on les garde)
-     ======================================== */
+  /* Couleurs principales */
   --accent: #667eea;
   --accent-dark: #764ba2;
   --black: 15, 18, 25;
@@ -20,10 +18,6 @@
   --gray-dark: 34, 41, 57;
   --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
-  
-  /* ========================================
-     NOUVELLES COULEURS PRIZM AI
-     ======================================== */
   
   /* Alias pour cohérence */
   --color-primary: var(--accent);
@@ -36,16 +30,12 @@
   --color-analyses: #8b5cf6;
   --color-outils: #f59e0b;
   
-  /* Dégradés Prizm */
+  /* Dégradés */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-hero: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(240,147,251,0.05) 100%);
   --gradient-card: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(240,147,251,0.1) 100%);
   
-  /* ========================================
-     TYPOGRAPHIE UNIFIÉE
-     ======================================== */
-  
-  /* Tailles cohérentes */
+  /* Typographie */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -56,17 +46,14 @@
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
   
-  /* Poids */
+  /* Poids de police */
   --font-normal: 400;
   --font-medium: 500;
   --font-semibold: 600;
   --font-bold: 700;
   --font-extrabold: 800;
   
-  /* ========================================
-     ESPACEMENTS COHÉRENTS
-     ======================================== */
-  
+  /* Espacements */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -78,10 +65,7 @@
   --space-12: 3rem;
   --space-16: 4rem;
   
-  /* ========================================
-     BORDURES & OMBRES
-     ======================================== */
-  
+  /* Bordures & Rayons */
   --radius-sm: 0.125rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
@@ -90,7 +74,7 @@
   --radius-3xl: 1.5rem;
   --radius-full: 9999px;
   
-  /* Ombres améliorées */
+  /* Ombres */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -98,18 +82,15 @@
   --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
   --shadow-card-hover: 0 20px 40px rgba(102, 126, 234, 0.15);
   
-  /* ========================================
-     TRANSITIONS
-     ======================================== */
-  
+  /* Transitions */
   --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-colors: color, background-color, border-color 0.3s ease;
   --transition-transform: transform 0.3s ease;
 }
 
-/* ========================================
-   POLICES (on garde Atkinson)
-   ======================================== */
+/* ==========================================================================
+   POLICES (Atkinson)
+   ========================================================================== */
 
 @font-face {
 	font-family: "Atkinson";
@@ -127,9 +108,13 @@
 	font-display: swap;
 }
 
-/* ========================================
-   STYLES DE BASE (améliorés)
-   ======================================== */
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+
+* {
+	box-sizing: border-box;
+}
 
 body {
 	font-family: "Atkinson", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -141,22 +126,67 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 18px; /* On garde une taille lisible */
+	font-size: 18px;
 	line-height: 1.7;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   MAIN - PAS DE LARGEUR PAR DÉFAUT (Best Practice)
+   ========================================================================== */
+
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	/* ❌ SUPPRIMÉ : width: 720px; */
+	/* Chaque page/layout choisit son propre container */
+	min-height: 60vh;
 }
 
-/* ========================================
-   TYPOGRAPHIE (tailles cohérentes)
-   ======================================== */
+/* ==========================================================================
+   SYSTÈME DE CONTAINERS RESPONSIVE (Mobile-First)
+   ========================================================================== */
+
+/* Container étroit - Articles, About, Contact */
+.container-narrow {
+	width: 100%;
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 3rem 1.5rem;
+}
+
+/* Container moyen - Pages standards */
+.container-medium {
+	width: 100%;
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 3rem 1.5rem;
+}
+
+/* Container large - Blog listing, Galleries */
+.container-wide {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 3rem 1.5rem;
+}
+
+/* Container très large - Landing pages */
+.container-full {
+	width: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 3rem 1.5rem;
+}
+
+/* Container sans limite - Full-width sections */
+.container-fluid {
+	width: 100%;
+	padding: 3rem 1.5rem;
+}
+
+/* ==========================================================================
+   TYPOGRAPHIE
+   ========================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
@@ -196,10 +226,6 @@ h6 {
 	font-weight: var(--font-medium);
 }
 
-/* ========================================
-   ÉLÉMENTS DE BASE
-   ======================================== */
-
 strong, b {
 	font-weight: var(--font-bold);
 }
@@ -225,7 +251,11 @@ p {
 	line-height: 1.8;
 }
 
-textarea {
+/* ==========================================================================
+   ÉLÉMENTS DE FORMULAIRE
+   ========================================================================== */
+
+textarea, input {
 	width: 100%;
 	font-size: 16px;
 	font-family: inherit;
@@ -235,35 +265,46 @@ textarea {
 	transition: var(--transition-colors);
 }
 
-textarea:focus {
+textarea:focus, input:focus {
 	outline: none;
 	border-color: var(--color-primary);
 }
 
-input {
-	font-size: 16px;
-	font-family: inherit;
-	border-radius: var(--radius-lg);
-	border: 2px solid rgb(var(--gray-light));
-	padding: var(--space-2) var(--space-3);
-	transition: var(--transition-colors);
-}
-
-input:focus {
-	outline: none;
-	border-color: var(--color-primary);
-}
+/* ==========================================================================
+   TABLEAUX
+   ========================================================================== */
 
 table {
 	width: 100%;
 	border-collapse: collapse;
+	margin: var(--space-8) 0;
 }
+
+table th {
+	background: rgb(var(--gray-light));
+	padding: var(--space-3);
+	text-align: left;
+	font-weight: var(--font-semibold);
+}
+
+table td {
+	padding: var(--space-3);
+	border-bottom: 1px solid rgb(var(--gray-light));
+}
+
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
 
 img {
 	max-width: 100%;
 	height: auto;
 	border-radius: var(--radius-lg);
 }
+
+/* ==========================================================================
+   CODE & PRE
+   ========================================================================== */
 
 code {
 	padding: 2px 5px;
@@ -279,6 +320,7 @@ pre {
 	background-color: rgb(var(--black));
 	color: rgb(var(--gray-light));
 	overflow-x: auto;
+	margin: var(--space-8) 0;
 }
 
 pre > code {
@@ -286,6 +328,10 @@ pre > code {
 	color: inherit;
 	font-size: 0.875rem;
 }
+
+/* ==========================================================================
+   BLOCKQUOTE
+   ========================================================================== */
 
 blockquote {
 	border-left: 4px solid var(--color-primary);
@@ -298,15 +344,19 @@ blockquote {
 	padding: var(--space-4);
 }
 
+/* ==========================================================================
+   SÉPARATEUR
+   ========================================================================== */
+
 hr {
 	border: none;
 	border-top: 2px solid rgb(var(--gray-light));
 	margin: var(--space-8) 0;
 }
 
-/* ========================================
+/* ==========================================================================
    COMPOSANTS RÉUTILISABLES
-   ======================================== */
+   ========================================================================== */
 
 /* Boutons */
 button, .btn {
@@ -344,26 +394,22 @@ button, .btn {
 	box-shadow: var(--shadow-xl);
 }
 
-/* Container */
-.container {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 var(--space-4);
-}
-
-/* ========================================
+/* ==========================================================================
    CLASSES UTILITAIRES
-   ======================================== */
+   ========================================================================== */
 
+/* Texte */
 .text-primary { color: var(--color-primary); }
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
+/* Poids de police */
 .font-bold { font-weight: var(--font-bold); }
 .font-semibold { font-weight: var(--font-semibold); }
 .font-medium { font-weight: var(--font-medium); }
 
+/* Marges */
 .mt-1 { margin-top: var(--space-1); }
 .mt-2 { margin-top: var(--space-2); }
 .mt-4 { margin-top: var(--space-4); }
@@ -376,23 +422,48 @@ button, .btn {
 .mb-6 { margin-bottom: var(--space-6); }
 .mb-8 { margin-bottom: var(--space-8); }
 
+/* Padding */
 .p-1 { padding: var(--space-1); }
 .p-2 { padding: var(--space-2); }
 .p-4 { padding: var(--space-4); }
 .p-6 { padding: var(--space-6); }
 .p-8 { padding: var(--space-8); }
 
-/* ========================================
-   RESPONSIVE
-   ======================================== */
+/* ==========================================================================
+   RESPONSIVE (Mobile-First)
+   ========================================================================== */
 
-@media (max-width: 720px) {
+/* Mobile (< 768px) - Styles par défaut ci-dessus */
+
+/* Tablette (768px - 1024px) */
+@media (min-width: 768px) {
 	body {
-		font-size: 16px;
+		font-size: 18px;
 	}
 	
-	main {
-		padding: 1em;
+	h1 {
+		font-size: var(--text-5xl);
+	}
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1024px) {
+	body {
+		font-size: 20px;
+	}
+	
+	.container-narrow,
+	.container-medium,
+	.container-wide,
+	.container-full {
+		padding: 3rem 2rem;
+	}
+}
+
+/* Mobile spécifique (< 768px) */
+@media (max-width: 767px) {
+	body {
+		font-size: 16px;
 	}
 	
 	h1 {
@@ -407,14 +478,21 @@ button, .btn {
 		font-size: var(--text-xl);
 	}
 	
+	.container-narrow,
+	.container-medium,
+	.container-wide,
+	.container-full {
+		padding: 2rem 1rem;
+	}
+	
 	blockquote {
 		padding: var(--space-3);
 	}
 }
 
-/* ========================================
-   CLASSES SPÉCIFIQUES (existantes)
-   ======================================== */
+/* ==========================================================================
+   ACCESSIBILITÉ
+   ========================================================================== */
 
 .sr-only {
 	border: 0;
@@ -430,9 +508,15 @@ button, .btn {
 	white-space: nowrap;
 }
 
-/* ========================================
-   ANIMATIONS GLOBALES
-   ======================================== */
+/* Focus visible pour navigation clavier */
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
 
 @keyframes fadeIn {
 	from {
@@ -456,4 +540,28 @@ button, .btn {
 
 .animate-fade-in {
 	animation: fadeIn 0.5s ease-out;
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+	body {
+		background: white;
+		font-size: 12pt;
+	}
+	
+	.no-print {
+		display: none !important;
+	}
+	
+	a {
+		text-decoration: underline;
+	}
+	
+	pre {
+		border: 1px solid #000;
+		page-break-inside: avoid;
+	}
 }

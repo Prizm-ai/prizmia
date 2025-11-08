@@ -4,28 +4,49 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
-export interface Props {
-  content: {
-    title: string;
-    description: string;
-    pubDate?: string;
-    updatedDate?: string;
-    heroImage?: string;
-    imageUrl?: string;  // Nouvelle prop pour URL d'image directe
-    emoji?: string;
-  };
-}
+// ⭐ ROBUSTE : Gère toutes les façons dont Astro peut passer les props
+const propsData = Astro.props.data || Astro.props.content?.data || Astro.props.content || Astro.props;
 
-const {
-  content: { title, description, pubDate, updatedDate, heroImage, imageUrl, emoji = "📰" },
-} = Astro.props;
+const title = propsData.title;
+const description = propsData.description;
+const pubDate = propsData.pubDate;
+const updatedDate = propsData.updatedDate;
+const heroImage = propsData.heroImage;
+const imageUrl = propsData.imageUrl;
+const image = propsData.image;
+const emoji = propsData.emoji || "📰";
 
-// Fonction pour déterminer l'image à afficher
-function getImagePath(title, imageUrl) {
-  // Si une imageUrl est fournie, l'utiliser
-  if (imageUrl) return imageUrl;
+// ⭐ DEBUG : Afficher ce qui est reçu
+console.log('=== DEBUG BLOGPOST LAYOUT ===');
+console.log('Astro.props:', Object.keys(Astro.props));
+console.log('propsData keys:', Object.keys(propsData));
+console.log('imageUrl:', imageUrl);
+console.log('heroImage:', heroImage);
+console.log('image:', image);
+console.log('=============================');
+
+// ⭐ FONCTION CORRIGÉE : Lit TOUTES les propriétés d'image dans l'ordre de priorité
+function getImagePath(title, imageUrl, heroImage, image) {
+  // 1. Priorité absolue : imageUrl (propriété explicite pour les articles générés)
+  if (imageUrl) {
+    console.log('✅ Image trouvée via imageUrl:', imageUrl);
+    return imageUrl;
+  }
   
-  // Mapping des titres vers les images
+  // 2. Ensuite : heroImage (propriété Astro standard)
+  if (heroImage) {
+    console.log('✅ Image trouvée via heroImage:', heroImage);
+    return heroImage;
+  }
+  
+  // 3. Ensuite : image (autre propriété standard)
+  if (image) {
+    console.log('✅ Image trouvée via image:', image);
+    return image;
+  }
+  
+  // 4. Fallback : Mapping manuel SEULEMENT pour les anciens articles
+  console.log('⚠️  Aucune propriété image trouvée, utilisation du mapping manuel');
   const imageMap = {
     'manifeste': '/images/blog/manifeste-prizm-ai.jpg',
     'spectateurs': '/images/blog/manifeste-prizm-ai.jpg',
@@ -35,13 +56,12 @@ function getImagePath(title, imageUrl) {
     'contenu marketing': '/images/blog/contenu-marketing.jfif',
     'générative': '/images/blog/ia-generative.jfif',
     'service client': '/images/blog/chatgpt-service-client.jfif'
-    // Ajoutez ici les futurs articles avec images
   };
   
-  // Chercher si le titre contient un mot-clé
   const titleLower = title ? title.toLowerCase() : '';
   for (const [keyword, imagePath] of Object.entries(imageMap)) {
     if (titleLower.includes(keyword)) {
+      console.log('🔄 Mapping manuel utilisé:', imagePath);
       return imagePath;
     }
   }
@@ -49,25 +69,17 @@ function getImagePath(title, imageUrl) {
   return null;
 }
 
-const imagePath = getImagePath(title, imageUrl);
+const imagePath = getImagePath(title, imageUrl, heroImage, image);
 ---
 
 <html lang="fr">
   <head>
     <BaseHead title={title} description={description} />
     <style>
-      :root {
-        --accent: #667eea;
-        --accent-dark: #764ba2;
-        --gray: #6c757d;
-        --gray-dark: #212529;
-      }
-
-      main {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 3em 1em;
-      }
+      /* ==========================================================================
+         STYLES SPÉCIFIQUES ARTICLE
+         Note: La largeur est gérée par .container-narrow de global.css
+         ========================================================================== */
 
       .hero-image-wrapper {
         width: 100%;
@@ -129,7 +141,7 @@ const imagePath = getImagePath(title, imageUrl);
 
       .date {
         text-align: center;
-        color: var(--gray);
+        color: #6b7280;
         margin-bottom: 2rem;
         font-size: 0.9rem;
       }
@@ -139,7 +151,7 @@ const imagePath = getImagePath(title, imageUrl);
       }
 
       /* Styles pour le contenu */
-      .prose h2 {
+      .prose :global(h2) {
         margin-top: 2.5rem;
         margin-bottom: 1.5rem;
         font-size: 1.8rem;
@@ -149,7 +161,7 @@ const imagePath = getImagePath(title, imageUrl);
         padding-left: 1rem;
       }
 
-      .prose h2:before {
+      .prose :global(h2:before) {
         content: "";
         position: absolute;
         left: 0;
@@ -161,7 +173,7 @@ const imagePath = getImagePath(title, imageUrl);
         border-radius: 2px;
       }
 
-      .prose h3 {
+      .prose :global(h3) {
         margin-top: 2rem;
         margin-bottom: 1rem;
         font-size: 1.4rem;
@@ -169,28 +181,28 @@ const imagePath = getImagePath(title, imageUrl);
         color: #4a5568;
       }
 
-      .prose p {
+      .prose :global(p) {
         margin-bottom: 1.5rem;
         font-size: 1.1rem;
         color: #4a5568;
       }
 
-      .prose ul, .prose ol {
+      .prose :global(ul), .prose :global(ol) {
         margin-bottom: 1.5rem;
         padding-left: 2rem;
       }
 
-      .prose li {
+      .prose :global(li) {
         margin-bottom: 0.5rem;
         font-size: 1.05rem;
         color: #4a5568;
       }
 
-      .prose ul {
+      .prose :global(ul) {
         list-style-type: none;
       }
 
-      .prose ul li:before {
+      .prose :global(ul li:before) {
         content: "▸";
         color: #667eea;
         font-weight: bold;
@@ -199,17 +211,17 @@ const imagePath = getImagePath(title, imageUrl);
         margin-left: -1.5rem;
       }
 
-      .prose ol {
+      .prose :global(ol) {
         counter-reset: list-counter;
         list-style-type: none;
       }
 
-      .prose ol li {
+      .prose :global(ol li) {
         counter-increment: list-counter;
         position: relative;
       }
 
-      .prose ol li:before {
+      .prose :global(ol li:before) {
         content: counter(list-counter) ".";
         color: #667eea;
         font-weight: bold;
@@ -217,7 +229,7 @@ const imagePath = getImagePath(title, imageUrl);
         left: -1.5rem;
       }
 
-      .prose blockquote {
+      .prose :global(blockquote) {
         border-left: 4px solid #667eea;
         padding-left: 1.5rem;
         margin: 2rem 0;
@@ -228,23 +240,23 @@ const imagePath = getImagePath(title, imageUrl);
         border-radius: 0.5rem;
       }
 
-      .prose a {
+      .prose :global(a) {
         color: #667eea;
         text-decoration: none;
         border-bottom: 2px solid transparent;
         transition: border-color 0.3s ease;
       }
 
-      .prose a:hover {
+      .prose :global(a:hover) {
         border-bottom-color: #667eea;
       }
 
-      .prose strong {
+      .prose :global(strong) {
         font-weight: 600;
         color: #2d3748;
       }
 
-      .prose code {
+      .prose :global(code) {
         background: #f7fafc;
         padding: 0.2rem 0.4rem;
         border-radius: 0.25rem;
@@ -253,7 +265,7 @@ const imagePath = getImagePath(title, imageUrl);
         color: #764ba2;
       }
 
-      .prose pre {
+      .prose :global(pre) {
         background: #f7fafc;
         padding: 1.5rem;
         border-radius: 0.5rem;
@@ -262,7 +274,7 @@ const imagePath = getImagePath(title, imageUrl);
         border: 1px solid #e2e8f0;
       }
 
-      .prose pre code {
+      .prose :global(pre code) {
         background: transparent;
         padding: 0;
         color: #2d3748;
@@ -271,9 +283,21 @@ const imagePath = getImagePath(title, imageUrl);
       /* Responsive */
       @media (max-width: 720px) {
         .title { font-size: 2rem; }
-        .prose h2 { font-size: 1.5rem; }
-        .prose h3 { font-size: 1.2rem; }
-        .prose p, .prose li { font-size: 1rem; }
+        .prose :global(h2) { font-size: 1.5rem; }
+        .prose :global(h3) { font-size: 1.2rem; }
+        .prose :global(p), .prose :global(li) { font-size: 1rem; }
+        
+        .hero-image-wrapper {
+          min-height: 250px;
+        }
+        
+        .hero-placeholder {
+          height: 250px;
+        }
+        
+        .emoji {
+          font-size: 3rem;
+        }
       }
 
       /* Animation d'entrée */
@@ -303,7 +327,9 @@ const imagePath = getImagePath(title, imageUrl);
 
   <body>
     <Header />
-    <main>
+    
+    <!-- 🎯 CHANGEMENT CLÉ : Ajout de la classe container-narrow -->
+    <main class="container-narrow">
       <article>
         <div class="prose">
           <h1 class="title">{title}</h1>

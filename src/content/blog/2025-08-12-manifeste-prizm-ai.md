@@ -1,10 +1,11 @@
-﻿---
+---
 title: "De spectateurs à acteurs en 6 mois : notre révélation IA"
 description: "Notre vision pour démocratiser l'IA : accompagner concrètement les PME françaises dans leur transformation digitale avec des solutions pragmatiques et accessibles."
 pubDate: 2025-08-12
 author: "L'équipe Prizm AI"
+imageUrl: /images/blog/manifeste-prizm-ai.jpg
 emoji: "📰"
-category: "analyses"
+category: "lessentiel"
 featured: true
 readingTime: "4 min"
 ---

@@ -12,13 +12,61 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
 	<slot />
 </a>
+
 <style>
+	/* ==========================================================================
+	   HEADER LINK - STYLES NAVIGATION
+	   ========================================================================== */
+	
 	a {
 		display: inline-block;
 		text-decoration: none;
+		color: var(--color-primary);
+		font-size: var(--text-base);
+		font-weight: var(--font-medium);
+		transition: all 0.3s ease;
+		position: relative;
+		padding: 0.5rem 0;
 	}
+
+	/* Effet de soulignement au hover */
+	a::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+		transition: width 0.3s ease;
+	}
+
+	a:hover::after {
+		width: 100%;
+	}
+
+	a:hover {
+		color: var(--color-primary-dark);
+	}
+
+	/* État actif */
 	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
+		font-weight: var(--font-semibold);
+		color: var(--color-primary-dark);
+	}
+
+	a.active::after {
+		width: 100%;
+	}
+
+	/* ==========================================================================
+	   RESPONSIVE
+	   ========================================================================== */
+
+	@media (max-width: 768px) {
+		a {
+			font-size: var(--text-sm);
+			padding: 0.25rem 0;
+		}
 	}
 </style>

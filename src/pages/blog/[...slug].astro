@@ -14,15 +14,10 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await render(post);
 
-// Créer l'objet content sans traiter heroImage
+// ⭐ CORRECTION : Passer TOUTES les données au lieu de filtrer
 const content = {
-  title: post.data.title,
-  description: post.data.description,
-  pubDate: post.data.pubDate,
-  updatedDate: post.data.updatedDate,
-  // NE PAS passer heroImage même si elle existe
-  // heroImage: post.data.heroImage,  // LIGNE SUPPRIMÉE
-  emoji: post.data.emoji || "📰"
+  ...post.data,  // ⭐ Spread toutes les propriétés
+  emoji: post.data.emoji || "📰"  // Valeur par défaut si absente
 };
 ---
 

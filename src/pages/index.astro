@@ -9,27 +9,6 @@ import { getCollection } from 'astro:content';
 
 // Recuperer tous les articles du blog
 const allPosts = await getCollection('blog');
-// Fonction pour déterminer l'image à afficher
-function getImagePath(title) {
-  const imageMap = {
-    'manifeste': '/images/blog/manifeste-prizm-ai.jpg',
-    'spectateurs': '/images/blog/manifeste-prizm-ai.jpg',
-    'adoption': '/images/blog/adoption-ia-pme.jfif',
-    'prospection': '/images/blog/prospection-commerciale.jfif',
-    'avocats': '/images/blog/chatgpt-avocat.jfif',
-    'contenu marketing': '/images/blog/contenu-marketing.jfif',
-    'générative': '/images/blog/ia-generative.jfif',
-    'service client': '/images/blog/chatgpt-service-client.jfif'
-  };
-  
-  const titleLower = title ? title.toLowerCase() : '';
-  for (const [keyword, imagePath] of Object.entries(imageMap)) {
-    if (titleLower.includes(keyword)) {
-      return imagePath;
-    }
-  }
-  return null;
-}
 
 // Fonction pour classifier les articles
 function classifyPost(post) {
@@ -39,7 +18,7 @@ function classifyPost(post) {
   // Si deja classifie, utiliser la categorie existante
   if (post.data.category) return post.data.category;
   
-  // Classification automatique
+  // Classification automatique (fallback)
   if (title.includes('manifeste') || title.includes('vision')) return 'analyses';
   if (title.includes('guide') || title.includes('comment')) return 'guides';
   if (title.includes('outil') || title.includes('template')) return 'outils';
@@ -69,8 +48,8 @@ allPosts.forEach(post => {
 const sortAndLimit = (posts) => {
   return posts
     .sort((a, b) => {
-      const dateA = a.data.date ? new Date(a.data.date) : new Date();
-      const dateB = b.data.date ? new Date(b.data.date) : new Date();
+      const dateA = a.data.pubDate ? new Date(a.data.pubDate) : new Date();
+      const dateB = b.data.pubDate ? new Date(b.data.pubDate) : new Date();
       return dateB.valueOf() - dateA.valueOf();
     })
     .slice(0, 3);
@@ -84,7 +63,11 @@ const analysesLimited = sortAndLimit(analysesPosts);
 <!doctype html>
 <html lang="fr">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- ✅ CORRECTION : Meta description SEO optimisée -->
+		<BaseHead 
+			title="Prizm AI - IA pratique pour PME et ETI françaises"
+			description="Analyses techniques, guides pratiques et outils IA pour les professionnels français. Comprenez et appliquez l'IA dans votre contexte métier."
+		/>
 		<style>
 			html {
 				scroll-behavior: smooth;
@@ -93,17 +76,15 @@ const analysesLimited = sortAndLimit(analysesPosts);
 				transform: translateY(-5px);
 				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 			}
-			.start-here-link:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-				background: var(--color-primary);
-				color: white;
+			.coming-soon-link:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 15px rgba(102,126,234,0.15);
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="container-fluid">
 			<!-- Hero Section -->
 			<section style="background: linear-gradient(to bottom right, rgba(102,126,234,0.05), rgba(240,147,251,0.05)); padding: 6rem 0; text-align: center; position: relative; overflow: hidden;">
 				<div style="position: absolute; top: -50%; right: -25%; width: 800px; height: 800px; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border-radius: 50%; filter: blur(100px);"></div>
@@ -114,24 +95,11 @@ const analysesLimited = sortAndLimit(analysesPosts);
 					<p style="font-size: 1.375rem; color: #4a5568; margin-bottom: 2.5rem;">
 						Analyses pointues et guides pratiques pour les professionnels qui veulent comprendre et appliquer l'IA dans leur contexte
 					</p>
-					<a href="#start-here" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: white; padding: var(--space-4) 2rem; border-radius: var(--radius-xl); text-decoration: none; font-weight: var(--font-semibold); font-size: var(--text-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s;">
-						Commencer ici
+					<!-- ✅ CORRECTION : CTA Hero optimisé - vers section lessentiel -->
+					<a href="#lessentiel" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: white; padding: var(--space-4) 2rem; border-radius: var(--radius-xl); text-decoration: none; font-weight: var(--font-semibold); font-size: var(--text-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s;">
+						Découvrir les articles
 						<span>→</span>
 					</a>
-				</div>
-			</section>
-
-			<!-- Trust Section -->
-			<section style="background: #f8f9fa; padding: 3.75rem 0; text-align: center;">
-				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
-					<p style="font-size: var(--text-lg); color: #6b7280; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: 2px;">Ils nous font confiance</p>
-					<div style="display: flex; justify-content: center; align-items: center; gap: 3.75rem; flex-wrap: wrap; opacity: 0.6; filter: grayscale(100%);">
-						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
-						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
-						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
-						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
-						<div style="width: 120px; height: 40px; background: #ddd; border-radius: 8px;"></div>
-					</div>
 				</div>
 			</section>
 
@@ -154,38 +122,17 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="lessentiel"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1000) / 1500)} min`}
 									emoji={post.data.emoji || "📰"}
-									image={getImagePath(post.data.title)}
+									image={post.data.imageUrl}
 									href={`/blog/${post.id}`}
 									featured={index === 0}
 								/>
 							))
 						) : (
-							<>
-								<ArticleCard 
-									title="RAG vs Fine-tuning : Le match définitif pour vos use cases"
-									description="Analyse comparative avec benchmarks réels sur 5 cas d'usage entreprise."
-									category="lessentiel"
-									readingTime="15 min"
-									emoji="🔬"
-									href="/blog"
-								/>
-								<ArticleCard 
-									title="Template : Grille d'évaluation LLM pour votre entreprise"
-									description="Notre framework testé pour comparer GPT-4, Claude, et Mistral."
-									category="lessentiel"
-									readingTime="5 min"
-									emoji="⚡"
-									href="/blog"
-								/>
-								<ArticleCard 
-									title="Pourquoi 80% des POC IA échouent"
-									description="Les 5 patterns d'échec identifiés sur 100+ projets."
-									category="lessentiel"
-									readingTime="8 min"
-									emoji="📊"
-									href="/blog"
-								/>
-							</>
+							<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: linear-gradient(135deg, rgba(102,126,234,0.05), rgba(240,147,251,0.05)); border-radius: var(--radius-2xl);">
+								<div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+								<h3 style="font-size: var(--text-xl); color: #4a5568; margin-bottom: 0.5rem;">Premiers articles en préparation</h3>
+								<p style="color: #6b7280;">Notre système IA génère du contenu de qualité pour vous.</p>
+							</div>
 						)}
 					</div>
 				</div>
@@ -210,37 +157,16 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="guides"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1500) / 1500)} min`}
 									emoji={post.data.emoji || "🎯"}
-									image={getImagePath(post.data.title)}
+									image={post.data.imageUrl}
 									href={`/blog/${post.id}`}
 								/>
 							))
 						) : (
-							<>
-								<ArticleCard 
-									title="Le guide complet du RAG en production"
-									description="De la théorie à l'implémentation : chunking optimal et patterns éprouvés."
-									category="guides"
-									readingTime="25 min"
-									emoji="🎯"
-									href="/blog"
-								/>
-								<ArticleCard 
-									title="La matrice Build vs Buy pour l'IA"
-									description="Critères objectifs pour choisir entre développement interne et solutions tierces."
-									category="guides"
-									readingTime="12 min"
-									emoji="🛠️"
-									href="/blog"
-								/>
-								<ArticleCard 
-									title="Prompt Engineering : Au-delà des bases"
-									description="Techniques avancées pour maximiser la performance des LLMs."
-									category="guides"
-									readingTime="18 min"
-									emoji="🚀"
-									href="/blog"
-								/>
-							</>
+							<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: white; border-radius: var(--radius-2xl);">
+								<div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
+								<h3 style="font-size: var(--text-xl); color: #4a5568; margin-bottom: 0.5rem;">Guides en préparation</h3>
+								<p style="color: #6b7280;">Des tutoriels pratiques arrivent bientôt.</p>
+							</div>
 						)}
 					</div>
 				</div>
@@ -265,19 +191,16 @@ const analysesLimited = sortAndLimit(analysesPosts);
 									category="analyses"
 									readingTime={post.data.readingTime || `${Math.ceil((post.body?.length || 1200) / 1500)} min`}
 									emoji={post.data.emoji || "🔍"}
-									image={getImagePath(post.data.title)}
+									image={post.data.imageUrl}
 									href={`/blog/${post.id}`}
 								/>
 							))
 						) : (
-							<ArticleCard 
-								title="De spectateurs à acteurs : transformer les PME avec l'IA"
-								description="Notre vision pour démocratiser l'IA générative auprès des PME françaises."
-								category="analyses"
-								readingTime="3 min"
-								emoji="🎯"
-								href="/blog/2025-08-12-manifeste-prizm-ai"
-							/>
+							<div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: linear-gradient(135deg, rgba(102,126,234,0.05), rgba(240,147,251,0.05)); border-radius: var(--radius-2xl);">
+								<div style="font-size: 3rem; margin-bottom: 1rem;">🔬</div>
+								<h3 style="font-size: var(--text-xl); color: #4a5568; margin-bottom: 0.5rem;">Analyses en préparation</h3>
+								<p style="color: #6b7280;">Des décryptages approfondis arrivent bientôt.</p>
+							</div>
 						)}
 					</div>
 				</div>
@@ -295,89 +218,119 @@ const analysesLimited = sortAndLimit(analysesPosts);
 					</div>
 					
 					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-	<!-- Guide du Débutant -->
-	<a href="/outils/guide-debutant" style="text-decoration: none; color: inherit; transition: transform 0.3s;" class="tool-card">
-		<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px solid #e5e7eb; transition: all 0.3s; height: 100%;">
-			<div style="font-size: 3rem; margin-bottom: 1.5rem;">🎯</div>
-			<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: var(--color-primary);">
-				Guide du Débutant IA
-			</h3>
-			<p style="color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6;">
-				L'Intelligence Artificielle expliquée simplement en 5 minutes. Parfait pour commencer !
-			</p>
-			<div style="display: flex; align-items: center; justify-content: space-between;">
-				<span style="background: rgba(102,126,234,0.1); color: var(--color-primary); padding: 0.25rem 0.75rem; border-radius: var(--radius-lg); font-size: 0.875rem; font-weight: 500;">
-					5 min de lecture
-				</span>
-				<span style="color: var(--color-primary); font-weight: 500;">
-					Commencer →
-				</span>
-			</div>
-		</div>
-	</a>
+						<!-- Guide du Débutant -->
+						<a href="/outils/guide-debutant" style="text-decoration: none; color: inherit; transition: transform 0.3s;" class="tool-card">
+							<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px solid #e5e7eb; transition: all 0.3s; height: 100%;">
+								<div style="font-size: 3rem; margin-bottom: 1.5rem;">🎯</div>
+								<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: var(--color-primary);">
+									Guide du Débutant IA
+								</h3>
+								<p style="color: #6b7280; margin-bottom: 1.5rem; line-height: 1.6;">
+									L'Intelligence Artificielle expliquée simplement en 5 minutes. Parfait pour commencer !
+								</p>
+								<div style="display: flex; align-items: center; justify-content: space-between;">
+									<span style="background: rgba(102,126,234,0.1); color: var(--color-primary); padding: 0.25rem 0.75rem; border-radius: var(--radius-lg); font-size: 0.875rem; font-weight: 500;">
+										5 min de lecture
+									</span>
+									<span style="color: var(--color-primary); font-weight: 500;">
+										Commencer →
+									</span>
+								</div>
+							</div>
+						</a>
 
-	<!-- Placeholder pour futurs outils -->
-	<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px dashed #e5e7eb; text-align: center;">
-		<div style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.5;">🛠️</div>
-		<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: #9ca3af;">
-			Prochains outils
-		</h3>
-		<p style="color: #9ca3af; margin-bottom: 1.5rem;">
-			Templates Excel, checklists, scripts d'automatisation...
-		</p>
-		<a href="#newsletter" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">
-			Être notifié →
-		</a>
-	</div>
-</div>
-			</section>
-
-			<!-- Start Here Section -->
-			<section id="start-here" style="padding: 5rem 0;">
-				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
-					<div style="background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border-radius: var(--radius-3xl); padding: 3.75rem; text-align: center;">
-						<h2 style="font-size: 2rem; margin-bottom: 1.25rem;">🎯 Nouveau sur Prism ?</h2>
-						<p style="font-size: var(--text-xl); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; color: #4a5568;">
-							Commencez par ces ressources essentielles pour maîtriser rapidement les fondamentaux de l'IA appliquée
-						</p>
-						<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto;">
-							<a href="#" class="start-here-link" style="background: white; padding: var(--space-6); border-radius: var(--radius-xl); text-decoration: none; color: #1a1a1a; font-weight: var(--font-semibold); transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-								1. Comprendre les LLMs
-							</a>
-							<a href="#" class="start-here-link" style="background: white; padding: var(--space-6); border-radius: var(--radius-xl); text-decoration: none; color: #1a1a1a; font-weight: var(--font-semibold); transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-								2. Votre premier RAG
-							</a>
-							<a href="#" class="start-here-link" style="background: white; padding: var(--space-6); border-radius: var(--radius-xl); text-decoration: none; color: #1a1a1a; font-weight: var(--font-semibold); transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-								3. Mesurer le ROI
-							</a>
-							<a href="#" class="start-here-link" style="background: white; padding: var(--space-6); border-radius: var(--radius-xl); text-decoration: none; color: #1a1a1a; font-weight: var(--font-semibold); transition: all 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-								4. Éviter les pièges
+						<!-- Placeholder pour futurs outils -->
+						<div style="background: white; border-radius: var(--radius-2xl); padding: 2rem; border: 2px dashed #e5e7eb; text-align: center;">
+							<div style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.5;">🛠️</div>
+							<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 1rem; color: #9ca3af;">
+								Prochains outils
+							</h3>
+							<p style="color: #9ca3af; margin-bottom: 1.5rem;">
+								Templates Excel, checklists, scripts d'automatisation...
+							</p>
+							<a href="/newsletter" style="color: var(--color-primary); text-decoration: none; font-weight: 500;">
+								Être notifié →
 							</a>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Pourquoi Prism AI -->
-			<section style="padding: 5rem 0;">
+			<!-- Section Start Here - En préparation -->
+			<section id="start-here" style="padding: 5rem 0;">
 				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
-					<h2 style="text-align: center; margin-bottom: 3.75rem; font-size: 2rem;">Pourquoi Prism AI ?</h2>
+					<div style="background: white; border: 2px solid var(--color-primary); border-radius: var(--radius-2xl); padding: 3rem; max-width: 800px; margin: 0 auto;">
+						<!-- Badge EN PRÉPARATION -->
+						<div style="text-align: center; margin-bottom: 2rem;">
+							<span style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: white; padding: 0.5rem 1.5rem; border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+								En préparation
+							</span>
+						</div>
+						
+						<!-- Titre -->
+						<h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+							🚀 Parcours Débutant IA
+						</h2>
+						
+						<!-- Description -->
+						<p style="text-align: center; color: #6b7280; font-size: var(--text-lg); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+							4 guides essentiels pour maîtriser les fondamentaux de l'IA appliquée arrivent très bientôt
+						</p>
+						
+						<!-- Liste des ressources à venir -->
+						<div style="background: linear-gradient(135deg, rgba(102,126,234,0.05), rgba(240,147,251,0.05)); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 2.5rem;">
+							<ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem;">
+								<li style="display: flex; align-items: center; gap: 1rem; color: #4a5568;">
+									<span style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); color: var(--color-primary); box-shadow: 0 2px 8px rgba(102,126,234,0.15);">1</span>
+									<span style="font-weight: var(--font-medium);">Comprendre les LLMs</span>
+								</li>
+								<li style="display: flex; align-items: center; gap: 1rem; color: #4a5568;">
+									<span style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); color: var(--color-primary); box-shadow: 0 2px 8px rgba(102,126,234,0.15);">2</span>
+									<span style="font-weight: var(--font-medium);">Votre premier RAG</span>
+								</li>
+								<li style="display: flex; align-items: center; gap: 1rem; color: #4a5568;">
+									<span style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); color: var(--color-primary); box-shadow: 0 2px 8px rgba(102,126,234,0.15);">3</span>
+									<span style="font-weight: var(--font-medium);">Mesurer le ROI</span>
+								</li>
+								<li style="display: flex; align-items: center; gap: 1rem; color: #4a5568;">
+									<span style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: var(--font-semibold); color: var(--color-primary); box-shadow: 0 2px 8px rgba(102,126,234,0.15);">4</span>
+									<span style="font-weight: var(--font-medium);">Éviter les pièges</span>
+								</li>
+							</ul>
+						</div>
+						
+						<!-- CTA -->
+						<div style="text-align: center;">
+							<a href="/newsletter" class="coming-soon-link" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: white; padding: var(--space-4) 2rem; border-radius: var(--radius-xl); text-decoration: none; font-weight: var(--font-semibold); font-size: var(--text-base); box-shadow: 0 4px 15px rgba(102,126,234,0.2); transition: all 0.3s;">
+								Être notifié du lancement
+								<span>→</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ✅ CORRECTION : Typo corrigée "Prism → Prizm" -->
+			<!-- Pourquoi Prizm AI -->
+			<section style="padding: 5rem 0; background: #f8f9fa;">
+				<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+					<h2 style="text-align: center; margin-bottom: 3.75rem; font-size: 2rem;">Pourquoi Prizm AI ?</h2>
 					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: var(--radius-2xl); transition: all 0.3s;">
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: white; border-radius: var(--radius-2xl); transition: all 0.3s;">
 							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
 								🔍
 							</div>
 							<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 0.75rem;">Analyse en profondeur</h3>
 							<p style="font-size: var(--text-base); color: #4a5568;">Pas de bullshit marketing. Des analyses techniques basées sur des tests réels et des retours terrain.</p>
 						</div>
-						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: var(--radius-2xl); transition: all 0.3s;">
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: white; border-radius: var(--radius-2xl); transition: all 0.3s;">
 							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
 								⚡
 							</div>
 							<h3 style="font-size: var(--text-xl); font-weight: var(--font-semibold); margin-bottom: 0.75rem;">100% actionnable</h3>
 							<p style="font-size: var(--text-base); color: #4a5568;">Chaque article contient des templates, checklists ou code prêts à l'emploi dans votre contexte.</p>
 						</div>
-						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: #f8f9fa; border-radius: var(--radius-2xl); transition: all 0.3s;">
+						<div class="feature-card" style="text-align: center; padding: 2.5rem 2rem; background: white; border-radius: var(--radius-2xl); transition: all 0.3s;">
 							<div style="font-size: 3rem; margin-bottom: 1.25rem; display: inline-block; background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); width: 80px; height: 80px; line-height: 80px; border-radius: 20px;">
 								🎯
 							</div>
@@ -395,14 +348,15 @@ const analysesLimited = sortAndLimit(analysesPosts);
 					<p style="color: rgba(255,255,255,0.9); font-size: var(--text-xl); margin-bottom: 2.5rem;">
 						Chaque vendredi, recevez notre sélection d'insights IA directement applicables à votre métier
 					</p>
-					<form style="display: flex; gap: 1rem; max-width: 500px; margin: 0 auto;">
-						<input type="email" placeholder="votre@email.com" required style="flex: 1; padding: var(--space-4) 1.5rem; border: none; border-radius: var(--radius-xl); font-size: var(--text-base); background: rgba(255,255,255,0.2); color: white; backdrop-filter: blur(10px);">
-						<button type="submit" style="background: white; color: var(--color-primary); padding: var(--space-4) 2rem; border: none; border-radius: var(--radius-xl); font-weight: var(--font-semibold); font-size: var(--text-base); cursor: pointer; white-space: nowrap; transition: all 0.3s;">
-							S'inscrire
-						</button>
-					</form>
+					
+					<!-- Bouton vers page newsletter -->
+					<a href="/newsletter" style="display: inline-flex; align-items: center; gap: 0.75rem; background: white; color: var(--color-primary); padding: var(--space-4) 2.5rem; border-radius: var(--radius-xl); text-decoration: none; font-weight: var(--font-semibold); font-size: var(--text-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s; margin-bottom: 1.5rem;">
+						Rejoindre la newsletter
+						<span>→</span>
+					</a>
+					
 					<p style="font-size: var(--text-sm); margin-top: 1.25rem; opacity: 0.9;">
-						Pas de spam. Désabonnement en 1 clic. 2,847 professionnels déjà inscrits.
+						Pas de spam. Désabonnement en 1 clic.
 					</p>
 				</div>
 			</section>
