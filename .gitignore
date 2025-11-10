@@ -25,7 +25,6 @@ Thumbs.db
 .vscode/
 
 # SÉCURITÉ - NE JAMAIS EXPOSER
-pipelines/
 _archives/
 documentation/
 backup*/
@@ -47,3 +46,7 @@ data/subscribers/
 *-backup.*
 structure-prizmia.txt
 index-probleme.astro
+
+pipelines/newsletter/.env
+pipelines/newsletter/*.log
+pipelines/newsletter/newsletter_preview.html
