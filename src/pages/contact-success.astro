@@ -1,0 +1,237 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead title={`Message envoyé - ${SITE_TITLE}`} description="Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="success-container">
+				<div class="success-card">
+					<div class="success-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+							<polyline points="22 4 12 14.01 9 11.01"></polyline>
+						</svg>
+					</div>
+					
+					<h1>Message envoyé !</h1>
+					
+					<p class="message">
+						Merci pour votre message. Nous l'avons bien reçu et nous vous répondrons 
+						dans un délai de <strong>24 à 48 heures</strong> ouvrées.
+					</p>
+
+					<div class="next-steps">
+						<h2>En attendant notre réponse</h2>
+						<ul>
+							<li>
+								<span class="step-icon">📚</span>
+								<span>Explorez nos <a href="/blog">derniers articles</a> sur l'IA</span>
+							</li>
+							<li>
+								<span class="step-icon">📬</span>
+								<span>Inscrivez-vous à notre <a href="/newsletter">newsletter</a></span>
+							</li>
+							<li>
+								<span class="step-icon">🔗</span>
+								<span>Suivez-nous sur <a href="https://www.linkedin.com/company/prizmia/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+							</li>
+						</ul>
+					</div>
+
+					<a href="/" class="btn-home">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+							<polyline points="9 22 9 12 15 12 15 22"></polyline>
+						</svg>
+						Retour à l'accueil
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* ==========================================================================
+	   PAGE SUCCÈS - STYLES
+	   ========================================================================== */
+
+	main {
+		width: 100%;
+		min-height: calc(100vh - 200px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+		padding: 2rem 1.5rem;
+	}
+
+	.success-container {
+		width: 100%;
+		max-width: 560px;
+	}
+
+	.success-card {
+		background: white;
+		border-radius: 20px;
+		padding: 3rem 2.5rem;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+		border: 1px solid #e2e8f0;
+		text-align: center;
+	}
+
+	.success-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 100px;
+		height: 100px;
+		background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+		border-radius: 50%;
+		margin-bottom: 1.5rem;
+		color: white;
+		animation: scaleIn 0.5s ease-out;
+	}
+
+	@keyframes scaleIn {
+		0% {
+			transform: scale(0);
+			opacity: 0;
+		}
+		50% {
+			transform: scale(1.1);
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	h1 {
+		font-size: 1.875rem;
+		font-weight: 700;
+		color: #1e293b;
+		margin: 0 0 1rem 0;
+	}
+
+	.message {
+		font-size: 1.0625rem;
+		color: #64748b;
+		line-height: 1.7;
+		margin: 0 0 2rem 0;
+	}
+
+	.message strong {
+		color: #1e293b;
+	}
+
+	/* Next Steps */
+	.next-steps {
+		background: #f8fafc;
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		text-align: left;
+	}
+
+	.next-steps h2 {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		color: #475569;
+		margin: 0 0 1rem 0;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.next-steps ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.next-steps li {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.625rem 0;
+		font-size: 0.9375rem;
+		color: #64748b;
+	}
+
+	.next-steps li + li {
+		border-top: 1px solid #e2e8f0;
+	}
+
+	.step-icon {
+		font-size: 1.25rem;
+	}
+
+	.next-steps a {
+		color: #667eea;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.next-steps a:hover {
+		text-decoration: underline;
+	}
+
+	/* Button */
+	.btn-home {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.625rem;
+		background: linear-gradient(135deg, #667eea 0%, #5a67d8 100%);
+		color: white;
+		text-decoration: none;
+		padding: 0.875rem 1.75rem;
+		border-radius: 8px;
+		font-weight: 600;
+		font-size: 0.9375rem;
+		transition: all 0.3s ease;
+	}
+
+	.btn-home:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+	}
+
+	/* ==========================================================================
+	   RESPONSIVE
+	   ========================================================================== */
+
+	@media (max-width: 600px) {
+		.success-card {
+			padding: 2rem 1.5rem;
+		}
+
+		.success-icon {
+			width: 80px;
+			height: 80px;
+		}
+
+		.success-icon svg {
+			width: 48px;
+			height: 48px;
+		}
+
+		h1 {
+			font-size: 1.5rem;
+		}
+
+		.message {
+			font-size: 1rem;
+		}
+	}
+</style>

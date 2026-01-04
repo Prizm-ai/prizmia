@@ -12,9 +12,9 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/#guides">Guides Pratiques</HeaderLink>
 			<HeaderLink href="/#analyses">Analyses & Décryptages</HeaderLink>
 			<HeaderLink href="/outils/index.html">Boîte à Outils</HeaderLink>
-			<HeaderLink href="/newsletter">Newsletter</HeaderLink>
-			<a href="/contact" class="btn-primary">
-				Contact →
+			<HeaderLink href="/about">À propos</HeaderLink>
+			<a href="/newsletter" class="btn-newsletter">
+				Newsletter →
 			</a>
 		</div>
 	</nav>
@@ -60,8 +60,7 @@ import HeaderLink from './HeaderLink.astro';
 		align-items: center;
 	}
 
-	/* Bouton Principal - Contact */
-	.btn-primary {
+	.btn-newsletter {
 		background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
 		color: white;
 		padding: 0.625rem 1.5rem;
@@ -72,7 +71,7 @@ import HeaderLink from './HeaderLink.astro';
 		white-space: nowrap;
 	}
 
-	.btn-primary:hover {
+	.btn-newsletter:hover {
 		transform: translateY(-2px);
 		box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 	}
@@ -112,7 +111,7 @@ import HeaderLink from './HeaderLink.astro';
 			font-size: 0.875rem;
 		}
 
-		.btn-primary {
+		.btn-newsletter {
 			width: 100%;
 			text-align: center;
 		}

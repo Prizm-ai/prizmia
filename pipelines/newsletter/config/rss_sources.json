@@ -1,0 +1,48 @@
+{
+  "rss_sources": [
+    {
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "category": "tech",
+      "active": true
+    },
+    {
+      "name": "AI News",
+      "url": "https://artificialintelligence-news.com/feed/",
+      "category": "ai",
+      "active": true
+    },
+    {
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "tech",
+      "active": true
+    },
+    {
+      "name": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/feed/",
+      "category": "ai",
+      "active": true
+    },
+    {
+      "name": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "tech",
+      "active": true
+    }
+  ],
+  "max_articles_per_source": 5,
+  "max_age_days": 7,
+  "keywords_filter": [
+    "artificial intelligence",
+    "machine learning",
+    "AI",
+    "deep learning",
+    "neural network",
+    "chatgpt",
+    "openai",
+    "technology",
+    "software",
+    "programming"
+  ]
+}

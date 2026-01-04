@@ -1,0 +1,58 @@
+services:
+  activepieces:
+    image: activepieces/activepieces:latest
+    container_name: prizm-activepieces
+    ports:
+      - "8080:80"
+    environment:
+      - AP_POSTGRES_DATABASE=activepieces
+      - AP_POSTGRES_HOST=postgres
+      - AP_POSTGRES_PORT=5432
+      - AP_POSTGRES_USERNAME=activepieces
+      - AP_POSTGRES_PASSWORD=prizm2025secure
+      - AP_REDIS_HOST=redis
+      - AP_REDIS_PORT=6379
+      - AP_JWT_SECRET=prizm-jwt-secret-2025-super-secure
+      - AP_ENCRYPTION_KEY=a1b2c3d4e5f67890a1b2c3d4e5f67890
+      - AP_WEBHOOK_TIMEOUT_SECONDS=60
+      - AP_TRIGGER_DEFAULT_POLL_INTERVAL=5
+      - AP_ENVIRONMENT=production
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - activepieces-storage:/app/storage
+    restart: unless-stopped
+    networks:
+      - prizm-network
+
+  postgres:
+    image: postgres:14
+    container_name: prizm-postgres
+    environment:
+      - POSTGRES_DB=activepieces
+      - POSTGRES_USER=activepieces
+      - POSTGRES_PASSWORD=prizm2025secure
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - prizm-network
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: prizm-redis
+    volumes:
+      - redis-data:/data
+    networks:
+      - prizm-network
+    restart: unless-stopped
+
+volumes:
+  activepieces-storage:
+  postgres-data:
+  redis-data:
+
+networks:
+  prizm-network:
+    driver: bridge
