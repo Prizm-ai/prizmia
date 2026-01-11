@@ -3,7 +3,7 @@ title: "IA générative en 2026 : comment les PME françaises boostent leur prod
 description: "73% des PME françaises augmentent leurs investissements IA en 2026. Découvrez les stratégies concrètes et les gains de productivité (15-30%) observés sur le terrain."
 author: L'équipe Prizm AI
 pubDate: 2026-01-11
-image: /images/blog/ia-generative-pme-2026.jpg
+image: /images/blog/ia-generative.jfif
 featured: true
 tags: ["IA générative", "PME", "productivité", "transformation digitale"]
 ---
