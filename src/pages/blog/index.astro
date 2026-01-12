@@ -146,14 +146,14 @@ const posts = (await getCollection('blog')).sort(
 				{posts.length > 0 ? (
 					posts.map((post) => (
 						<ArticleCard
-							title={post.data.title}
-							description={post.data.description || 'Découvrez cet article sur l\'IA générative et son application en entreprise.'}
-							category={post.data.category || 'lessentiel'}
-							readingTime={post.data.readingTime || '5 min'}
-							emoji={post.data.emoji || '📄'}
-							image={post.data.imageUrl}
-							href={`/blog/${post.id.replace('.md', '')}/`}
-							featured={post.data.featured || false}
+						title={post.data.title}
+						description={post.data.description || 'Découvrez cet article sur l\'IA générative et son application en entreprise.'}
+						category={post.data.category || 'lessentiel'}
+						readingTime={post.data.readingTime || '5 min'}
+						emoji={post.data.emoji || '📄'}
+						image={post.data.heroImage || post.data.imageUrl || post.data.image}
+						href={`/blog/${post.id.replace('.md', '')}/`}
+						featured={post.data.featured || false}
 						/>
 					))
 				) : (

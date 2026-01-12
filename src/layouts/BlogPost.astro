@@ -87,19 +87,21 @@ const imagePath = getImagePath(title, imageUrl, heroImage, image);
         border-radius: 1.5rem;
         overflow: hidden;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        min-height: 400px;
-        position: relative;
+        background: #f7fafc; /* Fond neutre si l'image ne charge pas */
+        aspect-ratio: 16 / 9; /* Force le ratio 16:9 */
       }
 
       .hero-image {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover; /* Remplit le conteneur sans déformation */
+        object-position: center;
         display: block;
       }
 
       .hero-placeholder {
         width: 100%;
-        height: 400px;
+        height: 100%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
@@ -286,14 +288,6 @@ const imagePath = getImagePath(title, imageUrl, heroImage, image);
         .prose :global(h2) { font-size: 1.5rem; }
         .prose :global(h3) { font-size: 1.2rem; }
         .prose :global(p), .prose :global(li) { font-size: 1rem; }
-        
-        .hero-image-wrapper {
-          min-height: 250px;
-        }
-        
-        .hero-placeholder {
-          height: 250px;
-        }
         
         .emoji {
           font-size: 3rem;

@@ -14,7 +14,7 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			
 			// ⭐ IMAGES : Toutes les variantes
-			heroImage: image().optional(),
+			heroImage: z.string().optional(),     // Chemin string vers public/
 			image: z.string().optional(),         // ⭐ AJOUTÉ
 			imageUrl: z.string().optional(),      // ⭐ AJOUTÉ : Pour articles générés
 			
