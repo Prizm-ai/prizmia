@@ -1,10 +1,10 @@
 ---
 title: "La gouvernance des données, clé de voûte des projets IA en entreprise"
-description: "Article Prizm AI : La gouvernance des données, clé de voûte des projets IA en entreprise"
+description: "70% des projets IA échouent avant leur mise en production. Le problème n'est pas technique : c'est la gouvernance des données qui fait défaut."
 pubDate: 2026-01-12
 author: "L'équipe Prizm AI"
 emoji: "🚀"
-category: "actualites"
+category: "lessentiel"
 featured: false
 readingTime: "7 min"
 heroImage: "/images/blog/la-gouvernance-des-donnees-cle-de-voute-des-projets-ia-en-en-hero.png"
